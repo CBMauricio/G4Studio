@@ -1,0 +1,42 @@
+﻿<UserControl x:Name="CTRL_LandingPage"
+    x:Class="G4Studio.Views.UC_LandingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:G4Studio.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Storyboard x:Name="SB_Intro">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="TB_Teaser" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.5000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IMG_Logo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:07" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:08" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IMG_Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:08" Value="-610"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid x:Name="GRD_Main" Background="White">
+        <Image x:Name="IMG_Logo" Source="/Assets/logo.png" Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="301" Visibility="Visible"/>
+        <TextBlock x:Name="TB_Teaser" Text="Bring meaningful moments to people by enhancing safety, well-being and sustainability in public spaces" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Roboto Thin" FontSize="36" FontWeight="Light" Margin="0,0,0,0" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal"/>
+        <Image x:Name="IMG_Anim" Margin="0,640,-670,0" VerticalAlignment="Top" Source="/Assets/IMG/LandingPageWide_v6.png" Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <CompositeTransform/>
+            </Image.RenderTransform>
+        </Image>
+    </Grid>
+</UserControl>

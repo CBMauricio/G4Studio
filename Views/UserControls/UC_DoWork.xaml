@@ -1,0 +1,24 @@
+﻿<UserControl
+    x:Class="G4Studio.Views.UserControls.UC_DoWork"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:G4Studio.Views.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="GRD_DoWork" Background="#B5000000" Visibility="Visible" FocusVisualPrimaryBrush="#66000000" Margin="0,0,0,0">
+        <StackPanel x:Name="SP_DoWork_Main" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="TB_DoWork_Title" Text="Register Devices" TextWrapping="Wrap" FontFamily="Roboto" FontSize="72" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="White" FontStretch="Normal"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,31,0,0">
+                <TextBlock x:Name="TB_DoWork_Counter" Text="1" TextWrapping="Wrap" FontFamily="Roboto" FontSize="72" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF20AE46" FontStretch="Normal" TextAlignment="Right"/>
+                <TextBlock x:Name="TB_DoWork_Counter_Splitter" Text="/" TextWrapping="Wrap" FontFamily="Roboto" FontSize="36" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="White" FontStretch="Normal" Margin="13,0,0,13" VerticalAlignment="Bottom"/>
+                <TextBlock x:Name="TB_DoWork_Counter_Max" Text="1" TextWrapping="Wrap" FontFamily="Roboto" FontSize="36" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="White" FontStretch="Normal" Margin="13,0,0,13" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <TextBlock x:Name="TB_DoWork_Description" Text="registered devices" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="22" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="White" FontStretch="Normal" Visibility="Visible" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Border x:Name="BTN_Done" BorderThickness="2,2,2,2" FocusVisualPrimaryBrush="#FFDEDEDE" CornerRadius="2,2,2,2" Background="White" BorderBrush="White" HorizontalAlignment="Center" Margin="0,90,0,0" Tapped="BTN_Done_Tapped" Visibility="Visible" Opacity="0">
+                <TextBlock x:Name="TB_BTN_Run" Text="DONE" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="13" FontWeight="Normal" FocusVisualPrimaryBrush="#FF343434" Foreground="#FF333333" FontStretch="Normal" Margin="13,7,13,6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

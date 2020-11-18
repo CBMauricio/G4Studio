@@ -1,0 +1,41 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:G4Studio.Views.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:G4Studio.Views" x:Name="UCMain"
+    x:Class="G4Studio.Views.UserControls.UCAlarms"
+    mc:Ignorable="d" HorizontalAlignment="Right" VerticalAlignment="Top">
+
+    <StackPanel x:Name="SPMain" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <Border x:Name="BRDDetail" BorderThickness="1" BorderBrush="White" VerticalAlignment="Top" Margin="0,0,5,0" CornerRadius="5,5,5,5" Background="#E8FFFFFF" HorizontalAlignment="Right">
+            <StackPanel x:Name="SPDetailInner" Orientation="Vertical" VerticalAlignment="Stretch" Margin="3,3,3,3">
+                <Grid>
+                    <Border x:Name="BRD_BTN_Main" BorderThickness="1,1,1,1" FocusVisualPrimaryBrush="#FFDEDEDE" CornerRadius="2,2,2,2" HorizontalAlignment="Left">
+                        <StackPanel x:Name="SP_Inner" Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Image x:Name="IMG_BTN" Source="/Assets/Artwork/icon_power_H_B_48px.png" NineGrid="0,0,0,0" Width="28" Stretch="Fill" Opacity="0.8"/>
+                            <TextBlock x:Name="TB_AC_Alarms_PH" Text="HIGH POWER" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="8" FontWeight="Normal" FocusVisualPrimaryBrush="#FF545454" Foreground="#FF343434" FontStretch="Normal" Margin="0,3,0,0" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="BRD_BTN_Main_Copy" BorderThickness="1,1,1,1" FocusVisualPrimaryBrush="#FFDEDEDE" CornerRadius="2,2,2,2" Margin="55,0,0,0" HorizontalAlignment="Left">
+                        <StackPanel x:Name="SP_Inner1" Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Image x:Name="IMG_BTN1" Source="/Assets/Artwork/icon_power_L_B_48px.png" NineGrid="0,0,0,0" Width="28" Stretch="Fill" Opacity="0.8"/>
+                            <TextBlock x:Name="TB_AC_Alarms_PH1" Text="HIGH POWER" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="8" FontWeight="Normal" FocusVisualPrimaryBrush="#FF545454" Foreground="#FF343434" FontStretch="Normal" Margin="0,3,0,0" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border x:Name="BRDView" BorderThickness="1,1,1,1" VerticalAlignment="Top" HorizontalAlignment="Right" CornerRadius="5,5,5,5">
+            <Border x:Name="BRDViewInner" BorderThickness="1,1,1,1" HorizontalAlignment="Right" Margin="0,0,0,0" CornerRadius="5,5,5,5" Background="#E8FFFFFF" BorderBrush="White">
+                <StackPanel x:Name="SPViewInner" HorizontalAlignment="Right" Orientation="Horizontal" Margin="7,5,7,5">
+                    <Border x:Name="BRDIMGView" BorderThickness="0.5,0.5,0.5,0.5" >
+                        <Image x:Name="IMGView" Source="/Assets/Artwork/icon_power_H_B_48px.png" Height="21" Opacity="0.8" Stretch="Uniform"/>
+                    </Border>
+                    <TextBlock x:Name="TBViewTitle" Text="Alarms" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="18" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" HorizontalAlignment="Center" Margin="7,3,3,3" VerticalAlignment="Center" Opacity="0.8"/>
+                </StackPanel>
+            </Border>
+        </Border>
+    </StackPanel>
+</UserControl>

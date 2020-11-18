@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{AC386108-24AC-4360-A488-02C864BA8386}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>G4Studio</RootNamespace>
+    <AssemblyName>G4Studio</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AlarmFeedback.cs" />
+    <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\DimFeedback.cs" />
+    <Compile Include="Models\G3GatewayTableEntity.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ColorHandler.cs" />
+    <Compile Include="Utils\GeopositionHandler.cs" />
+    <Compile Include="Utils\MathHandler.cs" />
+    <Compile Include="Utils\NetworkHandler.cs" />
+    <Compile Include="Utils\TimeZoneHandler.cs" />
+    <Compile Include="Utils\TwinHandler.cs" />
+    <Compile Include="Views\await.cs" />
+    <Compile Include="Views\UC_Actions_Project.xaml.cs">
+      <DependentUpon>UC_Actions_Project.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_Action_BTN.xaml.cs">
+      <DependentUpon>UC_Action_BTN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_AddNewDevices.xaml.cs">
+      <DependentUpon>UC_AddNewDevices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_Devices_Item.xaml.cs">
+      <DependentUpon>UC_Devices_Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_LandingPage.xaml.cs">
+      <DependentUpon>UC_LandingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_MapControl.xaml.cs">
+      <DependentUpon>UC_MapControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_MapControlAnimation.xaml.cs">
+      <DependentUpon>UC_MapControlAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_ProjectDetail.xaml.cs">
+      <DependentUpon>UC_ProjectDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_Projects.xaml.cs">
+      <DependentUpon>UC_Projects.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UC_Projects_Item.xaml.cs">
+      <DependentUpon>UC_Projects_Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UCAlarms.xaml.cs">
+      <DependentUpon>UCAlarms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_DoWork.xaml.cs">
+      <DependentUpon>UC_DoWork.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_ListOfActions.xaml.cs">
+      <DependentUpon>UC_ListOfActions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_ListViewItem.xaml.cs">
+      <DependentUpon>UC_ListViewItem.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Artwork\Icon_100_48px.png" />
+    <Content Include="Assets\Artwork\icon_cursor.png" />
+    <Content Include="Assets\Artwork\Icon_Deselect_All_21px.jpg" />
+    <Content Include="Assets\Artwork\Icon_Deselect_All_21px.png" />
+    <Content Include="Assets\Artwork\Icon_Deselect_All_256px.png" />
+    <Content Include="Assets\Artwork\Icon_Deselect_All_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Deselect_All_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Devices_B_256px.png" />
+    <Content Include="Assets\Artwork\Icon_Devices_B_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Devices_B_V2_256px.png" />
+    <Content Include="Assets\Artwork\Icon_Devices_W_256px.png" />
+    <Content Include="Assets\Artwork\Icon_Devices_W_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Devices_W_V2_256px.png" />
+    <Content Include="Assets\Artwork\icon_luminaire.png" />
+    <Content Include="Assets\Artwork\Icon_Lumminaire_White.png" />
+    <Content Include="Assets\Artwork\Icon_Lumminaire_White_V2.png" />
+    <Content Include="Assets\Artwork\Icon_Lumminaire_White_V3.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_Filled_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_Filled_v2_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_HALF_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_HALF_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Black_v2_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_New_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_New_Black_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_New_Black_v2_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Red_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Red_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Refresh_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Refresh_Black_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_Refresh_Black_v2_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_UPD_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Lum_UPD_Black_48x.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_Filled_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_Filled_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_v2_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_v3_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Black_v3_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Grey_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Grey_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Red_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Pin_Red_48px.png" />
+    <Content Include="Assets\Artwork\icon_power_H_B_38px.png" />
+    <Content Include="Assets\Artwork\icon_power_H_B_48px.png" />
+    <Content Include="Assets\Artwork\icon_power_L_B_38px.png" />
+    <Content Include="Assets\Artwork\icon_power_L_B_48px.png" />
+    <Content Include="Assets\Artwork\icon_power_PF_B_38px.png" />
+    <Content Include="Assets\Artwork\icon_power_PF_B_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Projects_B_256px.png" />
+    <Content Include="Assets\Artwork\Icon_Projects_B_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Projects_W_256px.png" />
+    <Content Include="Assets\Artwork\Icon_Projects_W_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Registered_Devices_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Registered_Devices_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Registered_Devices_B_NoFrame_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Registered_Devices_B_NoFrame_17px.png" />
+    <Content Include="Assets\Artwork\Icon_Registered_Devices_B_NoFrame_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_21px.jpg" />
+    <Content Include="Assets\Artwork\Icon_Select_All_21px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_256px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_38px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v2%402x.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v2.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v3_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v3_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v4_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v4_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v5_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v5_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v6_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v6_17px.png" />
+    <Content Include="Assets\Artwork\Icon_Select_All_v6_48px.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_0_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_0_Black_48x.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_0_Black_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_0_Black_v2_48x.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_100_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_100_Black_48x.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_100_Black_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_100_Black_v2_48x.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_50_Black_38px.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_50_Black_48x.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_50_Black_v2_38px.png" />
+    <Content Include="Assets\Artwork\Icon_TEL_50_Black_v2_48x.png" />
+    <Content Include="Assets\Artwork\Icon_Unregistered_Devices_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Unregistered_Devices_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Unregistered_Devices_v2_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Unregistered_Devices_v2_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Unselect_All_v3_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Unselect_All_v3_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Unselect_All_v4_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Unselect_All_v4_48px.png" />
+    <Content Include="Assets\Artwork\Icon_Unselect_All_v5_120px.png" />
+    <Content Include="Assets\Artwork\Icon_Unselect_All_v5_48px.png" />
+    <Content Include="Assets\IMG\LandingPageWide_V5.png" />
+    <Content Include="Assets\Artwork\logo_b_v3_256.png" />
+    <Content Include="Assets\Artwork\logo_simple_B_V2.png" />
+    <Content Include="Assets\Artwork\Logo_V4.jpg" />
+    <Content Include="Assets\Artwork\Logo_V4.png" />
+    <Content Include="Assets\Artwork\Logo_V4_3000.png" />
+    <Content Include="Assets\Artwork\pointer_48.png" />
+    <Content Include="Assets\Artwork\pointer_v2_48.png" />
+    <Content Include="Assets\Artwork\pointer_v3_48.png" />
+    <Content Include="Assets\Artwork\pointer_v4_48.png" />
+    <Content Include="Assets\Artwork\pointer_v5_48.png" />
+    <Content Include="Assets\Artwork\pointer_v6_48.png" />
+    <Content Include="Assets\Artwork\project.png" />
+    <Content Include="Assets\Artwork\project_b_256.png" />
+    <Content Include="Assets\Artwork\project_w.png" />
+    <Content Include="Assets\Artwork\splitter_v2.png" />
+    <Content Include="Assets\Artwork\telemetry_d_48.png" />
+    <Content Include="Assets\Artwork\telemetry_l_48.png" />
+    <Content Include="Assets\Artwork\tiles_256.png" />
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-125.png" />
+    <Content Include="Assets\BadgeLogo.scale-150.png" />
+    <Content Include="Assets\BadgeLogo.scale-200.png" />
+    <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\IMG\LandingPageWide_V4.png" />
+    <Content Include="Assets\IMG\LandingPageWide_v6.png" />
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\logo.png" />
+    <Content Include="Assets\logo_simple_B.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UC_Actions_Project.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_Action_BTN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_AddNewDevices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_Devices_Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_LandingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_MapControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_MapControlAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_ProjectDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_Projects.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UC_Projects_Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UCAlarms.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UC_DoWork.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UC_ListOfActions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\UC_ListViewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity">
+      <Version>1.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Azure.Security.KeyVault.Secrets">
+      <Version>4.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="CoAP">
+      <Version>1.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Azure.Devices">
+      <Version>1.28.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Azure.KeyVault">
+      <Version>3.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Azure.Services.AppAuthentication">
+      <Version>1.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
+      <Version>3.3.1</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.10</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
+      <Version>6.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.UI.Xaml">
+      <Version>2.4.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager">
+      <Version>3.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="RestSharp">
+      <Version>106.11.7</Version>
+    </PackageReference>
+    <PackageReference Include="WindowsAzure.Storage">
+      <Version>9.3.3</Version>
+    </PackageReference>
+    <PackageReference Include="XAML.MapControl">
+      <Version>5.4.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Resources\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExedraCoreLibrary\ExedraCoreLibrary.csproj">
+      <Project>{48DEA61C-CC71-4B70-92CC-E309259C257D}</Project>
+      <Name>ExedraCoreLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

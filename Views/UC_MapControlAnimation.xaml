@@ -1,0 +1,714 @@
+﻿<UserControl
+    x:Class="G4Studio.Views.UC_MapControlAnimation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:G4Studio.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Storyboard x:Name="SB_Animation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_1_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.2" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.2" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_2_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.3" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_3_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.4" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_4_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.5" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_5_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.6" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_6_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.7" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.7" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_7_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.8" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.8" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_8_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.9" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.9" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_9_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.0" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.0" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_10_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.1" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_11_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.2" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.2" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_12_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.3" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.3" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_13_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.4" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_14_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.5" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_15_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.6" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_16_1" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.7" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.7" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.7" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_1_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_2_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_3_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_4_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_6_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_7_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_8_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_9_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_10_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_11_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_12_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_13_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_14_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_15_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_16_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_5_1" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:06" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="SB_Animation_2">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_1_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.3" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_2_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.3" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_3_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.4" Value=".65"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_4_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value=".15"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5" Value=".25"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.5" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_5_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.6" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_6_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value=".65"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.7" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.7" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_7_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.8" Value=".35"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.8" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_8_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9" Value=".45"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.9" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.9" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_9_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.0" Value=".45"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.0" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_10_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1" Value=".35"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.1" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.1" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_11_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2" Value=".3"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.2" Value=".45"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.2" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_12_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3" Value=".25"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.3" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.3" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_13_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4" Value=".15"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.4" Value=".15"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_14_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.5" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.5" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_15_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.6" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_16_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.7" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.7" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".05"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.7" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".05"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="SB_Animation_3">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_1_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value=".4"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.2" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.2" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_2_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.3" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.3" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_3_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.4" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_4_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.5" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.5" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_5_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.6" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_6_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.7" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.7" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_7_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.8" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.8" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_8_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.9" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.9" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_9_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.0" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.0" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_10_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00.9" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.1" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.1" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_11_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.2" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.2" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_12_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.3" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.3" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_13_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.4" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.4" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_14_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.3" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.5" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.5" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_15_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.4" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.6" Value=".5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.6" Value=".8"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="r_16_2" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01.5" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.7" Value=".9"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:02.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:03.7" Value=".6"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04.0" Value=".2"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:05.7" Value=".7"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:06.0" Value=".2"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <StackPanel x:Name="SP_Main" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <StackPanel x:Name="SP_Graph" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Grid x:Name="GRD_1" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_1_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_1_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_2_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_2_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy1" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_3_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_3_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy2" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_4_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_4_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy3" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_5_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_5_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy4" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_6_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_6_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy5" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_7_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_7_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy6" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_8_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_8_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy7" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_9_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3"  RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_9_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy8" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_10_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3"  RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_10_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy9" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_11_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3"  RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_11_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy10" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_12_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_12_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy11" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_13_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_13_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy12" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_14_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_14_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy13" Margin="9,0,0,0" VerticalAlignment="Bottom" Height="110">
+                <Rectangle x:Name="r_15_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_15_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid x:Name="GRD_1_Copy14" Height="110" Margin="9,0,0,0" VerticalAlignment="Bottom">
+                <Rectangle x:Name="r_16_1" Stroke="Black" Fill="#FFEEEEEE" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0.2"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="r_16_2" Stroke="Black" Fill="Black" Margin="0,0,0,0" Width="5" Height="110" HorizontalAlignment="Left" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="3" RadiusY="3" RenderTransformOrigin="0.5,1">
+                    <Rectangle.RenderTransform>
+                        <CompositeTransform ScaleY="0"/>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="SP_Teaser" Width="Auto" Height="Auto" Background="{x:Null}" Margin="0,21,0,0" HorizontalAlignment="Center">
+            <TextBlock x:Name="TB_Teaser_Copy" Text="Building your experience" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="18" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" HorizontalAlignment="Center" Visibility="Collapsed"/>
+            <TextBlock x:Name="TB_Teaser" Text="getting your location" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="18" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

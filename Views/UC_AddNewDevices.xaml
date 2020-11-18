@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="G4Studio.Views.UC_AddNewDevices"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:G4Studio.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" VerticalAlignment="Bottom">
+
+    <Border x:Name="BRD_EditMap" BorderThickness="0,0,0,0" BorderBrush="#CC000000" VerticalAlignment="Bottom" Background="#CCFFFFFF" Opacity="1">
+        <Grid HorizontalAlignment="Stretch" Margin="13,13,13,13">
+            <StackPanel HorizontalAlignment="Left" Margin="25,0,0,0" Orientation="Horizontal">
+                <StackPanel x:Name="SP_ProjectInfo" Orientation="Vertical" Visibility="Visible" VerticalAlignment="Top">
+                    <TextBlock x:Name="TB_Title" Text="Liege" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="31" FontWeight="Light" FocusVisualPrimaryBrush="#FF343434" Foreground="#FF343434" FontStretch="Normal" MinWidth="200" Margin="0,0,0,0"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                        <Rectangle x:Name="RC_Color" Height="13" Stroke="White" Width="13" Margin="0,0,0,1"/>
+                        <TextBlock x:Name="TB_Hostname" Text="liege.schreder.citylinx.io" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="#FF878787" Foreground="#FF878787" FontStretch="Normal" Margin="3,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="SP_NDevices" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock x:Name="TB_NProjects" Text="4590" TextWrapping="Wrap" FontFamily="Roboto" FontSize="26" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF343434" FontStretch="Normal" Height="27"/>
+                    <TextBlock x:Name="TB_NProjects_Label" Text="lighpoints" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF878787" FontStretch="Normal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,7,0,0"/>
+                </StackPanel>
+                <StackPanel x:Name="SP_NDevices_Copy" Orientation="Horizontal" Margin="23,0,0,0">
+                    <TextBlock x:Name="TB_NewDevices" Text="4590" TextWrapping="Wrap" FontFamily="Roboto" FontSize="26" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF343434" FontStretch="Normal" Height="27"/>
+                    <TextBlock x:Name="TB_NProjects_Label1" Text="new devices" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF878787" FontStretch="Normal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,7,0,0"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="SP_Actions" HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                <Border x:Name="BTN_Register" BorderThickness="2,2,2,2" FocusVisualPrimaryBrush="#FFDEDEDE" CornerRadius="2,2,2,2" BorderBrush="White" VerticalAlignment="Center" Tapped="BTN_Register_Tapped">
+                    <Image x:Name="IMG_Register" Width="38" Source="/Assets/Artwork/Icon_Lum_New_Black_v2_38px.png"/>
+                </Border>
+                <Border x:Name="BRD_BTN_Main_Copy" BorderThickness="2,2,2,2" FocusVisualPrimaryBrush="#FFDEDEDE" CornerRadius="2,2,2,2" Background="#FFCC0000" BorderBrush="White" VerticalAlignment="Center" Margin="13,0,13,0">
+                    <TextBlock x:Name="TB_AC_Alarms_PH1" Text="CANCEL" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="13" FontWeight="Normal" FocusVisualPrimaryBrush="#FF343434" Foreground="White" FontStretch="Normal" Margin="9,7,9,6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
