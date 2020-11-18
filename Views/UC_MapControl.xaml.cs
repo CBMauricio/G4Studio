@@ -61,6 +61,7 @@ namespace G4Studio.Views
 
             UserLocation = new Geopoint(new BasicGeoposition());
 
+
             Coordinates = new List<BasicGeoposition>();
 
             MapPolygons = new List<MapPolygon>();
