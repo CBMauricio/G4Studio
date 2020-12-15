@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G4Studio", "G4Studio.csproj", "{AC386108-24AC-4360-A488-02C864BA8386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExedraCoreLibrary", "..\ExedraCoreLibrary\ExedraCoreLibrary.csproj", "{48DEA61C-CC71-4B70-92CC-E309259C257D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,26 +45,6 @@ Global
 		{AC386108-24AC-4360-A488-02C864BA8386}.Release|x86.ActiveCfg = Release|x86
 		{AC386108-24AC-4360-A488-02C864BA8386}.Release|x86.Build.0 = Release|x86
 		{AC386108-24AC-4360-A488-02C864BA8386}.Release|x86.Deploy.0 = Release|x86
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|ARM.Build.0 = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|x64.Build.0 = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Debug|x86.Build.0 = Debug|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|ARM.ActiveCfg = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|ARM.Build.0 = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|ARM64.Build.0 = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|x64.ActiveCfg = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|x64.Build.0 = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|x86.ActiveCfg = Release|Any CPU
-		{48DEA61C-CC71-4B70-92CC-E309259C257D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

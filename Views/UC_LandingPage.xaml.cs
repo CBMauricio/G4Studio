@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Hyperion.Platform.Tests.Core.ExedraLib.Config;
+using System;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -22,22 +12,51 @@ namespace G4Studio.Views
     {
         public event RoutedEventHandler FinishedWork;
 
+        public EnvironmentHandler.Type EnvironmentT { get; set; }
+
         public UC_LandingPage()
         {
             this.InitializeComponent();
 
-            SB_Intro.Completed += SB_Intro_Completed;
             SB_Intro.Begin();
         }
 
-        private void SB_Intro_Completed(object sender, object e)
+        private void PointerEnteredHandler(string type, bool show)
         {
-            Debug.WriteLine("INTRO_COMPLETED");
-
-            if (FinishedWork != null)
+            switch (type)
             {
-                FinishedWork?.Invoke(sender, null);
+                case "DEV": // DEV
+                    IMG_DEV_1.Visibility = show ? Visibility.Collapsed : Visibility.Visible;
+                    IMG_DEV_2.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+                    break;
+                default: // TST
+                    IMG_TST_1.Visibility = show ? Visibility.Collapsed : Visibility.Visible;
+                    IMG_TST_2.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+                    break;
             }
+        }
+
+        private void BT_PointerEntered(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            StackPanel stackPanel = sender as StackPanel;
+
+            PointerEnteredHandler(stackPanel.Tag.ToString(), true);
+        }
+
+        private void BT_PointerExited(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            StackPanel stackPanel = sender as StackPanel;
+
+            PointerEnteredHandler(stackPanel.Tag.ToString(), false);
+        }
+
+        private void BT_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            StackPanel stackPanel = sender as StackPanel;
+
+            EnvironmentT = stackPanel.Tag.ToString().Equals("DEV", StringComparison.Ordinal) ? EnvironmentHandler.Type.DEV : EnvironmentHandler.Type.TST;
+
+            FinishedWork?.Invoke(sender, null);
         }
     }
 }

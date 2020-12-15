@@ -25,7 +25,7 @@ namespace G4Studio
         {
             UCLandingPage.Visibility = Visibility.Collapsed;
 
-            UCMapControl.StartAnimation();
+            UCMapControl.StartAnimation(UCLandingPage.EnvironmentT);
         }
     }
 }

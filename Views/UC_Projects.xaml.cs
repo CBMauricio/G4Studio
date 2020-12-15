@@ -1,7 +1,9 @@
 ﻿using G4Studio.Models;
 using G4Studio.Utils;
+using Hyperion.Platform.Tests.Core.ExedraLib.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -24,8 +26,8 @@ namespace G4Studio.Views
     public sealed partial class UC_Projects : UserControl
     {
         private bool IsShowingInfo { get; set; }
-        public List<Project> Projects { get; set; }
-        public Project SelectedProject { get; set; }
+        public List<Tenant> Projects { get; set; }
+        public Tenant SelectedProject { get; set; }
 
         public double ItemWidth { get; set; }
         public double ItemHeight { get; set; }
@@ -43,7 +45,7 @@ namespace G4Studio.Views
             ItemHeight = 150;
             DefaultMargin = 5;
             NColumns = 10;
-            Projects = new List<Project>();
+            Projects = new List<Tenant>();
 
             BRD_Projects_List.Visibility = Visibility.Visible;
 
@@ -52,7 +54,7 @@ namespace G4Studio.Views
             SB_HideInfo.Completed += SB_HideInfo_Completed;
         }
 
-        public void BindData(List<Project> projects)
+        public void BindData(List<Tenant> projects)
         {
             Projects = projects;
 
@@ -75,7 +77,7 @@ namespace G4Studio.Views
             {
                 if (project != null)
                 {
-                    project.GetNTwins().Wait();
+                    //project.GetNTwins().Wait();
 
                     if (column <= NColumns)
                     {
@@ -99,12 +101,12 @@ namespace G4Studio.Views
                         ItemHeight = ItemHeight,
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Left,
-                        //BGColor = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor, project.fence.properties.fillOpacity * 100)),
+                        //BGColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100)),
                         BRDColor = new SolidColorBrush(Windows.UI.Colors.White),
                         BRDThickness = new Thickness(1),
-                        BGColor = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor)),
-                        Text = project.name,
-                        NProjects = project.Count.ToString(CultureInfo.InvariantCulture),
+                        BGColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor)),
+                        Text = project.Name,
+                        NProjects = project.NDevices.ToString(CultureInfo.InvariantCulture),
                         Project = project
                     };
 

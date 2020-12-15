@@ -1,10 +1,7 @@
 ﻿using G4Studio.Models;
 using G4Studio.Utils;
-using Microsoft.Azure.Devices.Shared;
-using Newtonsoft.Json;
+using Hyperion.Platform.Tests.Core.ExedraLib.Models;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
@@ -23,7 +20,7 @@ namespace G4Studio.Views
 
         private bool IsSelected { get; set; }
         //public Twin _Twin { get; set; }
-        public Device Device { get; set; }
+        public Twin Device { get; set; }
         public string SelectedItemColor { get; set; }
 
         public string DeviceName { get; set; }
@@ -49,7 +46,7 @@ namespace G4Studio.Views
             ItemHeight = 51;
         }
 
-        public void BindData(Device device)
+        public void BindData(Twin device)
         {
             //if (twin == null)
             //    return;

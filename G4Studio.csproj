@@ -127,15 +127,13 @@
     <Compile Include="Models\DimFeedback.cs" />
     <Compile Include="Models\G3GatewayTableEntity.cs" />
     <Compile Include="Models\Position.cs" />
-    <Compile Include="Models\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ColorHandler.cs" />
-    <Compile Include="Utils\GeopositionHandler.cs" />
+    <Compile Include="Utils\GeoPositionConversor.cs" />
     <Compile Include="Utils\MathHandler.cs" />
     <Compile Include="Utils\NetworkHandler.cs" />
     <Compile Include="Utils\TimeZoneHandler.cs" />
     <Compile Include="Utils\TwinHandler.cs" />
-    <Compile Include="Views\await.cs" />
     <Compile Include="Views\UC_Actions_Project.xaml.cs">
       <DependentUpon>UC_Actions_Project.xaml</DependentUpon>
     </Compile>
@@ -168,6 +166,9 @@
     </Compile>
     <Compile Include="Views\UserControls\UCAlarms.xaml.cs">
       <DependentUpon>UCAlarms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UCEnvironmentSelector.xaml.cs">
+      <DependentUpon>UCEnvironmentSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\UC_DoWork.xaml.cs">
       <DependentUpon>UC_DoWork.xaml</DependentUpon>
@@ -285,6 +286,14 @@
     <Content Include="Assets\Artwork\Icon_Unselect_All_v4_48px.png" />
     <Content Include="Assets\Artwork\Icon_Unselect_All_v5_120px.png" />
     <Content Include="Assets\Artwork\Icon_Unselect_All_v5_48px.png" />
+    <Content Include="Assets\Icons\icon_arrow_left_B%402x.png" />
+    <Content Include="Assets\Icons\icon_arrow_left_B.png" />
+    <Content Include="Assets\Icons\icon_arrow_left_B_F%402x.png" />
+    <Content Include="Assets\Icons\icon_arrow_left_B_F.png" />
+    <Content Include="Assets\Icons\icon_arrow_right_B%402x.png" />
+    <Content Include="Assets\Icons\icon_arrow_right_B.png" />
+    <Content Include="Assets\Icons\icon_arrow_right_B_F%402x.png" />
+    <Content Include="Assets\Icons\icon_arrow_right_B_F.png" />
     <Content Include="Assets\IMG\LandingPageWide_V5.png" />
     <Content Include="Assets\Artwork\logo_b_v3_256.png" />
     <Content Include="Assets\Artwork\logo_simple_B_V2.png" />
@@ -311,6 +320,9 @@
     <Content Include="Assets\BadgeLogo.scale-400.png" />
     <Content Include="Assets\IMG\LandingPageWide_V4.png" />
     <Content Include="Assets\IMG\LandingPageWide_v6.png" />
+    <Content Include="Assets\IMG\LandingPageWide_v7.png" />
+    <Content Include="Assets\IMG\LandingPageWide_v8.png" />
+    <Content Include="Assets\IMG\LandingPageWide_v9.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -419,6 +431,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\UCEnvironmentSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\UC_DoWork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -485,10 +501,10 @@
     <PRIResource Include="Resources\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExedraCoreLibrary\ExedraCoreLibrary.csproj">
-      <Project>{48DEA61C-CC71-4B70-92CC-E309259C257D}</Project>
-      <Name>ExedraCoreLibrary</Name>
-    </ProjectReference>
+    <Reference Include="Hyperion.Platform.Tests.Core.ExedraLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\platform-test-suite\tests\Hyperion.Platform.Tests.Core\bin\Debug\netstandard2.0\Hyperion.Platform.Tests.Core.ExedraLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

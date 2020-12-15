@@ -1,4 +1,5 @@
 ﻿using G4Studio.Models;
+using Hyperion.Platform.Tests.Core.ExedraLib.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -10,7 +11,7 @@ namespace G4Studio.Views
 {
     public sealed partial class UC_Projects_Item : UserControl
     {
-        public Project Project { get; set; } 
+        public Tenant Project { get; set; } 
         public double ItemWidth { get; set; }
         public double ItemHeight { get; set; }
         public string Text { get; set; }
@@ -25,7 +26,7 @@ namespace G4Studio.Views
         {
             this.InitializeComponent();
 
-            Project = new Project();
+            Project = new Tenant();
 
             ItemWidth = 100;
             ItemHeight = 100;

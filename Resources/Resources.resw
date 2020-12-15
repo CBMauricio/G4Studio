@@ -217,7 +217,7 @@
     <value>coap://40.74.34.91:5683</value>
   </data>
   <data name="CONFS_ENVIRONMENT" xml:space="preserve">
-    <value>_TST</value>
+    <value>_DEV</value>
   </data>
   <data name="KeyVault_App_ID_DEV" xml:space="preserve">
     <value>47a00c50-46af-498b-a812-2b81d2e11a61</value>
@@ -788,6 +788,9 @@
   </data>
   <data name="QUERY_GetDevices_ByTenant_V2" xml:space="preserve">
     <value>SELECT * FROM devices WHERE tags.tenant = '{0}' or STARTSWITH(deviceId,'{1}')</value>
+  </data>
+  <data name="SANITIZE" xml:space="preserve">
+    <value>{"Info":{"UTC":"201215155318","Queue":[{"DeltaTime":"08:18:44","Priority":1,"Source":"Lamp","DimFeedback":[31.540232,0,0,0,2,0,108.7,110.4],"Index":1},{"DeltaTime":"00:19:18","Priority":1,"Source":"Lamp","DimFeedback":[31.540232,0,0,0,3,0,0,0],"Index":1}],"DeviceID":"0013A20041BC540B"},"RequestDomain":null,"Type":"information"}</value>
   </data>
   <data name="STR_UC_Map_ALARMS_Description" xml:space="preserve">
     <value>alarm messages sent</value>

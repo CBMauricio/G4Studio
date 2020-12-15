@@ -1,9 +1,9 @@
 ﻿using G4Studio.Models;
 using G4Studio.Utils;
-using Microsoft.Azure.Devices.Shared;
+using Hyperion.Platform.Tests.Core.ExedraLib.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -21,9 +21,10 @@ namespace G4Studio.Views
 
         private bool AllSelected { get; set; }
 
-        public List<Device> SelectedDevices { get; set; }
-        public Device SelectedDevice { get; set; }
-        public Project Project { get; set; }
+        public List<Twin> SelectedDevices { get; set; }
+        public List<Twin> Twins { get; set; }
+        public Twin SelectedDevice { get; set; }
+        public Tenant Project { get; set; }
         public event RoutedEventHandler ItemSelected;
         public event RoutedEventHandler ItemDeselected;
 
@@ -65,9 +66,11 @@ namespace G4Studio.Views
             DefaultMarginTop = 7;
 
 
-            Project = new Project();
-            SelectedDevices = new List<Device>();
-            SelectedDevice = new Device();
+            Project = new Tenant();
+            SelectedDevices = new List<Twin>();
+            SelectedDevice = new Twin();
+            Twins = new List<Twin>();
+
 
             IsVisible = true;
 
@@ -130,27 +133,27 @@ namespace G4Studio.Views
             CTRL_Action_UPD.ItemSelected += CTRL_Action_UPD_ItemSelected;
         }
 
-        public void BindData(Project project)
+        public void BindData(Tenant project, List<Twin> twins)
         {
             if (project != null)
             {
                 Project = project;
 
-                TB_Title.Text = Project.name;
-                TB_Hostname.Text = Project.hostnames[0];
+                Twins = twins;
+
+                TB_Title.Text = Project.Name;
+                TB_Hostname.Text = Project.Hostnames[0];
                 //TB_NProjects.Text = _Project.Items.Count.ToString(CultureInfo.InvariantCulture);
-                TB_ProjectInfo_Main_NProjects.Text = Project.Devices.Count.ToString(CultureInfo.InvariantCulture);
+                TB_ProjectInfo_Main_NProjects.Text = twins.Count.ToString(CultureInfo.InvariantCulture);
 
-                RC_Color.Fill = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor, project.fence.properties.fillOpacity * 100));
-                RC_Color.Stroke = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor));
-
-
+                RC_Color.Fill = new SolidColorBrush(ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100));
+                RC_Color.Stroke = new SolidColorBrush(ColorHandler.FromHex(project.FillColor));
                 
 
-                BRD_NDevices_Top.BorderBrush = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor));
-                //BRD_NDevices_Top.Background = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor, project.fence.properties.fillOpacity * 100));
+                BRD_NDevices_Top.BorderBrush = new SolidColorBrush(ColorHandler.FromHex(project.FillColor));
+                //BRD_NDevices_Top.Background = new SolidColorBrush(ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100));
 
-                //BindData_Devices(project.fence.properties.fillColor);
+                //BindData_Devices(project.FillColor);
 
                 IsVisible = true;
             }
@@ -163,7 +166,7 @@ namespace G4Studio.Views
 
             GRD_Devices_List.Children.Clear();
             SelectedDevices.Clear();
-            SelectedDevice = new Device();
+            SelectedDevice = new Twin();
 
             int column = 0;
             int line = 0;
@@ -172,7 +175,7 @@ namespace G4Studio.Views
             double marginTop = DefaultMarginTop;
 
 
-            foreach (var item in Project.Devices)
+            foreach (var item in Twins)
             {
                 if (column < NColumns)
                 {

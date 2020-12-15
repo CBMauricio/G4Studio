@@ -1,5 +1,6 @@
 ﻿using G4Studio.Models;
 using G4Studio.Utils;
+using Hyperion.Platform.Tests.Core.ExedraLib.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +25,8 @@ namespace G4Studio.Views
     public sealed partial class UC_AddNewDevices : UserControl
     {
         public List<Device> NewDevices { get; set; }
-        public Project Project { get; set; }
+        public Tenant Project { get; set; }
+        public List<Twin> Twins { get; set; }
 
         public event RoutedEventHandler RegisterDevices;
 
@@ -33,21 +35,23 @@ namespace G4Studio.Views
             this.InitializeComponent();
 
             NewDevices = new List<Device>(); 
-            Project = new Project();
+            Project = new Tenant();
+            Twins = new List<Twin>();
         }
 
-        public void BindData(Project project)
+        public void BindData(Tenant project, List<Twin> twins)
         {
             if (project != null)
             {
                 Project = project;
+                Twins = twins;
 
-                TB_Title.Text = Project.name;
-                TB_Hostname.Text = Project.hostnames[0];
-                TB_NProjects.Text = Project.Devices.Count.ToString(CultureInfo.InvariantCulture);
+                TB_Title.Text = Project.Name;
+                TB_Hostname.Text = Project.Hostnames[0];
+                TB_NProjects.Text = Twins.Count.ToString(CultureInfo.InvariantCulture);
 
-                RC_Color.Fill = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor, project.fence.properties.fillOpacity * 100));
-                RC_Color.Stroke = new SolidColorBrush(ColorHandler.FromHex(project.fence.properties.fillColor));
+                RC_Color.Fill = new SolidColorBrush(ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100));
+                RC_Color.Stroke = new SolidColorBrush(ColorHandler.FromHex(project.FillColor));
 
                 //BD_Actions_Main_Inner.Background = new SolidColorBrush(ColorHandler.FromHex(resourceLoader.GetString("BRD_Light_BGColor_Selected")));
                 //IMG_Main.Source = new BitmapImage(new Uri(resourceLoader.GetString("BRD_Actions_Devices_IMG_Selected")));
@@ -64,13 +68,13 @@ namespace G4Studio.Views
                 //CTRL_Action_TEL50.BindaData();
                 //CTRL_Action_TEL100.BindaData();
 
-                //BindData_Devices(project.fence.properties.fillColor);
+                //BindData_Devices(project.FillColor);
 
                 //IsVisible = true;
             }
         }
 
-        public void AddNewDevice(string deviceID, BasicGeoposition position)
+        public void AddNewDevice(string deviceID, Windows.Devices.Geolocation.BasicGeoposition position)
         {
             NewDevices.Add(new Device(deviceID, position));
 

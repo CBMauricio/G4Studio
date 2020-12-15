@@ -1,13 +1,13 @@
-﻿using ExedraCoreLibrary;
-using G4Studio.Models;
+﻿using G4Studio.Models;
 using G4Studio.Utils;
-using Newtonsoft.Json;
+using Hyperion.Platform.Tests.Core.ExedraLib;
+using Hyperion.Platform.Tests.Core.ExedraLib.Config;
+using Hyperion.Platform.Tests.Core.ExedraLib.Handlers;
+using Hyperion.Platform.Tests.Core.ExedraLib.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
@@ -18,6 +18,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Maps;
+using BasicGeoposition = Hyperion.Platform.Tests.Core.ExedraLib.Models.BasicGeoposition;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -25,15 +26,16 @@ namespace G4Studio.Views
 {
     public sealed partial class UC_MapControl : UserControl
     {
-        private string DeviceIP_CoAPSERVER { get; set; }
-       
+        EnvironmentHandler.Type EnvironmentT { get; set; }
+
         private static ResourceLoader resourceLoader;
         private string CEnvironment { get; set; }
 
         private Geopoint UserLocation { get; set; }
 
-        List<BasicGeoposition> Coordinates { get; set; }
-        private List<Project> Projects { get; set; }
+        List<Windows.Devices.Geolocation.BasicGeoposition> Coordinates { get; set; }
+        private List<Tenant> Projects { get; set; }
+        private List<Twin> Twins { get; set; }
         private List<MapPolygon> MapPolygons { get; set; }
         private List<MapElementsLayer> MapLayers { get; set; }
         private List<MapElementsLayer> MapLayersOverlayers { get; set; }
@@ -41,8 +43,8 @@ namespace G4Studio.Views
         private List<string> ListOfActionsToPerform { get; set; }
 
 
-        private Project SelectedProject { get; set; }
-        private Device SelectedDevice { get; set; }
+        private Tenant SelectedProject { get; set; }
+        private Twin SelectedDevice { get; set; }
 
         private bool ProjectLayerSelected { get; set; }
 
@@ -51,18 +53,21 @@ namespace G4Studio.Views
         {
             this.InitializeComponent();
 
+            Projects = new List<Tenant>();
+            Twins = new List<Twin>();
+
+            EnvironmentT = EnvironmentHandler.Type.TST;
+
             resourceLoader = ResourceLoader.GetForCurrentView();
 
             CEnvironment = resourceLoader.GetString("CONFS_ENVIRONMENT");
             CTRL_Map_Main.MapServiceToken = resourceLoader.GetString("Map_ServiceToken" + CEnvironment);
-
-            DeviceIP_CoAPSERVER = resourceLoader.GetString("CoAPSERVER_IP_DEV");
                        
 
-            UserLocation = new Geopoint(new BasicGeoposition());
+            UserLocation = new Geopoint(new Windows.Devices.Geolocation.BasicGeoposition());
 
 
-            Coordinates = new List<BasicGeoposition>();
+            Coordinates = new List<Windows.Devices.Geolocation.BasicGeoposition>();
 
             MapPolygons = new List<MapPolygon>();
             MapLayers = new List<MapElementsLayer>();
@@ -72,8 +77,8 @@ namespace G4Studio.Views
             ListOfActionsToPerform = new List<string>();
 
             ProjectLayerSelected = false;
-            SelectedProject = new Project();
-            SelectedDevice = new Device();
+            SelectedProject = new Tenant();
+            SelectedDevice = new Twin();
 
             SB_MapInitialization.Completed += SB_MapInitialization_Completed;
             SB_ShowMap.Completed += SB_ShowMap_Completed;
@@ -90,17 +95,16 @@ namespace G4Studio.Views
             CTRL_ProjectDetail.Telemetry_Bulk_PerformAction += CTRL_ProjectDetail_Telemetry_Bulk_PerformAction;
             CTRL_ProjectDetail.Alarms_Bulk_PerformAction += CTRL_ProjectDetail_Alarms_Bulk_PerformAction;
             CTRL_ProjectDetail.RegisterDevices_Bulk_PerformAction += CTRL_ProjectDetail_RegisterDevices_Bulk_PerformAction;
-            CTRL_ProjectDetail.DeleteDevices += CTRL_ProjectDetail_DeleteDevices;
-
-
-            
+            CTRL_ProjectDetail.DeleteDevices += CTRL_ProjectDetail_DeleteDevices;            
 
             CTRL_DoWork.Visibility = Visibility.Collapsed;
             CTRL_DoWork.Done += CTRL_DoWork_Done;
         }
 
-        public void StartAnimation()
+        public void StartAnimation(EnvironmentHandler.Type environment)
         {
+            EnvironmentT = environment;
+
             SB_MapInitialization.Begin();
             CTRL_Map_Animation.StartAnimation();
         }
@@ -110,7 +114,9 @@ namespace G4Studio.Views
             InitializeMapControl();
             InitializeProjects();
             CTRL_Projects.BindData(Projects);
-            
+
+            SanitizeTelemetry();
+
         }
 
         private async void SB_ShowMap_Completed(object sender, object e)
@@ -157,9 +163,8 @@ namespace G4Studio.Views
             }
             else 
             {
-                UserLocation = new Geopoint(new BasicGeoposition() { Latitude = (double)localSettings.Values["UserLocation_Latitude"], Longitude = (double)localSettings.Values["UserLocation_Longitude"] });
+                UserLocation = new Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = (double)localSettings.Values["UserLocation_Latitude"], Longitude = (double)localSettings.Values["UserLocation_Longitude"] });
             }
-
 
             // Set the map location.
             CTRL_Map_Main.Center = UserLocation;
@@ -176,24 +181,42 @@ namespace G4Studio.Views
 
         private void InitializeProjects()
         {
-            Projects = new List<Project>();
-            Projects = JsonConvert.DeserializeObject<List<Project>>(resourceLoader.GetString("TENANTS" + CEnvironment));
+            Projects = new List<Tenant>();
+            
+            TenantIList tenantsObj = Task.Run(async () => await ExedraLibCoreHandler.GetTenantsAsync(EnvironmentT).ConfigureAwait(false)).Result;
+
+            Projects = tenantsObj.Tenants;
+
+            Debug.WriteLine(tenantsObj.Logs.Value);
+
+            //CleanUnhealthyDevices();
         }
 
-        
-
-        private void InitializeTwins(Project project)
+        private void CleanUnhealthyDevices()
         {
-            project.SetCoordinates();
-            project.LoadTwins().Wait();
+            var unhealthyEntites = Task.Run(async () => await ExedraLibCoreHandler.GetUnhealthyEntities(EnvironmentT).ConfigureAwait(false)).Result;
 
-            //MOVE THIS TO DELETE DEVICES
-            //project.DeleteZombieDevicesOnTableStorage();
-            //project.DeleteZombieDevicesOnKeyVault();
+            Debug.WriteLine(unhealthyEntites.Logs.Value);
 
-            //CoAPServer.TestServer(DeviceIP_Local);
-            //CoAPServer.TestServer("20.56.53.23");
-            //CoAPServer.TestServer("95.136.78.21");
+            List<string> deviceIDs = new List<string>();
+
+           foreach (var item in unhealthyEntites.Entities)
+            {
+                deviceIDs.Add(item.DeviceID);
+            }
+
+            DeleteDevicesByDeviceID(deviceIDs);
+        }
+
+        private void InitializeTwinsAsync()
+        {
+            DateTime date1 = DateTime.Now;
+
+            TwinIList result = Task.Run(async () => await ExedraLibCoreHandler.GetTwinsAsync(EnvironmentT, SelectedProject.Name).ConfigureAwait(false)).Result;
+
+            Twins = result.Twins;
+
+            Debug.WriteLine(result.Logs.Value);            
         }
 
         private void CTRL_Projects_ItemSelected(object sender, RoutedEventArgs e)
@@ -203,16 +226,13 @@ namespace G4Studio.Views
 
         private void LoadProjectAndTwins()
         {
-            Project selectedProject = CTRL_Projects.SelectedProject;
+            SelectedProject = CTRL_Projects.SelectedProject;
 
-            if (!selectedProject.TwinsLoaded)
-            {
-                InitializeTwins(selectedProject);
-            }
+            InitializeTwinsAsync();
 
-            SetViewToSelectedProject(selectedProject);
+            SetViewToSelectedProject(SelectedProject);
             
-            CTRL_ProjectDetail.BindData(selectedProject);
+            CTRL_ProjectDetail.BindData(SelectedProject, Twins);
 
             if (!ProjectLayerSelected)
             {
@@ -245,10 +265,12 @@ namespace G4Studio.Views
 
         private void ListListOfActionsToPerform()
         {
-            Debug.WriteLine("---- ListListOfActionsToPerform ----");
             foreach (var item in ListOfActionsToPerform)
             {
                 Debug.WriteLine(string.Format(CultureInfo.InvariantCulture, "Item: {0}", item));
+
+
+                //var url = $"{tenant}{tenant}";
             }
         }
 
@@ -262,7 +284,7 @@ namespace G4Studio.Views
                     //SPECIAL CASE - REGISTER NEW DEVICES
 
                     CTRL_ProjectDetail.SetCTRLVisibility();
-                    CTRL_NewDevices.BindData(SelectedProject);
+                    CTRL_NewDevices.BindData(SelectedProject, Twins);
 
                     //AddOverlayer(SelectedProject.Coordinates);
 
@@ -342,6 +364,46 @@ namespace G4Studio.Views
             CreateDevicesBulk(SelectedProject, devicesToRegister);
             //CreateDevicesBulkThreaded(SelectedProject, devicesToRegister);
         }
+        private void CTRL_ProjectDetail_Telemetry_Bulk_PerformAction(object sender, RoutedEventArgs e)
+        {
+            DateTime initDateTime = new DateTime(2020, 11, 17, 0, 0, 1);
+            //DateTime initDateTime = DateTime.Now.AddDays(-2);
+            DateTime endDateTime = DateTime.Now;
+            var currentTotalConsumption = 101.4;
+
+            //List<Twin> selectedDevices = CTRL_ProjectDetail.SelectedDevices;
+            int messagesToDeliver;
+
+            switch (CTRL_ProjectDetail.ActionToPerform)
+            {
+                case "3":
+                    messagesToDeliver = 3;
+                    break;
+                case "12":
+                    messagesToDeliver = 12;
+                    break;
+                case "24":
+                    messagesToDeliver = 24;
+                    break;
+                case "36":
+                    messagesToDeliver = 36;
+                    break;
+                case "64":
+                    messagesToDeliver = 64;
+                    break;
+                default:
+                    messagesToDeliver = 0;
+                    break;
+            }
+
+            SendDimLevels(messagesToDeliver, initDateTime, endDateTime, false, currentTotalConsumption);
+            //SendDimLevels_BoisdelaCambre_Default(messagesToDeliver, initDateTime, endDateTime, true, currentTotalConsumption);
+            //SendDimLevels_BoisdelaCambre_Default_V2(messagesToDeliver, initDateTime, endDateTime, true);
+
+
+
+            //GetToken();
+        }
 
         private void CTRL_ProjectDetail_Alarms_Bulk_PerformAction(object sender, RoutedEventArgs e)
         {
@@ -373,52 +435,12 @@ namespace G4Studio.Views
                     break;
             }
             
-            SendAlarms(SelectedProject, alarmsToDeliver, initDateTime);
+            SendAlarms(alarmsToDeliver, initDateTime);
         }
 
-        private void CTRL_ProjectDetail_Telemetry_Bulk_PerformAction(object sender, RoutedEventArgs e)
+        private async void DeleteDevicesByDeviceID(List<string> deviceIDs)
         {
-            Debug.WriteLine("CTRL_ProjectDetail_Telemetry_Bulk_PerformAction -> " + CTRL_ProjectDetail.ActionToPerform);
-
-            DateTime initDateTime = new DateTime(2020, 11, 1, 0, 0, 1);
-            DateTime endDateTime = DateTime.Now;
-            var currentTotalConsumption = 0.0;
-
-            //List<Twin> selectedDevices = CTRL_ProjectDetail.SelectedDevices;
-            int messagesToDeliver;
-
-            switch (CTRL_ProjectDetail.ActionToPerform)
-            {
-                case "3":
-                    messagesToDeliver = 3;
-                    break;
-                case "12":
-                    messagesToDeliver = 12;
-                    break;
-                case "24":
-                    messagesToDeliver = 24;
-                    break;
-                case "36":
-                    messagesToDeliver = 36;
-                    break;
-                case "64":
-                    messagesToDeliver = 64;
-                    break;
-                default:
-                    messagesToDeliver = 0;
-                    break;
-            }
-
-            SendDimLevels(SelectedProject, messagesToDeliver, initDateTime, endDateTime, false, currentTotalConsumption);
-            //SendDimLevels_BoisdelaCambre_Default(messagesToDeliver, initDateTime, endDateTime, true, currentTotalConsumption);
-            //SendDimLevels_BoisdelaCambre_Default_V2(messagesToDeliver, initDateTime, endDateTime, true);
-        }
-
-        private async void CTRL_ProjectDetail_DeleteDevices(object sender, RoutedEventArgs e)
-        {
-            double totalMessages = SelectedProject.Devices.Count;
-
-            SelectedProject.TwinDeleted += SelectedProject_TwinDeleted;
+            int index = 1;            
 
             await Task.Run(async () =>
             {
@@ -427,7 +449,7 @@ namespace G4Studio.Views
                 {
                     CTRL_DoWork.Title = resourceLoader.GetString("STR_UC_Map_DELETE_Title");
                     CTRL_DoWork.Description = resourceLoader.GetString("STR_UC_Map_DELETE_Description");
-                    CTRL_DoWork.MaxItems = totalMessages.ToString(CultureInfo.InvariantCulture);
+                    CTRL_DoWork.MaxItems = deviceIDs.Count.ToString(CultureInfo.InvariantCulture);
                     CTRL_DoWork.Visibility = Visibility.Visible;
                     CTRL_DoWork.BindData();
 
@@ -436,86 +458,102 @@ namespace G4Studio.Views
 
             }).ConfigureAwait(false);
 
+            foreach (var ID in deviceIDs)
+            {
+                var result = await ExedraLibCoreHandler.DeleteDevice(EnvironmentT, ID).ConfigureAwait(false);
 
-            //await SelectedProject.DeleteTwins(SelectedProject.Items).ConfigureAwait(false);
-            await SelectedProject.DeleteTwinsByTenantID().ConfigureAwait(false);
-            //await SelectedProject.DeleteTwinsBulk().ConfigureAwait(false);
+                Debug.WriteLine(result.Value);
+
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+                () =>
+                {
+                    CTRL_DoWork.UpdateCounter(index++.ToString(CultureInfo.InvariantCulture));
+                });
+            }
 
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
             () =>
             {
-                Thread.Sleep(5000);
-                SelectedProject.TwinsLoaded = false;
-                LoadProjectAndTwins();
-
                 CTRL_DoWork.ShowDoneControl();
             });
         }
 
-        private async void SelectedProject_TwinDeleted(object sender, RoutedEventArgs e)
+        private void CTRL_ProjectDetail_DeleteDevices(object sender, RoutedEventArgs e)
         {
-            var project = sender as Project;
+            if (SelectedProject.Name.IndexOf("Bois", StringComparison.InvariantCulture) > -1 || SelectedProject.Name.IndexOf("Paris", StringComparison.InvariantCulture) > -1)
+            {
+                return;
+            }
+
+            List<string> deviceIDs = new List<string>();
+
+            foreach (var item in Twins)
+            {
+                deviceIDs.Add(item.DeviceID);
+            }
+
+            DeleteDevicesByDeviceID(deviceIDs);
+
+            LoadProjectAndTwins();
+        }
+
+        private async void CTRL_NewDevices_RegisterDevices(object sender, RoutedEventArgs e)
+        {
+            int index = 1;
+
+            await Task.Run(async () =>
+            {
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+                () =>
+                {
+                    CTRL_DoWork.Title = resourceLoader.GetString("STR_UC_Map_REGISTER_Title");
+                    CTRL_DoWork.Description = resourceLoader.GetString("STR_UC_Map_REGISTER_Description");
+                    CTRL_DoWork.MaxItems = CTRL_NewDevices.NewDevices.Count.ToString(CultureInfo.InvariantCulture);
+                    CTRL_DoWork.Visibility = Visibility.Visible;
+                    CTRL_DoWork.BindData();
+
+                    SB_HideProjectDetail.Begin();
+                });
+
+            }).ConfigureAwait(false);
+
+            foreach (var device in CTRL_NewDevices.NewDevices)
+            {
+                KeyValuePair<bool, string> result1 = ExedraLibCoreHandler.RegisterDevice(device.DeviceName, new BasicGeoposition() { Latitude = device.DevicePosition.Latitude, Longitude = device.DevicePosition.Longitude }, EnvironmentT);
+
+                Debug.WriteLine(result1.Value);
+
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
+                () =>
+                {
+                    CTRL_DoWork.UpdateCounter(index++.ToString(CultureInfo.InvariantCulture));
+                });
+            }            
 
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
             () =>
             {
-                CTRL_DoWork.UpdateCounter(project.Index.ToString(CultureInfo.InvariantCulture));
+                CTRL_NewDevices.NewDevices.Clear();
+
+                //Selectedproject.TwinsLoaded = false;
+                LoadProjectAndTwins();
+
+                CTRL_DoWork.ShowDoneControl();
             });
+
+
         }
 
-        private void CTRL_NewDevices_RegisterDevices(object sender, RoutedEventArgs e)
+        private async void CreateDevicesBulk(Tenant project, long nDevices)
         {
-            StringBuilder logs = new StringBuilder();
-
-            var initDate = DateTime.Now;
-
-            //Debug.WriteLine("STARTED AT: " + initDate.ToLongTimeString() + "." + initDate.Millisecond);
-
-            foreach (var item in CTRL_NewDevices.NewDevices)
-            {
-                //bool isRegistered = G3Gateway.RegisterDevice(item.DeviceName, item.DevicePosition, DateTime.Now, string.Format(CultureInfo.InvariantCulture, "{0}", DeviceIP_CoAPSERVER));
-
-                bool isRegistered = D2CHandler.RegisterDevice(item.DeviceName, item.DevicePosition, DateTime.Now, string.Format(CultureInfo.InvariantCulture, "{0}", DeviceIP_CoAPSERVER));
-
-                if (isRegistered)
-                {
-                    Debug.WriteLine("DEVICE REGISTERED::UPDATING MAP -> " + item.DeviceName);
-                    //await Task.Delay(3000).ConfigureAwait(true);
-                }
-                else
-                {
-                    Debug.WriteLine("ERROR REGISTERING DEVICE! -> " + item.DeviceName);
-                }
-            }
-
-            CTRL_NewDevices.NewDevices.Clear();
-
-            //InitializeTwins(SelectedProject.name);
-
-            //SetViewToSelectedDevice(CTRL_ProjectDetail.SelectedDevices, CTRL_ProjectDetail.SelectedDevice, false);
-            //SetMapElements_Devices_Selected(CTRL_ProjectDetail.SelectedDevice.DeviceId, false);
-
-            //CTRL_ProjectDetail.BindData(SelectedProject);
-            //ListOfActionsToPerform.Clear();
-
-            //var endDate = DateTime.Now;
-
-            //Debug.WriteLine("ENDED AT: " + endDate.ToLongTimeString() + "." + endDate.Millisecond);
-
-           
-        }
-
-        private async void CreateDevicesBulk(Project project, long nDevices)
-        {
-            StringBuilder logs = new StringBuilder();
-
             List<string> FirstAndLastDevice = new List<string>();
 
             BasicGeoposition centroid = GeopositionHandler.GetPolygonCentroid(project.Coordinates);
             BasicGeoposition northwest = GeopositionHandler.GetNorthWestPosition(project.Coordinates, centroid);
             BasicGeoposition southeast = GeopositionHandler.GetSouthEastPosition(project.Coordinates, centroid);
-            
-            var clickedProjectName = SelectedProject.name;
+
+            var clickedProjectName = SelectedProject.Name;
+
             var projectName = clickedProjectName.Substring(0, 3).ToUpper(CultureInfo.InvariantCulture);
             var length = 8;
             double totalMessages = nDevices;
@@ -547,31 +585,27 @@ namespace G4Studio.Views
 
                 var datetime = now.Ticks.ToString(CultureInfo.InvariantCulture);
                 var deviceID = projectName + i + datetime.Substring(datetime.Length - length, length);
+                //var deviceID = "test-device-" + (i > 9 ? i.ToString(CultureInfo.InvariantCulture) : $"0{i}");
 
                 if (i == 0 || i == nDevices - 1)
                 {
                     FirstAndLastDevice.Add(i + 1 + " -> " + deviceID);
                 }
 
-                BasicGeoposition devicePosition = new BasicGeoposition()
+                Windows.Devices.Geolocation.BasicGeoposition devicePosition = new Windows.Devices.Geolocation.BasicGeoposition()
                 {
                     Latitude = MathHandler.GetRandomNumber(southeast.Latitude, northwest.Latitude),
                     Longitude = MathHandler.GetRandomNumber(northwest.Longitude, southeast.Longitude),
                 };
 
-                //Debug.WriteLine("BOX ->");
+                KeyValuePair<bool, string> result = ExedraLibCoreHandler.RegisterDevice(deviceID, new BasicGeoposition() { Latitude = devicePosition.Latitude, Longitude = devicePosition.Longitude }, EnvironmentT);
 
-
-
-                //bool success = G3Gateway.RegisterDevice(deviceID, devicePosition, DateTime.Now, string.Format(CultureInfo.InvariantCulture, "{0}:{1}", DeviceIP_CoAPSERVER, messageIndex));
-                bool success = D2CHandler.RegisterDevice(deviceID, devicePosition, DateTime.Now, string.Format(CultureInfo.InvariantCulture, "{0}:{1}", DeviceIP_CoAPSERVER, messageIndex));
+                Debug.WriteLine($"{result.Value}");
 
                 DateTime end = DateTime.Now;
 
                 TimeSpan diff = end - now;
                 TimeSpan elapsed = end - initDate;
-
-                logs.AppendLine( "[" + (i + 1) + "] | " + deviceID + " -> " + diff.TotalSeconds + " -> " + elapsed.TotalSeconds);
 
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
                 () =>
@@ -587,37 +621,23 @@ namespace G4Studio.Views
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
             () =>
             {
-                Thread.Sleep(1000);
-                SelectedProject.TwinsLoaded = false;
+                //Selectedproject.TwinsLoaded = false;
                 LoadProjectAndTwins();
 
                 CTRL_DoWork.ShowDoneControl();
             });
-
-            var endDate = DateTime.Now;
-
-            //Debug.Write("STARTED AT: " + initDate.ToLongTimeString() + "." + initDate.Millisecond);
-            //Debug.WriteLine(" -> " + FirstAndLastDevice[0] != null ? FirstAndLastDevice[0] : "FirstAndLastDevice[0]");
-            
-            //Debug.Write("ENDED AT: " + endDate.ToLongTimeString() + "." + endDate.Millisecond);
-            //Debug.WriteLine(" -> " + FirstAndLastDevice[1] != null ? FirstAndLastDevice[1] : "FirstAndLastDevice[1]");
-
-            TimeSpan elapsedDiff = endDate - initDate;
-
-            logs.Insert(0, "TOTAL ELAPSED -> " + Math.Round(elapsedDiff.TotalSeconds, 3) + "s  |  " + Math.Round(elapsedDiff.TotalSeconds / nDevices, 3) + "s / device" + Environment.NewLine + Environment.NewLine);
-            //logs.Insert(0, "CityLinx ->  [FIRST AT ]" + Environment.NewLine);
-            //logs.Insert(0, "CoAP Clients ->  [FIRST AT ]" + Environment.NewLine);
-            logs.Insert(0, "BOT -> " + nDevices + Environment.NewLine);
-            logs.Insert(0, "STARTED AT -> " + initDate.ToLongTimeString() + Environment.NewLine);
-            logs.Insert(0, resourceLoader.GetString("CONFS_ENVIRONMENT") + "_" + Environment.NewLine);
-
-            //TOTAL ELAPSED [FROM 1 - 100 CoAP Requests @ BOT side] -> 724.6868905 | AVG -> 7.2s / device
-
-            Debug.WriteLine(logs.ToString());
-
-            //Debug.WriteLine("TOTAL DIFF -> " + elapsedDiff.TotalSeconds);
         }
+
         
+
+        private void SanitizeTelemetry()
+        {
+            string payload = resourceLoader.GetString("SANITIZE");
+            KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(payload, EnvironmentT);
+
+            Debug.WriteLine("MESSAGES SENT: " + result.Value);
+        }
+
         private async void SendDimLevels_BoisdelaCambre_Default(int messagesPerDay, DateTime initDateTime, DateTime endDateTime, bool usesTimeZoneHandler, double totalConsumption)
         {
             //List<Twin> selectedDevices = new List<Twin>();
@@ -662,7 +682,7 @@ namespace G4Studio.Views
                     {
                         //Debug.WriteLine(device + ": " + item.Date + " -> " + item.Date.DayOfWeek + " |" + item.Date.IsDaylightSavingTime() + "| -> " + item.DimLevel + " -> " + item.EnergyConsumption + " -> " + (totalConsumption + dailyConsumption + item.EnergyConsumption));
 
-                        bool success = D2CHandler.SendDimmingProfile(device, new BasicGeoposition(), item.Date, item.DimLevel, (totalConsumption + dailyConsumption + item.EnergyConsumption), item.ACPower, item.ACCurrent, item.ACCPowerFactor, DeviceIP_CoAPSERVER);
+                        KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(device, item.Date, item.DimLevel, (totalConsumption + dailyConsumption + item.EnergyConsumption), item.ACPower, item.ACCurrent, item.ACCPowerFactor, EnvironmentT);
 
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
                         () =>
@@ -702,7 +722,7 @@ namespace G4Studio.Views
             Debug.WriteLine("MESSAGES SENT: " + messageIndex);
         }
 
-        private async void SendDimLevels_BoisdelaCambre_Default_V2(int messagesPerDay, DateTime initDateTime, DateTime endDateTime, bool usesTimeZoneHandler)
+        private async void SendDimLevels_BoisdelaCambre_Default_V2()
         {
             List<string> Devices = new List<string>();
 
@@ -745,7 +765,7 @@ namespace G4Studio.Views
                 {
                     //Debug.WriteLine(device + ": " + dimFeedback.Date + " -> " + dimFeedback.Date.DayOfWeek + " |" + dimFeedback.Date.IsDaylightSavingTime() + "| -> " + dimFeedback.DimLevel + " -> " + dimFeedback.EnergyConsumption);
 
-                    bool success = D2CHandler.SendDimmingProfile(device, new BasicGeoposition(), dimFeedback.Date, dimFeedback.DimLevel, dimFeedback.EnergyConsumption, dimFeedback.ACPower, dimFeedback.ACCurrent, dimFeedback.ACCPowerFactor, DeviceIP_CoAPSERVER);
+                    KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(device, dimFeedback.Date, dimFeedback.DimLevel, dimFeedback.EnergyConsumption, dimFeedback.ACPower, dimFeedback.ACCurrent, dimFeedback.ACCPowerFactor, EnvironmentT);
                 }
 
                 Debug.WriteLine(Environment.NewLine);
@@ -764,19 +784,14 @@ namespace G4Studio.Views
             }).ConfigureAwait(false);
         }
 
-        private async void SendDimLevels(Project project, int messagesPerDay, DateTime initDateTime, DateTime endDateTime, bool usesTimeZoneHandler, double totalConsumption)
+        private async void SendDimLevels(int messagesPerDay, DateTime initDateTime, DateTime endDateTime, bool usesTimeZoneHandler, double totalConsumption)
         {
-            StringBuilder logs = new StringBuilder();
-
-            double dailyConsumption = 0;
-
-            var initDate = DateTime.Now;
-            List<string> FirstAndLastDevice = new List<string>();
-
-            int i = 1;
+            double dailyConsumption = 0;            
             int counter = 0;
             int messageIndex = 1;
-            double totalMessages = Math.Ceiling(new TimeSpan(endDateTime.Ticks - initDateTime.Ticks).TotalDays) * messagesPerDay * project.Devices.Count;
+            double totalMessages = Math.Ceiling(new TimeSpan(endDateTime.Ticks - initDateTime.Ticks).TotalDays) * messagesPerDay * Twins.Count;
+
+            var initDate = DateTime.Now;
 
             await Task.Run(async () =>
             {
@@ -796,7 +811,7 @@ namespace G4Studio.Views
 
             while (initDateTime <= endDateTime)
             {
-                foreach (Device device in project.Devices)
+                foreach (Twin device in Twins)
                 {
                     var now = DateTime.Now;
 
@@ -804,23 +819,12 @@ namespace G4Studio.Views
                     BasicGeoposition twinPosition = device.DevicePosition;
 
                     List<DimFeedback> dimFeedbacks = DimFeedback.GetDimFeedbacks(initDateTime, twinPosition.Latitude, twinPosition.Longitude, usesTimeZoneHandler);
-                    if (counter == 0 || counter == totalMessages - 1)
-                    {
-                        FirstAndLastDevice.Add(counter + 1 + " -> " + device.DeviceID);
-                    }
-
+                    
                     foreach (var item in dimFeedbacks)
                     {
-                        //Debug.WriteLine(twin.DeviceId + ": " + item.Date + " -> " + item.Date.DayOfWeek + " |" + item.Date.IsDaylightSavingTime() + "| -> " + item.DimLevel + " -> " + item.EnergyConsumption + " -> " + (totalConsumption + dailyConsumption + item.EnergyConsumption));
+                        KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(device.DeviceID, item.Date, item.DimLevel, (totalConsumption + dailyConsumption + item.EnergyConsumption), item.ACPower, item.ACCurrent, item.ACCPowerFactor, EnvironmentT);
 
-                        bool success = D2CHandler.SendDimmingProfile(device.DeviceID, device.DevicePosition, item.Date, item.DimLevel, (totalConsumption + dailyConsumption + item.EnergyConsumption), item.ACPower, item.ACCurrent, item.ACCPowerFactor, DeviceIP_CoAPSERVER);
-
-                        DateTime end = DateTime.Now;
-
-                        TimeSpan diff = end - now;
-                        TimeSpan elapsed = end - initDate;
-
-                        logs.AppendLine("[" + (i++) + "] | " + device.DeviceID + " -> " + diff.TotalSeconds + " -> " + elapsed.TotalSeconds);
+                        Debug.WriteLine(result.Value);
 
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
                         () =>
@@ -832,9 +836,6 @@ namespace G4Studio.Views
 
                         dailyConsumption += Math.Round(item.EnergyConsumption, 2);
                     }
-
-                    //Debug.WriteLine(Environment.NewLine);
-                    //Debug.WriteLine("DAILY -> " + dailyConsumption);
                 }
 
                 counter++;
@@ -853,40 +854,15 @@ namespace G4Studio.Views
                 });
 
             }).ConfigureAwait(false);
-
-            var endDate = DateTime.Now;
-
-            //Debug.WriteLine("MESSAGES SENT: " + messageIndex);
-            //Debug.Write("STARTED AT: " + initDate.ToLongTimeString() + "." + initDate.Millisecond);
-            //Debug.WriteLine(" -> " + FirstAndLastDevice[0] != null ? FirstAndLastDevice[0] : "FirstAndLastDevice[0]");
-
-            //Debug.Write("ENDED AT: " + endDate.ToLongTimeString() + "." + endDate.Millisecond);
-            //Debug.WriteLine(" -> " + FirstAndLastDevice[1] != null ? FirstAndLastDevice[1] : "FirstAndLastDevice[1]");
-
-            TimeSpan elapsedDiff = endDate - initDate;
-
-            logs.Insert(0, "TOTAL ELAPSED -> " + elapsedDiff.TotalSeconds + "  |  " + Math.Round(elapsedDiff.TotalSeconds / totalMessages, 3) + "s / device" + Environment.NewLine + Environment.NewLine);
-            //logs.Insert(0, "CityLinx ->  [FIRST AT ]" + Environment.NewLine);
-            //logs.Insert(0, "CoAP Clients ->  [FIRST AT ]" + Environment.NewLine);
-            logs.Insert(0, "BOT -> " + totalMessages + Environment.NewLine);
-            logs.Insert(0, "STARTED AT -> " + initDate.ToLongTimeString() + Environment.NewLine);
-            logs.Insert(0, "TELEMETRY" + Environment.NewLine);
-            logs.Insert(0, resourceLoader.GetString("CONFS_ENVIRONMENT") + "_" + Environment.NewLine);
-
-            //TOTAL ELAPSED [FROM 1 - 100 CoAP Requests @ BOT side] -> 724.6868905 | AVG -> 7.2s / device
-
-            Debug.WriteLine(logs.ToString());
         }
 
-        private async void SendAlarms(Project project, int messagesPerDay, DateTime initDateTime)
+        private async void SendAlarms(int messagesPerDay, DateTime initDateTime)
         {
             var initDate = DateTime.Now;
-            List<string> FirstAndLastDevice = new List<string>();
-
             int counter = 0;
             int messageIndex = 1;
             double workingHours = 12;
-            double totalMessages = Math.Ceiling(new TimeSpan(DateTime.Now.Ticks - initDateTime.Ticks).TotalDays) * messagesPerDay * project.Devices.Count;
+            double totalMessages = Math.Ceiling(new TimeSpan(DateTime.Now.Ticks - initDateTime.Ticks).TotalDays) * messagesPerDay * Twins.Count;
 
             await Task.Run(async () =>
             {
@@ -906,18 +882,15 @@ namespace G4Studio.Views
 
             while (initDateTime <= DateTime.Now)
             {
-                foreach (Device device in project.Devices)
+                foreach (Twin device in Twins)
                 {
                     List<AlarmFeedback> alarmFeedbacks = AlarmFeedback.GetAlarmFeedbacks(initDateTime, messagesPerDay, workingHours);
 
-                    if (counter == 0 || counter == totalMessages - 1)
-                    {
-                        FirstAndLastDevice.Add(counter + 1 + " -> " + device.DeviceID);
-                    }
-
                     foreach (var item in alarmFeedbacks)
                     {
-                        bool success = D2CHandler.SendAlarm(device.DeviceID, item.Type, item.Date, DeviceIP_CoAPSERVER);
+                        KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendAlarm(device.DeviceID, item.Date, item.Type, EnvironmentT);
+
+                        Debug.WriteLine(result.Value);
 
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
                         () =>
@@ -944,15 +917,6 @@ namespace G4Studio.Views
                 });
 
             }).ConfigureAwait(false);
-
-            var endDate = DateTime.Now;
-
-            Debug.WriteLine("ALARMS SENT: " + messageIndex);
-            Debug.Write("STARTED AT: " + initDate.ToLongTimeString() + "." + initDate.Millisecond);
-            Debug.WriteLine(" -> " + FirstAndLastDevice[0] != null ? FirstAndLastDevice[0] : "FirstAndLastDevice[0]");
-
-            Debug.Write("ENDED AT: " + endDate.ToLongTimeString() + "." + endDate.Millisecond);
-            Debug.WriteLine(" -> " + FirstAndLastDevice[1] != null ? FirstAndLastDevice[1] : "FirstAndLastDevice[1]");
         }
 
         private void CTRL_DoWork_Done(object sender, RoutedEventArgs e)
@@ -960,8 +924,6 @@ namespace G4Studio.Views
             CTRL_DoWork.Visibility = Visibility.Collapsed;
             SB_ShowProjectDetail.Begin();
         }
-
-       
 
         private async void SetMapView()
         {
@@ -972,7 +934,7 @@ namespace G4Studio.Views
         {
             if (fullsize)
             {
-                return new GeoboundingBox(new BasicGeoposition() { Latitude = 90, Longitude = 90 }, new BasicGeoposition() { Latitude = -90, Longitude = -90 });
+                return new GeoboundingBox(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = 90, Longitude = 90 }, new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -90, Longitude = -90 });
             }
 
             Geopoint topLeft;
@@ -985,7 +947,7 @@ namespace G4Studio.Views
             }
             catch
             {
-                var topOfMap = new Geopoint(new BasicGeoposition()
+                var topOfMap = new Geopoint(new Windows.Devices.Geolocation.BasicGeoposition()
                 {
                     Latitude = 85,
                     Longitude = 0
@@ -1003,7 +965,7 @@ namespace G4Studio.Views
             }
             catch
             {
-                var bottomOfMap = new Geopoint(new BasicGeoposition()
+                var bottomOfMap = new Geopoint(new Windows.Devices.Geolocation.BasicGeoposition()
                 {
                     Latitude = -85,
                     Longitude = 0
@@ -1042,7 +1004,7 @@ namespace G4Studio.Views
             MapLayersOverlayers.Clear();
         }
 
-        private void AddOverlayer(List<BasicGeoposition> basePositions)
+        private void AddOverlayer(List<Windows.Devices.Geolocation.BasicGeoposition> basePositions)
         {
             var fillColor = ColorHandler.FromHex("#99333333");
             var strokeColor = ColorHandler.FromHex("#FF000000");
@@ -1053,20 +1015,20 @@ namespace G4Studio.Views
 
             var mapProjects = new List<MapElement>();
             var mapProjectsOuter = new List<MapElement>();
-            var positions = new List<BasicGeoposition>();
-            var positionsOuterLayer = new List<BasicGeoposition>();
+            var positions = new List<Windows.Devices.Geolocation.BasicGeoposition>();
+            var positionsOuterLayer = new List<Windows.Devices.Geolocation.BasicGeoposition>();
 
             positions.Add(box.SoutheastCorner);
-            positions.Add(new BasicGeoposition() { Latitude = box.NorthwestCorner.Latitude, Longitude = box.SoutheastCorner.Longitude });
+            positions.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = box.NorthwestCorner.Latitude, Longitude = box.SoutheastCorner.Longitude });
             positions.Add(box.NorthwestCorner);
-            positions.Add(new BasicGeoposition() { Latitude = box.SoutheastCorner.Latitude, Longitude = box.NorthwestCorner.Longitude });
+            positions.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = box.SoutheastCorner.Latitude, Longitude = box.NorthwestCorner.Longitude });
 
             for (int i = basePositions.Count - 1; i >= 0; i--)
             {
                 positions.Add(basePositions[i]);
             }
 
-            positions.Add(new BasicGeoposition() { Latitude = box.SoutheastCorner.Latitude, Longitude = box.NorthwestCorner.Longitude });
+            positions.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = box.SoutheastCorner.Latitude, Longitude = box.NorthwestCorner.Longitude });
 
 
             var mapPolygon = new MapPolygon
@@ -1090,14 +1052,14 @@ namespace G4Studio.Views
             MapLayersOverlayers.Add(mapProjectsLayer);
             CTRL_Map_Main.Layers.Add(mapProjectsLayer);
 
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = -85, Longitude = 85 });
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = 85, Longitude = 85 });
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = 85, Longitude = -180 });
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = -85, Longitude = -180 });
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = -85, Longitude = 180 });
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = 85, Longitude = 180 });
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = 85, Longitude = -85 });
-            positionsOuterLayer.Add(new BasicGeoposition() { Latitude = -85, Longitude = -85 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -85, Longitude = 85 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = 85, Longitude = 85 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = 85, Longitude = -180 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -85, Longitude = -180 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -85, Longitude = 180 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = 85, Longitude = 180 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = 85, Longitude = -85 });
+            positionsOuterLayer.Add(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = -85, Longitude = -85 });
 
             var mapPolygonOuterLayer = new MapPolygon
             {
@@ -1127,19 +1089,19 @@ namespace G4Studio.Views
 
             foreach (var project in Projects)
             {
-                if (project.name.Equals(projectName, StringComparison.InvariantCulture))
+                if (project.Name.Equals(projectName, StringComparison.InvariantCulture))
                 {
-                    var fillColor = ColorHandler.FromHex(project.fence.properties.fillColor, project.fence.properties.fillOpacity * 100);
-                    var strokeColor = ColorHandler.FromHex(project.fence.properties.fillColor);
+                    var fillColor = ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100);
+                    var strokeColor = ColorHandler.FromHex(project.FillColor);
 
-                    Coordinates.AddRange(project.Coordinates);
+                    Coordinates.AddRange(GeoPositionConversor.Parse(project.Coordinates));
 
                     var mapProjects = new List<MapElement>();
 
                     var mapPolygon = new MapPolygon
                     {
-                        Tag = project.name,
-                        Path = new Geopath(project.Coordinates),
+                        Tag = project.Name,
+                        Path = new Geopath(Coordinates),
                         ZIndex = zindex,
                         FillColor = fillColor,
                         StrokeColor = strokeColor,
@@ -1180,16 +1142,16 @@ namespace G4Studio.Views
 
             if (centerOnTarget)
             {
-                Coordinates = new List<BasicGeoposition>();
+                Coordinates = new List<Windows.Devices.Geolocation.BasicGeoposition>();
             }
 
             foreach (var project in Projects)
             {
-                if (project.name.Equals(projectName, StringComparison.InvariantCulture))
+                if (project.Name.Equals(projectName, StringComparison.Ordinal))
                 {
                     var mapDevices = new List<MapElement>();
 
-                    foreach (var device in project.Devices)
+                    foreach (var device in Twins)
                     {
                         //foreach (KeyValuePair<string, object> item in twin.Properties.Desired)
                         //{
@@ -1219,7 +1181,7 @@ namespace G4Studio.Views
 
                         var pushpin = new MapIcon
                         {
-                            Location = new Geopoint(position),
+                            Location = new Geopoint(GeoPositionConversor.Parse(position)),
                             NormalizedAnchorPoint = new Point(0.5, 1),
                             ZIndex = 0,
                             Title = device.DeviceID,
@@ -1229,7 +1191,7 @@ namespace G4Studio.Views
                         MapIcons.Add(pushpin);
                         mapDevices.Add(pushpin);
 
-                        Coordinates.Add(position);
+                        Coordinates.Add(GeoPositionConversor.Parse(position));
                     }
 
                     var mapDevicesLayer = new MapElementsLayer
@@ -1268,11 +1230,11 @@ namespace G4Studio.Views
         //}
 
 
-        private void AddPushpin(string deviceID, BasicGeoposition position)
+        private void AddPushpin(string deviceID, Windows.Devices.Geolocation.BasicGeoposition position)
         {
             var mapDevices = new List<MapElement>();
-            
-            BasicGeoposition snPosition = new BasicGeoposition { Latitude = position.Latitude, Longitude = position.Longitude };
+
+            Windows.Devices.Geolocation.BasicGeoposition snPosition = new Windows.Devices.Geolocation.BasicGeoposition { Latitude = position.Latitude, Longitude = position.Longitude };
 
             var pushpin = new MapIcon
             {
@@ -1300,7 +1262,7 @@ namespace G4Studio.Views
             CTRL_NewDevices.AddNewDevice(deviceID, position);
         }
 
-        private async void SetViewToCoordinates(List<BasicGeoposition> coordinates)
+        private async void SetViewToCoordinates(List<Windows.Devices.Geolocation.BasicGeoposition> coordinates)
         {
             if (coordinates.Count > 0)
             {
@@ -1308,23 +1270,23 @@ namespace G4Studio.Views
             }
         }
 
-        private async void SetViewToSelectedProject(Project project)
+        private async void SetViewToSelectedProject(Tenant project)
         {
             SelectedProject = project;
 
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                Coordinates = new List<BasicGeoposition>();
+                Coordinates = new List<Windows.Devices.Geolocation.BasicGeoposition>();
 
                 MapPolygons.Clear();
                 CTRL_Map_Main.Layers.Clear();
 
-                AddMapElements_Projects(SelectedProject.name, true);
-                AddMapElements_Devices(SelectedProject.name, false);
+                AddMapElements_Projects(SelectedProject.Name, true);
+                AddMapElements_Devices(SelectedProject.Name, false);
             });
         }
 
-        private async void SetViewToSelectedDevice(List<Device> devices, Device selectedDevice, bool selected)
+        private async void SetViewToSelectedDevice(List<Twin> devices, Twin selectedDevice, bool selected)
         {
             var selectedDevicePosition = new Position();
             List<BasicGeoposition> coordinates = new List<BasicGeoposition>();
@@ -1341,11 +1303,11 @@ namespace G4Studio.Views
 
             if (coordinates.Count < 1 || !selected)
             {
-                await CTRL_Map_Main.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(SelectedProject.Coordinates), new Thickness(30), MapAnimationKind.Bow);
+                await CTRL_Map_Main.TrySetViewBoundsAsync(GeoboundingBox.TryCompute(GeoPositionConversor.Parse(SelectedProject.Coordinates)), new Thickness(30), MapAnimationKind.Bow);
             }
             else
             {
-                await CTRL_Map_Main.TrySetViewAsync(new Geopoint(new BasicGeoposition() { Latitude = selectedDevicePosition.latitude, Longitude = selectedDevicePosition.longitude }), 17);
+                await CTRL_Map_Main.TrySetViewAsync(new Geopoint(new Windows.Devices.Geolocation.BasicGeoposition() { Latitude = selectedDevicePosition.latitude, Longitude = selectedDevicePosition.longitude }), 17);
             }
         }
 
