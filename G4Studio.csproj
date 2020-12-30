@@ -134,17 +134,20 @@
     <Compile Include="Utils\NetworkHandler.cs" />
     <Compile Include="Utils\TimeZoneHandler.cs" />
     <Compile Include="Utils\TwinHandler.cs" />
-    <Compile Include="Views\UC_Actions_Project.xaml.cs">
-      <DependentUpon>UC_Actions_Project.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UC_Action_BTN.xaml.cs">
+    <Compile Include="Views\UIElements\UC_Action_BTN.xaml.cs">
       <DependentUpon>UC_Action_BTN.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UC_AddNewDevices.xaml.cs">
       <DependentUpon>UC_AddNewDevices.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UC_Devices_Item.xaml.cs">
+    <Compile Include="Views\UIElements\UC_Devices_Item.xaml.cs">
       <DependentUpon>UC_Devices_Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UIElements\UCActionsItem.xaml.cs">
+      <DependentUpon>UCActionsItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UCActions.xaml.cs">
+      <DependentUpon>UCActions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UC_LandingPage.xaml.cs">
       <DependentUpon>UC_LandingPage.xaml</DependentUpon>
@@ -152,7 +155,7 @@
     <Compile Include="Views\UC_MapControl.xaml.cs">
       <DependentUpon>UC_MapControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UC_MapControlAnimation.xaml.cs">
+    <Compile Include="Views\Animations\UC_MapControlAnimation.xaml.cs">
       <DependentUpon>UC_MapControlAnimation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UC_ProjectDetail.xaml.cs">
@@ -161,22 +164,19 @@
     <Compile Include="Views\UC_Projects.xaml.cs">
       <DependentUpon>UC_Projects.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UC_Projects_Item.xaml.cs">
+    <Compile Include="Views\UIElements\UC_Projects_Item.xaml.cs">
       <DependentUpon>UC_Projects_Item.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\UCAlarms.xaml.cs">
-      <DependentUpon>UCAlarms.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\UCEnvironmentSelector.xaml.cs">
-      <DependentUpon>UCEnvironmentSelector.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\UC_DoWork.xaml.cs">
+    <Compile Include="Views\Animations\UC_DoWork.xaml.cs">
       <DependentUpon>UC_DoWork.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UCControlPanel.xaml.cs">
+      <DependentUpon>UCControlPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\UC_ListOfActions.xaml.cs">
       <DependentUpon>UC_ListOfActions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\UC_ListViewItem.xaml.cs">
+    <Compile Include="Views\UIElements\UC_ListViewItem.xaml.cs">
       <DependentUpon>UC_ListViewItem.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -294,6 +294,12 @@
     <Content Include="Assets\Icons\icon_arrow_right_B.png" />
     <Content Include="Assets\Icons\icon_arrow_right_B_F%402x.png" />
     <Content Include="Assets\Icons\icon_arrow_right_B_F.png" />
+    <Content Include="Assets\Icons\Icon_Devices_B.png" />
+    <Content Include="Assets\Icons\Icon_Devices_W.png" />
+    <Content Include="Assets\Icons\Icon_Menu_B.png" />
+    <Content Include="Assets\Icons\Icon_Menu_W.png" />
+    <Content Include="Assets\Icons\Icon_Projects_B.png" />
+    <Content Include="Assets\Icons\Icon_Projects_W.png" />
     <Content Include="Assets\IMG\LandingPageWide_V5.png" />
     <Content Include="Assets\Artwork\logo_b_v3_256.png" />
     <Content Include="Assets\Artwork\logo_simple_B_V2.png" />
@@ -306,13 +312,11 @@
     <Content Include="Assets\Artwork\pointer_v4_48.png" />
     <Content Include="Assets\Artwork\pointer_v5_48.png" />
     <Content Include="Assets\Artwork\pointer_v6_48.png" />
-    <Content Include="Assets\Artwork\project.png" />
-    <Content Include="Assets\Artwork\project_b_256.png" />
-    <Content Include="Assets\Artwork\project_w.png" />
+    <Content Include="Assets\Artwork\Icon_tiles_B_256.png" />
     <Content Include="Assets\Artwork\splitter_v2.png" />
     <Content Include="Assets\Artwork\telemetry_d_48.png" />
     <Content Include="Assets\Artwork\telemetry_l_48.png" />
-    <Content Include="Assets\Artwork\tiles_256.png" />
+    <Content Include="Assets\Artwork\Icon_tiles_W_256.png" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
@@ -387,11 +391,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UC_Actions_Project.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UC_Action_BTN.xaml">
+    <Page Include="Views\UIElements\UC_Action_BTN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -399,7 +399,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UC_Devices_Item.xaml">
+    <Page Include="Views\UIElements\UC_Devices_Item.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UIElements\UCActionsItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UCActions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -411,7 +419,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UC_MapControlAnimation.xaml">
+    <Page Include="Views\Animations\UC_MapControlAnimation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -423,19 +431,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UC_Projects_Item.xaml">
+    <Page Include="Views\UIElements\UC_Projects_Item.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\UCAlarms.xaml">
+    <Page Include="Views\Animations\UC_DoWork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\UCEnvironmentSelector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserControls\UC_DoWork.xaml">
+    <Page Include="Views\UserControls\UCControlPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -443,7 +447,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UserControls\UC_ListViewItem.xaml">
+    <Page Include="Views\UIElements\UC_ListViewItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

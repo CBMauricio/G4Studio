@@ -27,17 +27,31 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:08" Value="-670"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IMG_Selector" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:08" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:09" Value="1"/>
+            <DoubleAnimation Duration="00:00:08" Storyboard.TargetName="IMG_Anim" Storyboard.TargetProperty="(UIElement.Opacity)" To="1"/>
+        </Storyboard>
+        <Storyboard x:Name="SB_Anim_Right">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IMG_Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="-670"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IMG_Anim" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:08" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:09" Value="0"/>
+        </Storyboard>
+        <Storyboard x:Name="SB_Anim_Left">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IMG_Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="-670"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="SB_Anim_Right_REV">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="IMG_Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="-670"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="SB_ShowEnvironments">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Environments" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:08.5000000" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:09" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0.5"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
@@ -50,12 +64,7 @@
                 <CompositeTransform/>
             </Image.RenderTransform>
         </Image>
-        <Image x:Name="IMG_Selector" Margin="-670,640,0,0" VerticalAlignment="Top" Source="/Assets/IMG/LandingPageWide_v9.png" Stretch="Uniform" RenderTransformOrigin="0.5,0.5" Opacity="0">
-            <Image.RenderTransform>
-                <CompositeTransform/>
-            </Image.RenderTransform>
-        </Image>
-        <Grid x:Name="GRD_Environments" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,0,0" Opacity="0" >
+        <Grid x:Name="GRD_Environments" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,0,0" Opacity="0" Visibility="Collapsed" >
             <StackPanel x:Name="SP_DEV" BorderThickness="0,0,0,0" Background="White" FocusVisualPrimaryBrush="White" Orientation="Horizontal" PointerEntered="BT_PointerEntered" PointerExited="BT_PointerExited" Tapped="BT_Tapped" Tag="DEV" Margin="113,0,0,0" HorizontalAlignment="Left">
                 <Grid x:Name="GRD_BT_DEV" HorizontalAlignment="Left" Margin="0,-3,7,0">
                     <Image x:Name="IMG_DEV_1" Source="/Assets/Icons/icon_arrow_left_B@2x.png" NineGrid="0,0,0,0" Margin="0,0,0,1" HorizontalAlignment="Left" Height="23"/>

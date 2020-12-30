@@ -1,23 +1,11 @@
-﻿using G4Studio.Models;
-using G4Studio.Utils;
+﻿using G4Studio.Utils;
 using Hyperion.Platform.Tests.Core.ExedraLib.Models;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -26,7 +14,7 @@ namespace G4Studio.Views
     public sealed partial class UC_Projects : UserControl
     {
         private bool IsShowingInfo { get; set; }
-        public List<Tenant> Projects { get; set; }
+        public List<Tenant> Projects { get; private set; }
         public Tenant SelectedProject { get; set; }
 
         public double ItemWidth { get; set; }
@@ -40,16 +28,13 @@ namespace G4Studio.Views
         {
             this.InitializeComponent();
 
-            IsShowingInfo = true;
+            IsShowingInfo = false;
             ItemWidth = 150;
             ItemHeight = 150;
             DefaultMargin = 5;
             NColumns = 10;
             Projects = new List<Tenant>();
 
-            BRD_Projects_List.Visibility = Visibility.Visible;
-
-            SB_ShowProject_Info.Completed += SB_ShowProject_Info_Completed;
             SB_ShowInfo.Completed += SB_ShowInfo_Completed;
             SB_HideInfo.Completed += SB_HideInfo_Completed;
         }
@@ -59,6 +44,11 @@ namespace G4Studio.Views
             Projects = projects;
 
             BindProjects();
+        }
+
+        public void Reset()
+        {
+            IsShowingInfo = false;
         }
 
         private void BindProjects()
@@ -142,23 +132,15 @@ namespace G4Studio.Views
             }
         }
 
-        private void BD_Actions_Main_Tapped(object sender, TappedRoutedEventArgs e)
+        public void Show()
         {
-            //#E8FFFFFF
-
-            if (IsShowingInfo)
-            {
-                SB_HideInfo.Begin();
-            }
-            else
-            {
-                SB_ShowInfo.Begin();
-            }
+            SP_Main.Visibility = Visibility.Visible;
+            SB_ShowInfo.Begin();
         }
 
-        private void SB_HideInfo_Completed(object sender, object e)
+        public void Hide()
         {
-            IsShowingInfo = false;
+            SB_HideInfo.Begin();
         }
 
         private void SB_ShowInfo_Completed(object sender, object e)
@@ -166,12 +148,10 @@ namespace G4Studio.Views
             IsShowingInfo = true;
         }
 
-        private void SB_ShowProject_Info_Completed(object sender, object e)
+        private void SB_HideInfo_Completed(object sender, object e)
         {
-            //if (ItemSelected != null)
-            //{
-            //    ItemSelected?.Invoke(sender, null);
-            //}
+            IsShowingInfo = false;
+            SP_Main.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using G4Studio.Models;
 using G4Studio.Utils;
+using G4Studio.Views.UIElements;
 using Hyperion.Platform.Tests.Core.ExedraLib;
 using Hyperion.Platform.Tests.Core.ExedraLib.Config;
 using Hyperion.Platform.Tests.Core.ExedraLib.Handlers;
@@ -29,8 +30,6 @@ namespace G4Studio.Views
         EnvironmentHandler.Type EnvironmentT { get; set; }
 
         private static ResourceLoader resourceLoader;
-        private string CEnvironment { get; set; }
-
         private Geopoint UserLocation { get; set; }
 
         List<Windows.Devices.Geolocation.BasicGeoposition> Coordinates { get; set; }
@@ -54,18 +53,14 @@ namespace G4Studio.Views
             this.InitializeComponent();
 
             Projects = new List<Tenant>();
-            Twins = new List<Twin>();
-
-            EnvironmentT = EnvironmentHandler.Type.TST;
+            Twins = new List<Twin>();            
 
             resourceLoader = ResourceLoader.GetForCurrentView();
 
-            CEnvironment = resourceLoader.GetString("CONFS_ENVIRONMENT");
-            CTRL_Map_Main.MapServiceToken = resourceLoader.GetString("Map_ServiceToken" + CEnvironment);
-                       
+            EnvironmentT = EnvironmentHandler.Type.TST;
+            CTRL_Map_Main.MapServiceToken = resourceLoader.GetString("Map_ServiceToken");
 
             UserLocation = new Geopoint(new Windows.Devices.Geolocation.BasicGeoposition());
-
 
             Coordinates = new List<Windows.Devices.Geolocation.BasicGeoposition>();
 
@@ -103,7 +98,7 @@ namespace G4Studio.Views
 
         public void StartAnimation(EnvironmentHandler.Type environment)
         {
-            EnvironmentT = environment;
+            EnvironmentT = environment;            
 
             SB_MapInitialization.Begin();
             CTRL_Map_Animation.StartAnimation();
@@ -113,10 +108,11 @@ namespace G4Studio.Views
         {
             InitializeMapControl();
             InitializeProjects();
+
+            CTRL_Actions.BindData();
             CTRL_Projects.BindData(Projects);
 
-            SanitizeTelemetry();
-
+            CTRL_Actions.SetVisibility();
         }
 
         private async void SB_ShowMap_Completed(object sender, object e)
@@ -126,7 +122,6 @@ namespace G4Studio.Views
 
         private async void InitializeMapControl()
         {
-
             Windows.Storage.ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
 
             if (!localSettings.Values.Keys.Contains("UserLocation"))
@@ -172,7 +167,7 @@ namespace G4Studio.Views
             CTRL_Map_Main.LandmarksVisible = true;
             CTRL_Map_Main.PedestrianFeaturesVisible = true;
             CTRL_Map_Main.WatermarkMode = MapWatermarkMode.Automatic;
-            CTRL_Map_Main.StyleSheet = MapStyleSheet.ParseFromJson(resourceLoader.GetString("Map_Style" + CEnvironment));
+            CTRL_Map_Main.StyleSheet = MapStyleSheet.ParseFromJson(resourceLoader.GetString("Map_Style"));
 
             CTRL_Map_Animation.Visibility = Visibility.Collapsed;
             CTRL_Map_Animation.StopAnimation();
@@ -190,6 +185,8 @@ namespace G4Studio.Views
             Debug.WriteLine(tenantsObj.Logs.Value);
 
             //CleanUnhealthyDevices();
+
+            //SendC2DDimCurve();
         }
 
         private void CleanUnhealthyDevices()
@@ -218,12 +215,7 @@ namespace G4Studio.Views
 
             Debug.WriteLine(result.Logs.Value);            
         }
-
-        private void CTRL_Projects_ItemSelected(object sender, RoutedEventArgs e)
-        {
-            LoadProjectAndTwins();
-        }
-
+                
         private void LoadProjectAndTwins()
         {
             SelectedProject = CTRL_Projects.SelectedProject;
@@ -364,12 +356,13 @@ namespace G4Studio.Views
             CreateDevicesBulk(SelectedProject, devicesToRegister);
             //CreateDevicesBulkThreaded(SelectedProject, devicesToRegister);
         }
+        
         private void CTRL_ProjectDetail_Telemetry_Bulk_PerformAction(object sender, RoutedEventArgs e)
         {
-            DateTime initDateTime = new DateTime(2020, 11, 17, 0, 0, 1);
-            //DateTime initDateTime = DateTime.Now.AddDays(-2);
+            //DateTime initDateTime = new DateTime(2020, 12, 4, 0, 0, 1);
+            DateTime initDateTime = DateTime.Now.AddDays(-5);
             DateTime endDateTime = DateTime.Now;
-            var currentTotalConsumption = 101.4;
+            var currentTotalConsumption = 79.54;
 
             //List<Twin> selectedDevices = CTRL_ProjectDetail.SelectedDevices;
             int messagesToDeliver;
@@ -398,11 +391,6 @@ namespace G4Studio.Views
 
             SendDimLevels(messagesToDeliver, initDateTime, endDateTime, false, currentTotalConsumption);
             //SendDimLevels_BoisdelaCambre_Default(messagesToDeliver, initDateTime, endDateTime, true, currentTotalConsumption);
-            //SendDimLevels_BoisdelaCambre_Default_V2(messagesToDeliver, initDateTime, endDateTime, true);
-
-
-
-            //GetToken();
         }
 
         private void CTRL_ProjectDetail_Alarms_Bulk_PerformAction(object sender, RoutedEventArgs e)
@@ -627,9 +615,7 @@ namespace G4Studio.Views
                 CTRL_DoWork.ShowDoneControl();
             });
         }
-
         
-
         private void SanitizeTelemetry()
         {
             string payload = resourceLoader.GetString("SANITIZE");
@@ -638,15 +624,31 @@ namespace G4Studio.Views
             Debug.WriteLine("MESSAGES SENT: " + result.Value);
         }
 
+        private void SendC2DDimCurve()
+        {
+            //List<string> IPS = new List<string>() { "11.0.211.96", "11.0.142.194", "11.0.231.18", "11.0.241.214", "11.0.74.27", "11.0.63.218", "11.0.173.240", "11.0.177.217", "11.0.153.195", "11.0.133.175", "12.41.179.94" };
+            //List<string> IDS = new List<string>() { "0013A20041BBD742", "0013A20041BC0644", "0013A20041BC0634", "0013A20041BBD72C", "0013A20041BBD66E", "0013A20041BBD9C6", "0013A20041BC19DC", "0013A20041BBD78F", "0013A20041BC58EF", "0013A20041BC0A40", "0013A20041BC44F0" };
+
+            List<string> IPS = new List<string>() { "11.0.211.96" };
+            List<string> IDS = new List<string>() { "0013A20041BBD742" };
+
+            int index = 0;
+
+            foreach (var ip in IPS)
+            {
+                KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendC2DDimCurve(ip, IDS[index++], EnvironmentT);
+
+                Debug.WriteLine("MESSAGES SENT: " + result.Value);
+            }            
+        }
+
         private async void SendDimLevels_BoisdelaCambre_Default(int messagesPerDay, DateTime initDateTime, DateTime endDateTime, bool usesTimeZoneHandler, double totalConsumption)
         {
-            //List<Twin> selectedDevices = new List<Twin>();
-
-            List<string> DevicesBasline = new List<string>() { "BOI56168040" };
+            List<string> DevicesBaseline = new List<string>() { "BOI56168040" };
             //List<string> DevicesAvBelleAlliance = new List<string>() { "BOI31542458", "BOI48086484", "BOI64659725", "BOI65606604", "BOI94165412" }; //AV. BElle Alliance
 
             List<string> Devices = new List<string>();
-            Devices.AddRange(DevicesBasline);
+            Devices.AddRange(DevicesBaseline);
             //Devices.AddRange(DevicesAvBelleAlliance);
 
             double dailyConsumption = 0;
@@ -680,8 +682,6 @@ namespace G4Studio.Views
 
                     foreach (var item in dimFeedbacks)
                     {
-                        //Debug.WriteLine(device + ": " + item.Date + " -> " + item.Date.DayOfWeek + " |" + item.Date.IsDaylightSavingTime() + "| -> " + item.DimLevel + " -> " + item.EnergyConsumption + " -> " + (totalConsumption + dailyConsumption + item.EnergyConsumption));
-
                         KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(device, item.Date, item.DimLevel, (totalConsumption + dailyConsumption + item.EnergyConsumption), item.ACPower, item.ACCurrent, item.ACCPowerFactor, EnvironmentT);
 
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
@@ -693,11 +693,9 @@ namespace G4Studio.Views
                         messageIndex++;
 
                         dailyConsumption += Math.Round(item.EnergyConsumption, 2);
-                    }
 
-                    Debug.WriteLine("DAILY -> " + dailyConsumption);
-                    Debug.WriteLine(Environment.NewLine);
-                    
+                        Debug.WriteLine(result.Value);
+                    }
                 }
 
                 counter++;
@@ -718,70 +716,6 @@ namespace G4Studio.Views
             }).ConfigureAwait(false);
 
             var endDate = DateTime.Now;
-
-            Debug.WriteLine("MESSAGES SENT: " + messageIndex);
-        }
-
-        private async void SendDimLevels_BoisdelaCambre_Default_V2()
-        {
-            List<string> Devices = new List<string>();
-
-            //Avenue de Diane
-            Devices.Add("BOI85615447");
-            Devices.Add("BOI43928512");
-            Devices.Add("BOI35059266");
-            Devices.Add("BOI17470110");
-            //Devices.Add("BOI07608732");
-
-            List<DimFeedback> dimFeedbacks = new List<DimFeedback>();
-
-            //dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 23, 16, 15, 27), 0, 21.7, 0.0, 0.0, 0.36));
-            //dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 23, 16, 45, 44), 100, 21.72145, 85.8, 0.379, 0.36));
-            dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 24, 08, 01, 38), 0, 22.87975, 0.0, 0.0, 0.36));
-            dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 24, 16, 45, 44), 100, 22.9012, 85.8, 0.379, 0.36));
-            dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 25, 07, 22, 42), 0, 24.0595, 0.0, 0.0, 0.36));
-            dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 25, 16, 45, 57), 100, 24.08095, 85.8, 0.379, 0.36));
-            dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 25, 23, 14, 54), 50, 24.627925, 85.8 * 0.5, 0.379 * 0.5, 0.36));
-            dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 26, 05, 00, 32), 100, 24.885325, 85.8, 0.379, 0.36));
-            dimFeedbacks.Add(new DimFeedback(new DateTime(2020, 10, 26, 07, 23, 58), 0, 24.992575, 0.0, 0.0, 0.36));
-
-
-            /*
-            2020/10/23 16:15:27.671659 Date: 2020-10-23 16:15:27.644 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":21.7,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"0","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI35059266"}
-            2020/10/23 16:45:44.042188 Date: 2020-10-23 16:45:44.007 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":21.72145,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"100","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI85615447"}            
-            2020/10/24 06:30:38.781736 Date: 2020-10-24 06:30:38.76 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":22.879750000000083,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"0","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI85615447"}
-            2020/10/24 16:45:44.214730 Date: 2020-10-24 16:45:44.174 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":22.901200000000085,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"100","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI07608732"}
-            2020/10/25 06:30:42.143978 Date: 2020-10-25 06:30:42.113 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":24.059500000000167,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"0","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI85615447"}
-            2020/10/25 16:45:57.860996 Date: 2020-10-25 16:45:57.837 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":24.08095000000017,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"100","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI17470110"}
-            2020/10/25 23:15:54.041892 Date: 2020-10-25 23:15:54.009 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":24.627925000000207,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"50","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI17470110"}
-            2020/10/26 05:00:32.166805 Date: 2020-10-26 05:00:32.145 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":24.885325000000226,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"100","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI07608732"}
-            2020/10/26 06:30:58.052801 Date: 2020-10-26 06:30:58.026 +0000 UTC, Telemetry: {"DeltaTime":null,"Priority":0,"Source":"Lamp","Index":1,"DimFeedback":{"EnergyMeter":24.992575000000233,"ACPower":1.1,"ACCurrent":0.013,"ACVolt":235,"ACPF":0.36,"FeedbackDIMLevel":"0","MinAcPower":46.3,"MaxAcPower":47.6},"DeviceID":"BOI07608732"}
-             */
-
-
-            foreach (var dimFeedback in dimFeedbacks)
-            {
-                foreach (string device in Devices)
-                {
-                    //Debug.WriteLine(device + ": " + dimFeedback.Date + " -> " + dimFeedback.Date.DayOfWeek + " |" + dimFeedback.Date.IsDaylightSavingTime() + "| -> " + dimFeedback.DimLevel + " -> " + dimFeedback.EnergyConsumption);
-
-                    KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(device, dimFeedback.Date, dimFeedback.DimLevel, dimFeedback.EnergyConsumption, dimFeedback.ACPower, dimFeedback.ACCurrent, dimFeedback.ACCPowerFactor, EnvironmentT);
-                }
-
-                Debug.WriteLine(Environment.NewLine);
-            }            
-
-            await Task.Run(async () =>
-            {
-                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
-                () =>
-                {
-                    CTRL_DoWork.ShowDoneControl();
-
-                    SB_HideProjectDetail.Begin();
-                });
-
-            }).ConfigureAwait(false);
         }
 
         private async void SendDimLevels(int messagesPerDay, DateTime initDateTime, DateTime endDateTime, bool usesTimeZoneHandler, double totalConsumption)
@@ -1431,6 +1365,50 @@ namespace G4Studio.Views
             //var position = args.Location.Position;
 
             //AddPushpin(deviceID, position);
-        }        
+        }
+
+
+        #region Routed Events
+
+        private void CTRL_Actions_Show(object sender, RoutedEventArgs e)
+        {
+            UCActionsItem UIElement = sender as UCActionsItem;
+
+            switch (UIElement.ID)
+            {
+                case "SL_TEN":
+                    CTRL_Projects.Show();
+                    break;
+                default:
+                    CTRL_Projects.Hide();
+                    break;
+            }
+        }
+
+        private void CTRL_Actions_Hide(object sender, RoutedEventArgs e)
+        {
+            //UCActionsItem UIElement = sender as UCActionsItem;
+
+            //switch (UIElement.ID)
+            //{
+            //    case "SL_TEN":
+            //        CTRL_Projects.SetVisibility();
+            //        break;
+            //    default:
+            //        CTRL_Projects.ResetAndSetVisibility();
+            //        break;
+            //}
+
+            CTRL_Projects.Hide();
+        }
+
+        private void CTRL_Projects_ItemSelected(object sender, RoutedEventArgs e)
+        {
+            CTRL_Projects.Reset();
+            CTRL_Actions.Reset();
+            LoadProjectAndTwins();
+        }
+        
+        #endregion
     }
 }
