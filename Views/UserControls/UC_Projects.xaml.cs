@@ -26,13 +26,13 @@ namespace G4Studio.Views
 
         public UC_Projects()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             IsShowingInfo = false;
-            ItemWidth = 150;
-            ItemHeight = 150;
-            DefaultMargin = 5;
-            NColumns = 10;
+            ItemWidth = 210;
+            ItemHeight = 111;
+            DefaultMargin = 13;
+            NColumns = 8;
             Projects = new List<Tenant>();
 
             SB_ShowInfo.Completed += SB_ShowInfo_Completed;
@@ -92,8 +92,8 @@ namespace G4Studio.Views
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Left,
                         //BGColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100)),
-                        BRDColor = new SolidColorBrush(Windows.UI.Colors.White),
-                        BRDThickness = new Thickness(1),
+                        BRDColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor)),
+                        BRDThickness = new Thickness(0, 0, 0, 5),
                         BGColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor)),
                         Text = project.Name,
                         NProjects = project.NDevices.ToString(CultureInfo.InvariantCulture),

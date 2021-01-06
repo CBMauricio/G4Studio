@@ -39,9 +39,9 @@ namespace G4Studio.Views
 
             BRD_Main.Width = ItemWidth;
             BRD_Main.Height = ItemHeight;
-            BRD_Main.Background = BGColor;
+            //BRD_Main.Background = BGColor;
             BRD_Main.BorderThickness = BRDThickness;
-            BRD_Main.BorderBrush = BRDColor;
+            BRD_Main.BorderBrush = BGColor;
         }
 
         private void UserControl_Tapped(object sender, TappedRoutedEventArgs e)

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" VerticalAlignment="Top" Tapped="UserControl_Tapped" Background="Red" HorizontalAlignment="Left">
 
-    <Border x:Name="BRD_Main" VerticalAlignment="Stretch" Margin="0,0,0,0" BorderBrush="#19000000" BorderThickness="0,0,0,0" FocusVisualPrimaryBrush="White" Background="White" HorizontalAlignment="Stretch" CornerRadius="4,4,4,4" Width="Auto" Height="Auto" Opacity="1">
+    <Border x:Name="BRD_Main" VerticalAlignment="Top" Margin="0,0,0,0" BorderBrush="#19000000" BorderThickness="0,0,0,0" FocusVisualPrimaryBrush="White" Background="White" HorizontalAlignment="Left" CornerRadius="4,4,4,4" Width="Auto" Height="Auto" Opacity="1">
 
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="7,7,7,7" HorizontalAlignment="Left">
             <TextBlock x:Name="TB_Name" Text="0013A20041292942" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF343434" FontStretch="Normal"/>

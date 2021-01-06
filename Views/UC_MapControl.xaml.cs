@@ -111,6 +111,7 @@ namespace G4Studio.Views
 
             CTRL_Actions.BindData();
             CTRL_Projects.BindData(Projects);
+            CTRL_ControlPanel.BindData();
 
             CTRL_Actions.SetVisibility();
         }
@@ -1378,9 +1379,15 @@ namespace G4Studio.Views
             {
                 case "SL_TEN":
                     CTRL_Projects.Show();
+                    CTRL_ControlPanel.Hide();
+                    break;
+                case "SL_Main":
+                    CTRL_Projects.Hide();
+                    CTRL_ControlPanel.Show();
                     break;
                 default:
                     CTRL_Projects.Hide();
+                    CTRL_ControlPanel.Hide();
                     break;
             }
         }
@@ -1400,6 +1407,7 @@ namespace G4Studio.Views
             //}
 
             CTRL_Projects.Hide();
+            CTRL_ControlPanel.Hide();
         }
 
         private void CTRL_Projects_ItemSelected(object sender, RoutedEventArgs e)

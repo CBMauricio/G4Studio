@@ -9,12 +9,12 @@
     d:DesignHeight="200"
     d:DesignWidth="200" Tapped="UserControl_Tapped">
 
-    <Border x:Name="BRD_Main" Background="#FFDC00FF" VerticalAlignment="Bottom">
-        <StackPanel x:Name="SP_Inner" HorizontalAlignment="Left" Orientation="Vertical" VerticalAlignment="Bottom" Margin="7,7,7,7">
-            <TextBlock x:Name="TB_Project" Text="NOVA SBE" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="22" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="White" FontStretch="Normal"/>
-            <StackPanel x:Name="BRD_NProjects" BorderThickness="1,1,1,1" FocusVisualPrimaryBrush="#FFDEDEDE" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,13,0,0">
-                <TextBlock x:Name="TB_NProjects" Text="4590" TextWrapping="Wrap" FontFamily="Roboto" FontSize="29" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="White" FontStretch="Normal"/>
-                <TextBlock x:Name="TB_NProjects_Copy" Text="lighpoints" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="12" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="White" FontStretch="Normal"/>
+    <Border x:Name="BRD_Main" VerticalAlignment="Top" BorderBrush="#FFDC00FF" BorderThickness="0,0,0,0" HorizontalAlignment="Left" Background="White">
+        <StackPanel x:Name="SP_Inner" HorizontalAlignment="Stretch" Orientation="Vertical" VerticalAlignment="Bottom" Margin="7,3,7,3">
+            <TextBlock x:Name="TB_Project" Text="NOVA SBE" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal"/>
+            <StackPanel x:Name="BRD_NProjects" BorderThickness="1,1,1,1" FocusVisualPrimaryBrush="#FFDEDEDE" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,7,0,0" Orientation="Horizontal">
+                <TextBlock x:Name="TB_NProjects" Text="4590" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="14" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal"/>
+                <TextBlock x:Name="TB_NProjects_Copy" Text="lighpoints" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="10" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF4D4D4D" FontStretch="Normal" VerticalAlignment="Bottom" Margin="3,0,0,2"/>
             </StackPanel>
         </StackPanel>
     </Border>

@@ -143,8 +143,11 @@
     <Compile Include="Views\UIElements\UC_Devices_Item.xaml.cs">
       <DependentUpon>UC_Devices_Item.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UIElements\UCActionsItem.xaml.cs">
-      <DependentUpon>UCActionsItem.xaml</DependentUpon>
+    <Compile Include="Views\UIElements\UIEImageItem.xaml.cs">
+      <DependentUpon>UIEImageItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UIElements\UIETextItem.xaml.cs">
+      <DependentUpon>UIETextItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\UCActions.xaml.cs">
       <DependentUpon>UCActions.xaml</DependentUpon>
@@ -161,7 +164,10 @@
     <Compile Include="Views\UC_ProjectDetail.xaml.cs">
       <DependentUpon>UC_ProjectDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UC_Projects.xaml.cs">
+    <Compile Include="Views\UserControls\UCSelectorEnvironment.xaml.cs">
+      <DependentUpon>UCSelectorEnvironment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_Projects.xaml.cs">
       <DependentUpon>UC_Projects.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UIElements\UC_Projects_Item.xaml.cs">
@@ -403,7 +409,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UIElements\UCActionsItem.xaml">
+    <Page Include="Views\UIElements\UIEImageItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UIElements\UIETextItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -427,7 +437,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UC_Projects.xaml">
+    <Page Include="Views\UserControls\UCSelectorEnvironment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UC_Projects.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

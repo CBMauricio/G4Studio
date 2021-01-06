@@ -1,0 +1,21 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:G4Studio.Views.UIElements"
+    x:Class="G4Studio.Views.UserControls.UCSelectorEnvironment"
+    mc:Ignorable="d">
+
+    <Grid x:Name="GRD_Main">
+        <StackPanel x:Name="SP_Main" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock x:Name="TB_Title" Text="Environments" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="29" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal"/>
+            <TextBlock x:Name="TB_SubTitle" Text="Setting the environment will allow you to access all tenants defined for the chosen environment" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="16" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" Margin="0,9,0,0"/>
+            <StackPanel x:Name="SP_Selector" Orientation="Horizontal" Margin="0,41,0,0">
+                <Custom:UIETextItem x:Name="UC_DEV" Title="Development" ID="DEV"/>
+                <Custom:UIETextItem x:Name="UC_TST" Margin="13,0,0,0" Title="Tests &amp; Quality" ID="TST"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

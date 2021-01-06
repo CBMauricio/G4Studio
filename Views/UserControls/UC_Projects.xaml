@@ -20,18 +20,14 @@
         </Storyboard>
     </UserControl.Resources>
 
-    <StackPanel x:Name="SP_Main" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
-        <StackPanel x:Name="SP_Projects_Info_Top" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" RenderTransformOrigin="0.5,1">
-            <StackPanel.RenderTransform>
+    <StackPanel x:Name="SP_Main" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Visible">
+        <TextBlock x:Name="TB_Title" Text="Projects" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="29" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal"/>
+        <TextBlock x:Name="TB_SubTitle" Text="Setting the project will allow you to access all project functionalities and devices registered on the chosen project" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="16" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" Margin="0,9,0,0"/>
+        <ScrollViewer x:Name="SP_Projects_Info_Top" HorizontalAlignment="Stretch" VerticalAlignment="Top" RenderTransformOrigin="0.5,1" Margin="0,41,0,0" HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" MaxHeight="400">
+            <ScrollViewer.RenderTransform>
                 <CompositeTransform ScaleX="1" ScaleY="1"/>
-            </StackPanel.RenderTransform>
-            <Border x:Name="BRD_Projects_Info_Top" Background="#E8FFFFFF" BorderBrush="White" BorderThickness="1,1,1,1" CornerRadius="6,6,6,6">
-                <StackPanel x:Name="SP_Projects_Info_Top_Inner" Orientation="Vertical" Margin="3,3,3,7">
-                    <Border x:Name="BRD_Projects_List" BorderBrush="#FFDADADA">
-                        <Grid x:Name="GRD_Projects_List" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0"/>
-                    </Border>
-                </StackPanel>
-            </Border>
-        </StackPanel>
+            </ScrollViewer.RenderTransform>
+            <Grid x:Name="GRD_Projects_List"/>
+        </ScrollViewer>
     </StackPanel>
 </UserControl>

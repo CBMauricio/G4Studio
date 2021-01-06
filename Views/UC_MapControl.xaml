@@ -87,11 +87,12 @@
         </local:UC_ProjectDetail>
         <local:UC_AddNewDevices x:Name="CTRL_NewDevices" VerticalAlignment="Bottom" RegisterDevices="CTRL_NewDevices_RegisterDevices" Visibility="Visible" Opacity="1" HorizontalAlignment="Left"/>
         <Custom1:UC_DoWork x:Name="CTRL_DoWork" Visibility="Collapsed"/>
+        <Custom1:UCActions x:Name="CTRL_Actions" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,7" Show="CTRL_Actions_Show" Hide="CTRL_Actions_Hide" Visibility="Visible"/>
         <local:UC_Projects x:Name="CTRL_Projects" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,61" RenderTransformOrigin="0.5,0.5" Visibility="Visible">
             <local:UC_Projects.RenderTransform>
                 <CompositeTransform ScaleX="0" ScaleY="0"/>
             </local:UC_Projects.RenderTransform>
         </local:UC_Projects>
-        <Custom1:UCActions x:Name="CTRL_Actions" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,7" Show="CTRL_Actions_Show" Hide="CTRL_Actions_Hide" Visibility="Visible"/>
+        <Custom1:UCControlPanel x:Name="CTRL_ControlPanel" Visibility="Collapsed"/>
     </Grid>
 </UserControl>
