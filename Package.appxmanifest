@@ -8,14 +8,14 @@
 
   <Identity
     Name="1079eaa4-a2f2-403b-ba34-02fea103d640"
-    Publisher="CN=cmauricio"
-    Version="1.0.0.0" />
+    Publisher="CN=CMauricio-Hyperion"
+    Version="1.0.12.0" />
 
   <mp:PhoneIdentity PhoneProductId="1079eaa4-a2f2-403b-ba34-02fea103d640" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>G4Studio</DisplayName>
-    <PublisherDisplayName>cmauricio</PublisherDisplayName>
+    <DisplayName>G4Studio2021</DisplayName>
+    <PublisherDisplayName>Hyperion-DEVTEAM-CLOUD</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

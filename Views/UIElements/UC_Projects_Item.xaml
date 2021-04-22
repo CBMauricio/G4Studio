@@ -7,14 +7,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="200"
-    d:DesignWidth="200" Tapped="UserControl_Tapped">
+    d:DesignWidth="200" Tapped="UserControl_Tapped" HorizontalAlignment="Left" VerticalAlignment="Top">
 
-    <Border x:Name="BRD_Main" VerticalAlignment="Top" BorderBrush="#FFDC00FF" BorderThickness="0,0,0,0" HorizontalAlignment="Left" Background="White">
-        <StackPanel x:Name="SP_Inner" HorizontalAlignment="Stretch" Orientation="Vertical" VerticalAlignment="Bottom" Margin="7,3,7,3">
-            <TextBlock x:Name="TB_Project" Text="NOVA SBE" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal"/>
-            <StackPanel x:Name="BRD_NProjects" BorderThickness="1,1,1,1" FocusVisualPrimaryBrush="#FFDEDEDE" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,7,0,0" Orientation="Horizontal">
-                <TextBlock x:Name="TB_NProjects" Text="4590" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="14" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal"/>
-                <TextBlock x:Name="TB_NProjects_Copy" Text="lighpoints" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="10" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF4D4D4D" FontStretch="Normal" VerticalAlignment="Bottom" Margin="3,0,0,2"/>
+    <Border x:Name="BRD_Main" VerticalAlignment="Top" BorderThickness="1,1,1,1" HorizontalAlignment="Left" Background="Transparent" BorderBrush="#0C000000" CornerRadius="4,4,4,4" PointerEntered="BRD_Main_PointerEntered" PointerExited="BRD_Main_PointerExited">
+        <StackPanel x:Name="SP_Inner" Orientation="Vertical" Margin="7,7,7,7" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+            <TextBlock x:Name="TB_Project" Text="NOVA SBE" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="20" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal" MaxLines="1"/>
+            <StackPanel Orientation="Horizontal" Margin="0,1,0,0">
+                <Image Source="/Assets/Artwork/Icon_Devices_B_V2_256px.png" Width="11" Opacity="0.8" Margin="0,0,3,0" VerticalAlignment="Center" Visibility="Collapsed"/>
+                <TextBlock x:Name="TB_HostName" Text="bali.tst-schreder-exedra.com" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="12" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#7F333333" FontStretch="Normal" Visibility="Visible" Margin="0,0,0,0" VerticalAlignment="Center" FontStyle="Italic"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,7,0,7">
+                <Image Source="/Assets/Artwork/Icon_Lum_UPD_Black_48x.png" Width="13" VerticalAlignment="Center" Visibility="Collapsed" Margin="0,0,3,0"/>
+                <TextBlock x:Name="TB_NDevices" Text="4590" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="20" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Margin="0,0,0,0" VerticalAlignment="Center"/>
+                <Border x:Name="BRD_Fence" BorderThickness="0,0,0,0" BorderBrush="White" Width="100" Height="7" CornerRadius="2,2,2,2" Background="Black" MinWidth="7" Margin="7,-1,5,0" MaxWidth="161"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                <Image Source="/Assets/Artwork/icon_cursor.png" Width="11" Opacity="0.8" Margin="0,0,3,2" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TB_Timezone" Text="Europe/Faro" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="12" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#CC333333" FontStretch="Normal" Visibility="Visible" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
             </StackPanel>
         </StackPanel>
     </Border>

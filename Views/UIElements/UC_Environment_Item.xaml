@@ -1,0 +1,42 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:G4Studio.Views.UIElements"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:G4Studio.Views.Animations"
+    x:Class="G4Studio.Views.UIElements.UC_Environment_Item"    
+    d:DesignHeight="400"
+    d:DesignWidth="400"
+    mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Border x:Name="BRD_Main" BorderThickness="1,1,1,1" Background="White" BorderBrush="#19000000" CornerRadius="200,200,200,200" PointerEntered="BRD_PointerEntered" PointerExited="BRD_PointerExited" Tapped="BRD_Tapped" Tag="DEV" Margin="0,0,0,0">
+        <Grid x:Name="GRD_Main" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel x:Name="SP_Inner" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="TB_Environment" Text="Development" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="27" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal" MaxLines="1" HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Margin="0,1,0,0" HorizontalAlignment="Center">
+                    <Image Source="/Assets/Artwork/Icon_Devices_B_V2_256px.png" Width="11" Opacity="0.8" Margin="2,0,3,0" VerticalAlignment="Center" Visibility="Collapsed"/>
+                    <TextBlock x:Name="TB_HostName" Text="hyperion.dev-schreder-exedra.com" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#7F333333" FontStretch="Normal" Visibility="Visible" Margin="0,0,0,0" VerticalAlignment="Center" FontStyle="Italic"/>
+                </StackPanel>
+                <StackPanel x:Name="SP_Scores_Main" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,37,0,0">
+                    <StackPanel x:Name="SP_Tenants" Orientation="Vertical" Visibility="Visible" Margin="0,0,11,0" MinWidth="60">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Custom:UC_BoxesAnimation x:Name="CTRL_Animation_Tenants" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,1,0,0"/>
+                            <Grid x:Name="GRD_NTenants" HorizontalAlignment="Center" VerticalAlignment="Top" MinHeight="50" MinWidth="79" Visibility="Visible" Margin="0,0,0,0"/>
+                        </Grid>
+                        <TextBlock x:Name="TB_NTenants" Text="--" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="22" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Margin="0,11,0,1" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
+                        <TextBlock x:Name="TB_NTenants_Lead" Text="Tenants" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#B2333333" FontStretch="Normal" MaxLines="1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel x:Name="SP_Devices" Orientation="Vertical" Visibility="Visible" Margin="11,0,0,0" MinWidth="60">
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Custom:UC_BoxesAnimation x:Name="CTRL_Animation_Devices" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,0,0"/>
+                            <Grid x:Name="GRD_NDevices" HorizontalAlignment="Center" VerticalAlignment="Top" MinHeight="50" MinWidth="79" Visibility="Visible" Margin="0,0,0,0"/>
+                        </Grid>
+                        <TextBlock x:Name="TB_NDevices" Text="--" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="22" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Margin="0,11,0,1" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Visible"/>
+                        <TextBlock x:Name="TB_NDevices_Lead" Text="Devices" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#B2333333" FontStretch="Normal" MaxLines="1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock x:Name="TB_Unavailable" Text="Unavailable" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="20" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="White" FontStretch="Normal" MaxLines="1" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,48 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:G4Studio.Views.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:G4Studio.Views.UIElements"
+    x:Class="G4Studio.Views.UserControls.UC_Environments"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Storyboard x:Name="SB_Init">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="stackPanel" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CTRL_Environment_DEV" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CTRL_Environment_TST" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CTRL_Environment_PRD" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid x:Name="GRD_Main_Waiting" Background="White" Margin="0,0,0,0" VerticalAlignment="Stretch">
+        <Border x:Name="BRD_Main" VerticalAlignment="Stretch" Margin="0,0,0,0">
+            <StackPanel Orientation="Vertical" Margin="7,13,13,33" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <StackPanel x:Name="stackPanel" Orientation="Vertical" Margin="7,103,7,62" HorizontalAlignment="Center">
+                    <TextBlock x:Name="TB_Title" Text="Select environment" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="36" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TB_SubTitle" Text="Setting the project will allow you to access all project and devices functionalities" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="16" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" Visibility="Visible" Margin="0,7,0,0" HorizontalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,121,0,0">
+                    <Custom:UC_Environment_Item x:Name="CTRL_Environment_DEV" Width="300" Height="300" Title="Development" HostName="hyperion.dev-schreder-exedra.com" Available="True" EnvironmentT="DEV" HorizontalAlignment="Center" BorderCornerRadius="150"/>
+                    <Custom:UC_Environment_Item x:Name="CTRL_Environment_TST" Width="300" Height="300" Margin="111,0,111,0" Title="Test &amp; Quality" HostName="hyperion.tst-schreder-exedra.com" Available="True" EnvironmentT="TST" HorizontalAlignment="Center" BorderCornerRadius="150"/>
+                    <Custom:UC_Environment_Item x:Name="CTRL_Environment_PRD" Width="300" Height="300" Title="Production" HostName="hyperion.schreder-exedra.com" EnvironmentT="PRD" HorizontalAlignment="Center" BorderCornerRadius="150"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

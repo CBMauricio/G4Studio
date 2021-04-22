@@ -22,11 +22,6 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:02" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="1"/>
             </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Trace" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.4000000" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:01.7000000" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CTRL_Projects" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)">
                 <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:02.2000000" Value="1"/>
@@ -34,10 +29,6 @@
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CTRL_Projects" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)">
                 <EasingDoubleKeyFrame KeyTime="00:00:02.1000000" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="00:00:02.2000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CTRL_Map_Animation" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Name="SB_ShowProjectDetail">
@@ -60,19 +51,10 @@
                 <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-        <Storyboard x:Name="SB_MapInitialization">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Trace" Storyboard.TargetProperty="(UIElement.Opacity)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+        <Storyboard x:Name="SB_MapInitialization"/>
     </UserControl.Resources>
 
     <Grid x:Name="GRD_Main">
-        <Custom:MapControl x:Name="CTRL_Map_Main" HorizontalAlignment="Stretch" MapServiceToken="" Background="{x:Null}" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Visibility="Visible" MapRightTapped="CTRL_Map_Main_MapRightTapped" Opacity="0" MapTapped="CTRL_Map_Main_MapTapped"/>
-        <Grid x:Name="GRD_Trace" Background="#F7FFFFFF" Opacity="0">
-            <local:UC_MapControlAnimation x:Name="CTRL_Map_Animation" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Bottom" Margin="0,330,0,0"/>
-        </Grid>
         <Grid x:Name="GRD_Logo" VerticalAlignment="Top" Background="Transparent" FocusVisualPrimaryBrush="#7F000000" Visibility="Visible" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0">
             <Grid.RenderTransform>
                 <CompositeTransform ScaleY="0" ScaleX="0"/>
@@ -80,19 +62,17 @@
             <Image x:Name="IMG_Logo" Source="/Assets/Artwork/Logo_V4.png" HorizontalAlignment="Left" Margin="21,23,3,21" Stretch="Uniform" Width="124"/>
             <Image x:Name="IMG_Logo_Copy" Height="7" Source="/Assets/Artwork/splitter_v2.png" HorizontalAlignment="Stretch" Margin="0,50,0,0" VerticalAlignment="Bottom" Stretch="UniformToFill" Visibility="Collapsed"/>
         </Grid>
-        <local:UC_ProjectDetail x:Name="CTRL_ProjectDetail" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0,0,0,0" RenderTransformOrigin="0,0.5" ShowDetails="CTRL_ProjectDetail_ShowDetails" HideDetails="CTRL_ProjectDetail_HideDetails">
+        <Custom1:UCActions x:Name="CTRL_Actions" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,7" Show="CTRL_Actions_Show" Hide="CTRL_Actions_Hide" Visibility="Visible"/>
+        <Custom1:UC_Environments x:Name="CTRL_Environments" Visibility="Collapsed"/>
+        <local:UC_Projects x:Name="CTRL_Projects" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0" Visibility="Collapsed"/>
+        <Custom1:UC_Project x:Name="CTRL_Project_Detail_2" Visibility="Collapsed"/>
+        <Custom:MapControl x:Name="CTRL_Map_Main" HorizontalAlignment="Stretch" MapServiceToken="" Background="{x:Null}" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Visibility="Collapsed" MapRightTapped="CTRL_Map_Main_MapRightTapped" MapTapped="CTRL_Map_Main_MapTapped" Style="Road" ZoomLevel="7" Opacity="1"/>
+        <local:UC_ProjectDetail x:Name="CTRL_ProjectDetail" HorizontalAlignment="Left" VerticalAlignment="Stretch" Margin="0,0,0,0" RenderTransformOrigin="0,0.5" ShowDetails="CTRL_ProjectDetail_ShowDetails" HideDetails="CTRL_ProjectDetail_HideDetails" Visibility="Collapsed">
             <local:UC_ProjectDetail.RenderTransform>
                 <CompositeTransform ScaleX="0" ScaleY="0"/>
             </local:UC_ProjectDetail.RenderTransform>
         </local:UC_ProjectDetail>
-        <local:UC_AddNewDevices x:Name="CTRL_NewDevices" VerticalAlignment="Bottom" RegisterDevices="CTRL_NewDevices_RegisterDevices" Visibility="Visible" Opacity="1" HorizontalAlignment="Left"/>
+        <local:UC_AddNewDevices x:Name="CTRL_NewDevices" VerticalAlignment="Bottom" RegisterDevices="CTRL_NewDevices_RegisterDevices" Visibility="Collapsed" Opacity="1" HorizontalAlignment="Left"/>
         <Custom1:UC_DoWork x:Name="CTRL_DoWork" Visibility="Collapsed"/>
-        <Custom1:UCActions x:Name="CTRL_Actions" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,7" Show="CTRL_Actions_Show" Hide="CTRL_Actions_Hide" Visibility="Visible"/>
-        <local:UC_Projects x:Name="CTRL_Projects" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,61" RenderTransformOrigin="0.5,0.5" Visibility="Visible">
-            <local:UC_Projects.RenderTransform>
-                <CompositeTransform ScaleX="0" ScaleY="0"/>
-            </local:UC_Projects.RenderTransform>
-        </local:UC_Projects>
-        <Custom1:UCControlPanel x:Name="CTRL_ControlPanel" Visibility="Collapsed"/>
     </Grid>
 </UserControl>

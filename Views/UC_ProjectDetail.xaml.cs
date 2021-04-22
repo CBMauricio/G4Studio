@@ -161,95 +161,95 @@ namespace G4Studio.Views
 
         private void BindData_Devices(string projectColor)
         {
-            double maxHeight = BRD_Main.ActualHeight;
-            double offsetTop = 133 +  BRD_Devices_Info.ActualOffset.Y + SP_ProjectInfo.ActualOffset.Y + SV_Devices.ActualOffset.Y + BRD_Devices_Info.Margin.Bottom;
+            //double maxHeight = BRD_Main.ActualHeight;
+            //double offsetTop = 133 +  BRD_Devices_Info.ActualOffset.Y + SP_ProjectInfo.ActualOffset.Y + SV_Devices.ActualOffset.Y + BRD_Devices_Info.Margin.Bottom;
 
-            GRD_Devices_List.Children.Clear();
-            SelectedDevices.Clear();
-            SelectedDevice = new Twin();
+            //GRD_Devices_List.Children.Clear();
+            //SelectedDevices.Clear();
+            //SelectedDevice = new Twin();
 
-            int column = 0;
-            int line = 0;
+            //int column = 0;
+            //int line = 0;
 
-            double marginLeft;
-            double marginTop = DefaultMarginTop;
+            //double marginLeft;
+            //double marginTop = DefaultMarginTop;
 
 
-            foreach (var item in Twins)
-            {
-                if (column < NColumns)
-                {
-                    marginLeft = column * ItemWidth + column * DefaultMargin;
+            //foreach (var item in Twins)
+            //{
+            //    if (column < NColumns)
+            //    {
+            //        marginLeft = column * ItemWidth + column * DefaultMargin;
 
-                    column++;
-                }
-                else
-                {
-                    column = 1;
-                    line++;
+            //        column++;
+            //    }
+            //    else
+            //    {
+            //        column = 1;
+            //        line++;
 
-                    marginLeft = 0;
-                    marginTop = line * ItemHeight + (line + 1) * DefaultMarginTop;
-                }
+            //        marginLeft = 0;
+            //        marginTop = line * ItemHeight + (line + 1) * DefaultMarginTop;
+            //    }
 
-                var device = new UC_Devices_Item()
-                {
-                    ItemWidth = ItemWidth,
-                    ItemHeight = ItemHeight,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Top,
-                    Margin = new Thickness(marginLeft, marginTop, DefaultMargin, 0),
-                    SelectedItemColor = projectColor
-                };
+            //    var device = new UC_Devices_Item()
+            //    {
+            //        ItemWidth = ItemWidth,
+            //        ItemHeight = ItemHeight,
+            //        HorizontalAlignment = HorizontalAlignment.Left,
+            //        VerticalAlignment = VerticalAlignment.Top,
+            //        Margin = new Thickness(marginLeft, marginTop, DefaultMargin, 0),
+            //        SelectedItemColor = projectColor
+            //    };
 
-                device.ItemSelected += Device_ItemSelected;
-                device.ItemDeselected += Device_ItemDeselected;
+            //    device.ItemSelected += Device_ItemSelected;
+            //    device.ItemDeselected += Device_ItemDeselected;
 
-                device.BindData(item);
+            //    device.BindData(item);
 
-                GRD_Devices_List.Children.Insert(0, device);
-            }
+            //    GRD_Devices_List.Children.Insert(0, device);
+            //}
 
-            //var offset = SV_Devices.ActualOffset.X;
-            //var maxWidth = SP_ProjectInfo.ActualWidth;
-            //SV_Devices.Width = (NColumns * ItemWidth) + ((NColumns + 1) * DefaultMargin);
-            //SV_Devices.Height = (Math.Min(NRows, line) * ItemHeight) + (Math.Min(NRows, line) * DefaultMarginTop);
+            ////var offset = SV_Devices.ActualOffset.X;
+            ////var maxWidth = SP_ProjectInfo.ActualWidth;
+            ////SV_Devices.Width = (NColumns * ItemWidth) + ((NColumns + 1) * DefaultMargin);
+            ////SV_Devices.Height = (Math.Min(NRows, line) * ItemHeight) + (Math.Min(NRows, line) * DefaultMarginTop);
 
-            double width = NColumns * ItemWidth + NColumns * DefaultMargin;
-            SV_Devices.Height = maxHeight - offsetTop;
-            TB_FilterDevices.Width = width;
-            //BRD_NDevices_Top.Width = width / 2;
-            //BRD_NewDevices_Top.Width = width / 2;
+            //double width = NColumns * ItemWidth + NColumns * DefaultMargin;
+            //SV_Devices.Height = maxHeight - offsetTop;
+            //TB_FilterDevices.Width = width;
+            ////BRD_NDevices_Top.Width = width / 2;
+            ////BRD_NewDevices_Top.Width = width / 2;
         }
 
         private void Device_ItemSelected(object sender, RoutedEventArgs e)
         {
-            UC_Devices_Item item = sender as UC_Devices_Item;
+            //UC_Devices_Item item = sender as UC_Devices_Item;
 
-            SelectedDevices.Add(item.Device);
-            SelectedDevice = item.Device;
+            //SelectedDevices.Add(item.Device);
+            //SelectedDevice = item.Device;
 
-            SetActionsBasedOnNumberOfSelectedDevices();
+            //SetActionsBasedOnNumberOfSelectedDevices();
 
-            if (ItemSelected != null)
-            {
-                ItemSelected?.Invoke(sender, null);
-            }
+            //if (ItemSelected != null)
+            //{
+            //    ItemSelected?.Invoke(sender, null);
+            //}
         }
 
         private void Device_ItemDeselected(object sender, RoutedEventArgs e)
         {
-            UC_Devices_Item item = sender as UC_Devices_Item;
+            //UC_Devices_Item item = sender as UC_Devices_Item;
 
-            SelectedDevices.Remove(item.Device);
-            SelectedDevice = item.Device;
+            //SelectedDevices.Remove(item.Device);
+            //SelectedDevice = item.Device;
 
-            SetActionsBasedOnNumberOfSelectedDevices();
+            //SetActionsBasedOnNumberOfSelectedDevices();
 
-            if (ItemDeselected != null)
-            {
-                ItemDeselected?.Invoke(sender, null);
-            }
+            //if (ItemDeselected != null)
+            //{
+            //    ItemDeselected?.Invoke(sender, null);
+            //}
         }
 
         private void SetActionsBasedOnNumberOfSelectedDevices()
@@ -355,47 +355,47 @@ namespace G4Studio.Views
 
         private void BRD_NDevices_Select_All_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            TB_FilterDevices.Text = string.Empty;
-            SelectedDevices.Clear();
+            //TB_FilterDevices.Text = string.Empty;
+            //SelectedDevices.Clear();
 
-            foreach (UC_Devices_Item item in GRD_Devices_List.Children)
-            {
-                item.SetItemStyle(true);
-                SelectedDevices.Add(item.Device);
-            }
+            //foreach (UC_Devices_Item item in GRD_Devices_List.Children)
+            //{
+            //    item.SetItemStyle(true);
+            //    SelectedDevices.Add(item.Device);
+            //}
         }
 
         private void BRD_NDevices_UnSelect_All_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            TB_FilterDevices.Text = string.Empty;
-            SelectedDevices.Clear();
+            //TB_FilterDevices.Text = string.Empty;
+            //SelectedDevices.Clear();
 
-            foreach (UC_Devices_Item item in GRD_Devices_List.Children)
-            {
-                item.SetItemStyle(false);
+            //foreach (UC_Devices_Item item in GRD_Devices_List.Children)
+            //{
+            //    item.SetItemStyle(false);
 
-                SelectedDevices.Remove(item.Device);
-            }
+            //    SelectedDevices.Remove(item.Device);
+            //}
         }
 
         private void TB_FilterDevices_TextChanged(object sender, TextChangedEventArgs e)
         {
-            TextBox textbox = sender as TextBox;
+            //TextBox textbox = sender as TextBox;
 
-            foreach (UC_Devices_Item item in GRD_Devices_List.Children)
-            {
-                var index = item.Device.DeviceID.IndexOf(textbox.Text, StringComparison.InvariantCulture);
+            //foreach (UC_Devices_Item item in GRD_Devices_List.Children)
+            //{
+            //    var index = item.Device.DeviceID.IndexOf(textbox.Text, StringComparison.InvariantCulture);
 
-                if (index < 0)
-                {
-                    SelectedDevices.Remove(item.Device);
-                    item.Opacity = 0.2;
-                }
-                else
-                {
-                    item.Opacity = 1.0;
-                }
-            }
+            //    if (index < 0)
+            //    {
+            //        SelectedDevices.Remove(item.Device);
+            //        item.Opacity = 0.2;
+            //    }
+            //    else
+            //    {
+            //        item.Opacity = 1.0;
+            //    }
+            //}
         }
     }
 }

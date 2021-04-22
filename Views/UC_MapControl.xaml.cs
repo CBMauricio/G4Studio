@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 using Windows.Devices.Geolocation;
@@ -41,16 +42,13 @@ namespace G4Studio.Views
         private List<MapIcon> MapIcons { get; set; }
         private List<string> ListOfActionsToPerform { get; set; }
 
-
         private Tenant SelectedProject { get; set; }
         private Twin SelectedDevice { get; set; }
-
         private bool ProjectLayerSelected { get; set; }
-
 
         public UC_MapControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             Projects = new List<Tenant>();
             Twins = new List<Twin>();            
@@ -78,9 +76,13 @@ namespace G4Studio.Views
             SB_MapInitialization.Completed += SB_MapInitialization_Completed;
             SB_ShowMap.Completed += SB_ShowMap_Completed;
 
-            CTRL_Projects.ItemWidth = 130;
-            CTRL_Projects.ItemHeight = 106;
+            CTRL_Environments.ItemSelected += CTRL_Environments_ItemSelected;
             CTRL_Projects.ItemSelected += CTRL_Projects_ItemSelected;
+            CTRL_Projects.GoBack += CTRL_Projects_GoBack;
+            //CTRL_Projects.LoadedContents += CTRL_Projects_LoadedContents;
+
+            CTRL_Project_Detail_2.GoBack += CTRL_Project_Detail_2_GoBack;
+
 
             CTRL_ProjectDetail.ItemSelected += CTRL_ProjectDetail_ItemSelected;
             CTRL_ProjectDetail.ItemDeselected += CTRL_ProjectDetail_ItemDeselected;
@@ -96,29 +98,42 @@ namespace G4Studio.Views
             CTRL_DoWork.Done += CTRL_DoWork_Done;
         }
 
-        public void StartAnimation(EnvironmentHandler.Type environment)
+        public void StartAnimation()
         {
-            EnvironmentT = environment;            
+            CTRL_Environments.Visibility = Visibility.Visible;
+            CTRL_Environments.Show();
+        }
 
-            SB_MapInitialization.Begin();
-            CTRL_Map_Animation.StartAnimation();
+        private void CTRL_Environments_ItemSelected(object sender, RoutedEventArgs e)
+        {
+            EnvironmentT = CTRL_Environments.EnvironmentT;
+
+            CTRL_Projects.Visibility = Visibility.Visible;
+            CTRL_Projects.BindData(CTRL_Environments.Tenants);
+            CTRL_Projects.Show();
+        }
+
+        private void CTRL_Projects_GoBack(object sender, RoutedEventArgs e)
+        {
+            //CTRL_Environments.Show();
+        }
+
+        private void CTRL_Project_Detail_2_GoBack(object sender, RoutedEventArgs e)
+        {
+            //CTRL_Projects.Show();
         }
 
         private void SB_MapInitialization_Completed(object sender, object e)
         {
-            InitializeMapControl();
-            InitializeProjects();
+            //InitializeMapControl();
+            //InitializeProjects();
 
-            CTRL_Actions.BindData();
-            CTRL_Projects.BindData(Projects);
-            CTRL_ControlPanel.BindData();
+            //CTRL_Actions.BindData();
+            //CTRL_Projects.BindData(EnvironmentT);
+            //CTRL_Projects.Visibility = Visibility.Visible;
+            //CTRL_ControlPanel.BindData();
 
-            CTRL_Actions.SetVisibility();
-        }
-
-        private async void SB_ShowMap_Completed(object sender, object e)
-        {
-            await CTRL_Map_Main.TrySetViewAsync(UserLocation, 10, 0, 0, MapAnimationKind.Bow);
+            //CTRL_Actions.SetVisibility();
         }
 
         private async void InitializeMapControl()
@@ -170,25 +185,26 @@ namespace G4Studio.Views
             CTRL_Map_Main.WatermarkMode = MapWatermarkMode.Automatic;
             CTRL_Map_Main.StyleSheet = MapStyleSheet.ParseFromJson(resourceLoader.GetString("Map_Style"));
 
-            CTRL_Map_Animation.Visibility = Visibility.Collapsed;
-            CTRL_Map_Animation.StopAnimation();
             SB_ShowMap.Begin();
         }
 
-        private void InitializeProjects()
+        private async void SB_ShowMap_Completed(object sender, object e)
         {
-            Projects = new List<Tenant>();
-            
-            TenantIList tenantsObj = Task.Run(async () => await ExedraLibCoreHandler.GetTenantsAsync(EnvironmentT).ConfigureAwait(false)).Result;
-
-            Projects = tenantsObj.Tenants;
-
-            Debug.WriteLine(tenantsObj.Logs.Value);
-
-            //CleanUnhealthyDevices();
-
-            //SendC2DDimCurve();
+            await CTRL_Map_Main.TrySetViewAsync(UserLocation, 10, 0, 0, MapAnimationKind.Bow);
         }
+
+        //private void InitializeProjects()
+        //{
+        //    Projects = new List<Tenant>();
+
+        //    TenantIList tenantsObj = Task.Run(async () => await ExedraLibCoreHandler.GetTenantsAsync(EnvironmentT).ConfigureAwait(false)).Result;
+
+        //    Projects = tenantsObj.Tenants;
+
+        //    Debug.WriteLine(tenantsObj.Logs.Value);
+
+        //    //CleanUnhealthyDevices();
+        //}
 
         private void CleanUnhealthyDevices()
         {
@@ -219,7 +235,7 @@ namespace G4Studio.Views
                 
         private void LoadProjectAndTwins()
         {
-            SelectedProject = CTRL_Projects.SelectedProject;
+           SelectedProject = CTRL_Projects.SelectedProject;
 
             InitializeTwinsAsync();
 
@@ -227,9 +243,13 @@ namespace G4Studio.Views
             
             CTRL_ProjectDetail.BindData(SelectedProject, Twins);
 
+            Debug.WriteLine("LoadProjectAndTwins() -> COLOCAR NO PROJECT E NÃO FORA...");
+
             if (!ProjectLayerSelected)
             {
+                CTRL_ProjectDetail.Visibility = Visibility.Visible;
                 SB_ShowProjectDetail.Begin();
+
                 ProjectLayerSelected = true;
             }
         }
@@ -360,10 +380,10 @@ namespace G4Studio.Views
         
         private void CTRL_ProjectDetail_Telemetry_Bulk_PerformAction(object sender, RoutedEventArgs e)
         {
-            //DateTime initDateTime = new DateTime(2020, 12, 4, 0, 0, 1);
-            DateTime initDateTime = DateTime.Now.AddDays(-5);
-            DateTime endDateTime = DateTime.Now;
-            var currentTotalConsumption = 79.54;
+            //DateTime initDateTime = new DateTime(2021, 1, 19, 9, 0, 1);
+            DateTime initDateTime = DateTime.Now;
+            DateTime endDateTime = DateTime.Now.AddDays(2);
+            var currentTotalConsumption = 160.530;
 
             //List<Twin> selectedDevices = CTRL_ProjectDetail.SelectedDevices;
             int messagesToDeliver;
@@ -509,7 +529,7 @@ namespace G4Studio.Views
             foreach (var device in CTRL_NewDevices.NewDevices)
             {
                 KeyValuePair<bool, string> result1 = ExedraLibCoreHandler.RegisterDevice(device.DeviceName, new BasicGeoposition() { Latitude = device.DevicePosition.Latitude, Longitude = device.DevicePosition.Longitude }, EnvironmentT);
-
+                
                 Debug.WriteLine(result1.Value);
 
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
@@ -598,13 +618,12 @@ namespace G4Studio.Views
 
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
                 () =>
-                {                    
-                    AddPushpin(deviceID, devicePosition);
+                {
+                    //AddPushpin(deviceID, devicePosition);
                     CTRL_DoWork.UpdateCounter(messageIndex.ToString(CultureInfo.InvariantCulture));
                 });
 
                 messageIndex++;
-
             }
 
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
@@ -617,32 +636,6 @@ namespace G4Studio.Views
             });
         }
         
-        private void SanitizeTelemetry()
-        {
-            string payload = resourceLoader.GetString("SANITIZE");
-            KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(payload, EnvironmentT);
-
-            Debug.WriteLine("MESSAGES SENT: " + result.Value);
-        }
-
-        private void SendC2DDimCurve()
-        {
-            //List<string> IPS = new List<string>() { "11.0.211.96", "11.0.142.194", "11.0.231.18", "11.0.241.214", "11.0.74.27", "11.0.63.218", "11.0.173.240", "11.0.177.217", "11.0.153.195", "11.0.133.175", "12.41.179.94" };
-            //List<string> IDS = new List<string>() { "0013A20041BBD742", "0013A20041BC0644", "0013A20041BC0634", "0013A20041BBD72C", "0013A20041BBD66E", "0013A20041BBD9C6", "0013A20041BC19DC", "0013A20041BBD78F", "0013A20041BC58EF", "0013A20041BC0A40", "0013A20041BC44F0" };
-
-            List<string> IPS = new List<string>() { "11.0.211.96" };
-            List<string> IDS = new List<string>() { "0013A20041BBD742" };
-
-            int index = 0;
-
-            foreach (var ip in IPS)
-            {
-                KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendC2DDimCurve(ip, IDS[index++], EnvironmentT);
-
-                Debug.WriteLine("MESSAGES SENT: " + result.Value);
-            }            
-        }
-
         private async void SendDimLevels_BoisdelaCambre_Default(int messagesPerDay, DateTime initDateTime, DateTime endDateTime, bool usesTimeZoneHandler, double totalConsumption)
         {
             List<string> DevicesBaseline = new List<string>() { "BOI56168040" };
@@ -758,6 +751,7 @@ namespace G4Studio.Views
                     foreach (var item in dimFeedbacks)
                     {
                         KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendDimmingProfile(device.DeviceID, item.Date, item.DimLevel, (totalConsumption + dailyConsumption + item.EnergyConsumption), item.ACPower, item.ACCurrent, item.ACCPowerFactor, EnvironmentT);
+                        //KeyValuePair<bool, string> result = ExedraLib.ExedraLibCoreHandler.SendDimmingProfile(device.DeviceID, item.Date, item.DimLevel, (totalConsumption + dailyConsumption + item.EnergyConsumption), item.ACPower, item.ACCurrent, item.ACCPowerFactor, ExedraLib.Config.EnvironmentHandler.Type.TST);
 
                         Debug.WriteLine(result.Value);
 
@@ -793,6 +787,7 @@ namespace G4Studio.Views
 
         private async void SendAlarms(int messagesPerDay, DateTime initDateTime)
         {
+            //List<string> devices = new List<string>() { "DEM87760367", "DEM08159464", "DEM58782206", "DEM40558326", "DEM20384945", "DEM04956776" };
             var initDate = DateTime.Now;
             int counter = 0;
             int messageIndex = 1;
@@ -824,7 +819,7 @@ namespace G4Studio.Views
                     foreach (var item in alarmFeedbacks)
                     {
                         KeyValuePair<bool, string> result = ExedraLibCoreHandler.SendAlarm(device.DeviceID, item.Date, item.Type, EnvironmentT);
-
+                        
                         Debug.WriteLine(result.Value);
 
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.High,
@@ -1018,52 +1013,46 @@ namespace G4Studio.Views
             CTRL_Map_Main.Layers.Add(mapProjectsOuterLayer);
         }
 
-        private async void AddMapElements_Projects(string projectName, bool centerOnTarget)
+        private async void AddMapElements_Projects(bool centerOnTarget)
         {
             var zindex = 0;
 
-            foreach (var project in Projects)
+            var fillColor = ColorHandler.FromHex(SelectedProject.FillColor, SelectedProject.FillOpacity * 100);
+            var strokeColor = ColorHandler.FromHex(SelectedProject.FillColor);
+
+            Coordinates.AddRange(GeoPositionConversor.Parse(SelectedProject.Coordinates));
+
+            var mapProjects = new List<MapElement>();
+
+            var mapPolygon = new MapPolygon
             {
-                if (project.Name.Equals(projectName, StringComparison.InvariantCulture))
-                {
-                    var fillColor = ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100);
-                    var strokeColor = ColorHandler.FromHex(project.FillColor);
+                Tag = SelectedProject.Name,
+                Path = new Geopath(Coordinates),
+                ZIndex = zindex,
+                FillColor = fillColor,
+                StrokeColor = strokeColor,
+                StrokeThickness = 3,
+                StrokeDashed = true,
+            };
 
-                    Coordinates.AddRange(GeoPositionConversor.Parse(project.Coordinates));
+            mapProjects.Insert(0, mapPolygon);
 
-                    var mapProjects = new List<MapElement>();
-
-                    var mapPolygon = new MapPolygon
-                    {
-                        Tag = project.Name,
-                        Path = new Geopath(Coordinates),
-                        ZIndex = zindex,
-                        FillColor = fillColor,
-                        StrokeColor = strokeColor,
-                        StrokeThickness = 3,
-                        StrokeDashed = true,
-                    };
-
-                    mapProjects.Insert(0, mapPolygon);
-
-                    var mapProjectsLayer = new MapElementsLayer
-                    {
-                        ZIndex = zindex,
-                        MapElements = mapProjects
-                    };
+            var mapProjectsLayer = new MapElementsLayer
+            {
+                ZIndex = zindex,
+                MapElements = mapProjects
+            };
 
 
-                    mapProjectsLayer.MapElementClick += MapProjectsLayer_MapElementClick;
-                    mapProjectsLayer.MapContextRequested += MapProjectsLayer_MapContextRequested;
+            mapProjectsLayer.MapElementClick += MapProjectsLayer_MapElementClick;
+            mapProjectsLayer.MapContextRequested += MapProjectsLayer_MapContextRequested;
 
-                    MapPolygons.Insert(0, mapPolygon);
-                    MapLayers.Insert(0, mapProjectsLayer);
+            MapPolygons.Insert(0, mapPolygon);
+            MapLayers.Insert(0, mapProjectsLayer);
 
-                    CTRL_Map_Main.Layers.Add(mapProjectsLayer);
+            CTRL_Map_Main.Layers.Add(mapProjectsLayer);
 
-                    zindex++;
-                }
-            }
+            zindex++;
 
             if (centerOnTarget)
             {
@@ -1216,7 +1205,7 @@ namespace G4Studio.Views
                 MapPolygons.Clear();
                 CTRL_Map_Main.Layers.Clear();
 
-                AddMapElements_Projects(SelectedProject.Name, true);
+                AddMapElements_Projects(true);
                 AddMapElements_Devices(SelectedProject.Name, false);
             });
         }
@@ -1320,9 +1309,10 @@ namespace G4Studio.Views
             var clickedProjectName = args.MapElements[0].Tag.ToString();
 
             //var mapDevices = new List<MapElement>();
+            var minLengthSufix = Math.Min(clickedProjectName.Length, 3);
             var length = 8;
             var datetime = DateTime.Now.Ticks.ToString(CultureInfo.InvariantCulture);
-            var projectName = clickedProjectName.Substring(0, 3).ToUpper(CultureInfo.InvariantCulture);
+            var projectName = clickedProjectName.Substring(0, minLengthSufix).ToUpper(CultureInfo.InvariantCulture);
             var deviceID = projectName + datetime.Substring(datetime.Length - length, length);
             var position = args.Location.Position;
 
@@ -1373,23 +1363,23 @@ namespace G4Studio.Views
 
         private void CTRL_Actions_Show(object sender, RoutedEventArgs e)
         {
-            UCActionsItem UIElement = sender as UCActionsItem;
+            //UCActionsItem UIElement = sender as UCActionsItem;
 
-            switch (UIElement.ID)
-            {
-                case "SL_TEN":
-                    CTRL_Projects.Show();
-                    CTRL_ControlPanel.Hide();
-                    break;
-                case "SL_Main":
-                    CTRL_Projects.Hide();
-                    CTRL_ControlPanel.Show();
-                    break;
-                default:
-                    CTRL_Projects.Hide();
-                    CTRL_ControlPanel.Hide();
-                    break;
-            }
+            //switch (UIElement.ID)
+            //{
+            //    case "SL_TEN":
+            //        CTRL_Projects.Show();
+            //        //CTRL_ControlPanel.Hide();
+            //        break;
+            //    case "SL_Main":
+            //        CTRL_Projects.Hide();
+            //        //CTRL_ControlPanel.Show();
+            //        break;
+            //    default:
+            //        CTRL_Projects.Hide();
+            //        //CTRL_ControlPanel.Hide();
+            //        break;
+            //}
         }
 
         private void CTRL_Actions_Hide(object sender, RoutedEventArgs e)
@@ -1406,15 +1396,24 @@ namespace G4Studio.Views
             //        break;
             //}
 
-            CTRL_Projects.Hide();
-            CTRL_ControlPanel.Hide();
+            //CTRL_Projects.Hide();
+            //CTRL_ControlPanel.Hide();
         }
 
         private void CTRL_Projects_ItemSelected(object sender, RoutedEventArgs e)
         {
-            CTRL_Projects.Reset();
-            CTRL_Actions.Reset();
-            LoadProjectAndTwins();
+            //SelectedProject = CTRL_Projects.SelectedProject;
+
+            //CTRL_Actions.Reset();
+            //LoadProjectAndTwins();
+
+            //CTRL_Map_Main.Visibility = Visibility.Visible;
+            //CTRL_NewDevices.Visibility = Visibility.Visible;
+
+            CTRL_Project_Detail_2.BindData(CTRL_Projects.SelectedProject, EnvironmentT);
+
+            CTRL_Project_Detail_2.Visibility = Visibility.Visible;
+            CTRL_Project_Detail_2.Show();
         }
         
         #endregion

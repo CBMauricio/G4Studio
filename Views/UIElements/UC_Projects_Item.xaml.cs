@@ -1,5 +1,7 @@
-﻿using G4Studio.Models;
+﻿using G4Studio.Utils;
 using Hyperion.Platform.Tests.Core.ExedraLib.Models;
+using System;
+using System.Globalization;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -14,8 +16,6 @@ namespace G4Studio.Views
         public Tenant Project { get; set; } 
         public double ItemWidth { get; set; }
         public double ItemHeight { get; set; }
-        public string Text { get; set; }
-        public string NProjects { get; set; }
         public SolidColorBrush BGColor { get; set; }
         public SolidColorBrush BRDColor { get; set; }
         public Thickness BRDThickness { get; set; }
@@ -27,21 +27,37 @@ namespace G4Studio.Views
             this.InitializeComponent();
 
             Project = new Tenant();
-
-            ItemWidth = 100;
-            ItemHeight = 100;
         }
 
-        public void BindData()
+        public void BindData(Tenant project, int projectMaxSize)
         {
-            TB_Project.Text = Text;
-            TB_NProjects.Text = NProjects;
+            Project = project;
+
+            double projectSize = Math.Min(1, Math.Round((double)Project.NDevices / Math.Min(1500, projectMaxSize), 1)) * 180;
+
+            BRD_Fence.Background = BGColor;
+            TB_Project.Text = Project.Name ?? string.Empty;
+            TB_HostName.Text = Project.Hostnames != null && Project.Hostnames.Count > 0 ? Project.Hostnames[0] : string.Empty;
+            TB_Timezone.Text = Project.Timezone ?? string.Empty;
+            TB_NDevices.Text = string.Format(CultureInfo.InvariantCulture, "{0:### ### ##0}", Project.NDevices).Trim();
+
+            SetToolTip(TB_Project, TB_Project.Text);
+            SetToolTip(TB_HostName, TB_HostName.Text);
+
+            BRD_Fence.Width = projectSize;
 
             BRD_Main.Width = ItemWidth;
             BRD_Main.Height = ItemHeight;
-            //BRD_Main.Background = BGColor;
-            BRD_Main.BorderThickness = BRDThickness;
-            BRD_Main.BorderBrush = BGColor;
+        }
+
+        private static void SetToolTip(TextBlock textblock, string text)
+        {
+            ToolTip toolTip = new ToolTip
+            {
+                Content = text
+            };
+
+            ToolTipService.SetToolTip(textblock, toolTip);
         }
 
         private void UserControl_Tapped(object sender, TappedRoutedEventArgs e)
@@ -50,6 +66,16 @@ namespace G4Studio.Views
             {
                 ItemTapped?.Invoke(sender, null);
             }
+        }
+
+        private void BRD_Main_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            BRD_Main.Background = new SolidColorBrush(ColorHandler.FromHex("#0C000000"));
+        }
+
+        private void BRD_Main_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            BRD_Main.Background = new SolidColorBrush(ColorHandler.FromHex("#00FFFFFF"));
         }
     }
 }

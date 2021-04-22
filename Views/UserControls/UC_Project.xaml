@@ -1,0 +1,185 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom1="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:Custom="using:G4Studio.Views.UIElements"
+    xmlns:Custom2="using:G4Studio.Views.UserControls"
+    x:Class="G4Studio.Views.UserControls.UC_Project"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Storyboard x:Name="SB_ShowInfo_R">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Main_Info" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="2510"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="GRD_Loading" Storyboard.TargetProperty="(UIElement.Opacity)" To="1"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Map" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.1000000" Value="0.09"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="GRD_Logo" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="BRD_Breadcrumb" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="BRD_Info_BT" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="SP_Info" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="BRD_Reset_Position" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="GRD_Actions" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+        </Storyboard>
+        <Storyboard x:Name="SB_HideInfo_R">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Main_Info" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="2510"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="GRD_Loading" Storyboard.TargetProperty="(UIElement.Opacity)" To="1"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="GRD_Map" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="GRD_Logo" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="BRD_Breadcrumb" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="BRD_Info_BT" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="SP_Info" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="BRD_Reset_Position" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="GRD_Actions" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+            <DoubleAnimation Duration="00:00:00" Storyboard.TargetName="CTRL_Runbooks" Storyboard.TargetProperty="(UIElement.Opacity)" To="0"/>
+        </Storyboard>
+        <Storyboard x:Name="SB_ShowProjectInfo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SP_Info" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="SB_HideProjectInfo">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SP_Info" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="SB_ShowMap">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Map" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="0.13"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.8000000" Value="0.3475"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Logo" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BRD_Breadcrumb" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BRD_Info_BT" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="SP_Info" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BRD_Reset_Position" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GRD_Actions" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CTRL_Runbooks" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="00:00:01" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:01.2000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid x:Name="GRD_Main_Info" Background="White" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <CompositeTransform/>
+        </Grid.RenderTransform>
+
+        <Grid x:Name="GRD_Loading" Background="White" Visibility="Visible">
+            <TextBlock x:Name="TB_ProjectName" Text="Bali" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="91" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" Margin="13,0,13,0" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Justify"/>
+        </Grid>
+
+        <Grid x:Name="GRD_Map" BorderBrush="#4C333333" BorderThickness="1,1,1,1" Margin="0,0,0,0" Visibility="Visible" Opacity="0">
+            <Custom1:MapControl x:Name="CTRL_Map_Main" MapServiceToken="" Background="{x:Null}" ZoomInteractionMode="GestureAndControl" TiltInteractionMode="GestureAndControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Visibility="Visible" Style="Road" ZoomLevel="0" Margin="0,0,0,0" Grid.Row="1" MapElementClick="CTRL_Map_Main_MapElementClick"/>
+        </Grid>
+        <Grid x:Name="GRD_Logo" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,13,0,0" Opacity="0">
+            <Image x:Name="IMG_Logo" Width="89" Source="/Assets/Artwork/Logo_V4.png" Margin="21,17,3,17"/>
+        </Grid>
+
+        <Border x:Name="BRD_Breadcrumb" BorderThickness="1,1,1,1" BorderBrush="#19000000" Margin="13,35,13,0" Visibility="Visible" Background="#7FFFFFFF" VerticalAlignment="Top" HorizontalAlignment="Left" CornerRadius="17,17,17,17" PointerEntered="SP_Breadcrumb_PointerEntered" PointerExited="SP_Breadcrumb_PointerExited" Tapped="SP_Breadcrumb_Tapped" MinHeight="33" Opacity="0">
+            <StackPanel x:Name="SP_Breadcrumb_L" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Visible" Margin="6,5,6,5">
+                <Image x:Name="IMG_Breadcrumb_1" Source="/Assets/Icons/icon_arrow_left_B_v2.png" Width="19" VerticalAlignment="Center"/>
+                <Image x:Name="IMG_Breadcrumb_2" Source="/Assets/Icons/icon_arrow_left_W_v2.png" Width="19" Visibility="Collapsed"/>
+                <TextBlock x:Name="TB_Breadcrumb" Text="Projects" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="16" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="Black" FontStretch="Normal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,1,41,0" Visibility="Collapsed"/>
+            </StackPanel>
+        </Border>
+        <Border x:Name="BRD_Info_BT" BorderThickness="1,1,1,1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,41,25,0" Visibility="Visible" Background="#CC333333" BorderBrush="White" CornerRadius="38,38,38,38" MinHeight="33" Width="51" Height="51" Tapped="BRD_Info_BT_Tapped" PointerEntered="BRD_Info_BT_PointerEntered" PointerExited="BRD_Info_BT_PointerExited" Opacity="0">
+            <TextBlock x:Name="TB_Title_Prefix" Text="BAL" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="17" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="White" FontStretch="Normal" FocusVisualSecondaryBrush="White" SelectionHighlightColor="White" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Margin="0,0,0,0"/>
+        </Border>
+        <StackPanel x:Name="SP_Info" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="33,48,76,0" MinHeight="33" Orientation="Horizontal" Visibility="Visible" RenderTransformOrigin="1,0.5" Opacity="0">
+            <StackPanel.RenderTransform>
+                <CompositeTransform ScaleX="1" ScaleY="1"/>
+            </StackPanel.RenderTransform>
+            <Border x:Name="BRD_Info" BorderThickness="1,1,1,1" Visibility="Visible" BorderBrush="White" CornerRadius="4,4,4,4" HorizontalAlignment="Right">
+                <StackPanel Margin="0,0,0,0" VerticalAlignment="Stretch" Orientation="Horizontal" HorizontalAlignment="Stretch">
+                    <Border VerticalAlignment="Stretch" Margin="0,0,0,0" BorderBrush="#19000000" BorderThickness="0,0,1,0" Visibility="Visible" Background="#E5FFFFFF" MinWidth="151">
+                        <StackPanel x:Name="SP_Devices" Orientation="Horizontal" Visibility="Visible" BorderThickness="0,0,0,0" Margin="35,3,35,3">
+                            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/Assets/Devices/Icon_Lum_BAS_Black_2048.png" Width="19" Margin="0,0,0,0" Stretch="Uniform"/>
+                            <StackPanel x:Name="SP_NDevices" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="7,0,0,0">
+                                <TextBlock x:Name="TB_NDevices" Text="1234" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="21" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Visibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                                <TextBlock x:Name="TB_NDevices_Lead" Text="devices" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal" MaxLines="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4,3.5,0,0" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border VerticalAlignment="Stretch" Margin="0,0,0,0" BorderThickness="0,0,0,0" BorderBrush="#19000000" Visibility="Visible" Background="#E5FFFFFF" MinWidth="151" >
+                        <StackPanel x:Name="SP_Timezone" Orientation="Horizontal" BorderThickness="0,0,0,0" Visibility="Visible" Margin="35,3,35,3" VerticalAlignment="Center">
+                            <Image Source="/Assets/Map/Icon_Position_Reset.png" Margin="0,-2,0,0" VerticalAlignment="Center" Height="19"/>
+                            <TextBlock x:Name="TB_Timezone" Text="Europe/Lisbon" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal" MaxLines="1" Visibility="Visible" VerticalAlignment="Center" Margin="5,0,0.3,0" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                    <Border VerticalAlignment="Stretch" Margin="0,0,0,0" BorderThickness="1,0,0,0" BorderBrush="#19000000" Visibility="Visible" Background="#E5FFFFFF" MinWidth="151">
+                        <StackPanel x:Name="SP_Area_Main" Orientation="Horizontal" Visibility="Visible" BorderThickness="0,0,0,0" Margin="35,3,35,3">
+                            <Rectangle Height="17" Stroke="Black" Width="21" Fill="#19333333"/>
+                            <TextBlock x:Name="TB_Area_Copy" Text="A" TextWrapping="Wrap" FontFamily="Palatino Linotype" FontSize="22" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Visibility="Collapsed" HorizontalAlignment="Right" FontStyle="Italic" VerticalAlignment="Center" TextAlignment="Right" Margin="0,-2,0,0"/>
+                            <StackPanel x:Name="SP_Map" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1,0,0,-2">
+                                <TextBlock x:Name="TB_Area" Text="40.1" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="20" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" TextAlignment="Left"/>
+                                <TextBlock x:Name="TB_Area_Lead" Text="km²" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal" MaxLines="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border VerticalAlignment="Stretch" Margin="0,0,0,0" Visibility="Visible" BorderThickness="1,0,1,0" BorderBrush="#19000000" Background="#E5FFFFFF" MinWidth="151">
+                        <StackPanel x:Name="SP_Perimeter_Main" Orientation="Horizontal" Visibility="Visible" BorderThickness="0,0,0,0" Margin="35,3,35,3">
+                            <Rectangle Height="17" Stroke="Black" Width="21" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TB_Area_Copy1" Text="P" TextWrapping="Wrap" FontFamily="Palatino Linotype" FontSize="22" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Visibility="Collapsed" HorizontalAlignment="Right" VerticalAlignment="Center" FontStyle="Italic" TextAlignment="Right" Margin="0,-2,0,0"/>
+                            <StackPanel x:Name="SP_Perimeter_Info" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="1,0,0,-2">
+                                <TextBlock x:Name="TB_Perimeter" Text="60.3" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="20" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,0" TextAlignment="Left"/>
+                                <TextBlock x:Name="TB_Perimeter_Lead" Text="km" TextWrapping="NoWrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Light" FocusVisualPrimaryBrush="Black" Foreground="#FF333333" FontStretch="Normal" MaxLines="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,2"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border x:Name="BRD_Info_Title" HorizontalAlignment="Center" VerticalAlignment="Stretch" BorderBrush="#FF333333" BorderThickness="0,0,0,0" Background="#CC333333" CornerRadius="0,4,4,0" MinWidth="151">
+                        <TextBlock x:Name="TB_Title" Text="Bali" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="22" FontWeight="Light" FocusVisualPrimaryBrush="White" Foreground="White" FontStretch="Normal" FocusVisualSecondaryBrush="White" SelectionHighlightColor="White" Margin="41,0,41,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+            <Image Width="7" Source="/Assets/Map/Icon_Arrow_Right_W.png" VerticalAlignment="Center" Margin="0,0,0,0" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <Border x:Name="BRD_Reset_Position" BorderThickness="1" BorderBrush="#19000000" Margin="13,103,33,70" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#7FFFFFFF" CornerRadius="19,19,19,19" Width="35" Height="35" Tapped="BRD_Reset_Position_Tapped" PointerEntered="BRD_Reset_Position_PointerEntered" PointerExited="BRD_Reset_Position_PointerExited" Opacity="0">
+            <Image Source="/Assets/Map/icon_position_reset.png" Width="21" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
+        </Border>
+        <Grid x:Name="GRD_Actions" HorizontalAlignment="Left" Margin="25,0,0,171" VerticalAlignment="Bottom" Opacity="0">
+
+            <Custom2:UC_Devices_Actions x:Name="CTRL_NewDevices" Opacity="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,129"/>
+            <Custom2:UC_Devices_Actions x:Name="CTRL_Telemetry" HorizontalAlignment="Left" Margin="0,0,0,64" VerticalAlignment="Bottom"/>
+            <Custom2:UC_Devices_Actions x:Name="CTRL_Bulk" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+
+        </Grid>
+        <Custom2:UC_RunBooks x:Name="CTRL_Runbooks" RenderTransformOrigin="0.5,0.5" Visibility="Visible" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0">
+            <Custom2:UC_RunBooks.RenderTransform>
+                <CompositeTransform ScaleX="1" ScaleY="1"/>
+            </Custom2:UC_RunBooks.RenderTransform>
+        </Custom2:UC_RunBooks>
+
+    </Grid>
+</UserControl>

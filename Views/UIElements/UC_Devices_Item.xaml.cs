@@ -18,114 +18,56 @@ namespace G4Studio.Views
     {
         private static ResourceLoader resourceLoader;
 
-        private bool IsSelected { get; set; }
-        //public Twin _Twin { get; set; }
-        public Twin Device { get; set; }
-        public string SelectedItemColor { get; set; }
+        public string DefaultProjectColor { get; set; }
 
+        public string DeviceID { get; set; }
         public string DeviceName { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
         private string Type { get; set; }
 
         public double ItemWidth { get; set; }
         public double ItemHeight { get; set; }
 
 
-        public event RoutedEventHandler ItemSelected;
-        public event RoutedEventHandler ItemDeselected;
+        public event RoutedEventHandler Remove;
 
         public UC_Devices_Item()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             resourceLoader = ResourceLoader.GetForCurrentView();
 
-            IsSelected = false;
-            SelectedItemColor = "#00FFFFFF";
-
-            ItemWidth = 161;
-            ItemHeight = 51;
+            DefaultProjectColor = "#00FFFFFF";
         }
 
-        public void BindData(Twin device)
+        public void BindData()
         {
-            //if (twin == null)
-            //    return;
+            TB_Name.Text = DeviceName;
 
-            if (device == null) return;
-
+            TB_Position.Text = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", Latitude.Substring(0, Math.Min(11, Latitude.Length)), Latitude.Substring(0, Math.Min(11, Latitude.Length)));
             BRD_Main.Width = ItemWidth;
             BRD_Main.Height = ItemHeight;
-
-            DeviceName = device.DeviceID;
-
-            //_Twin = twin;
-            Device = device;
-
-            TB_Name.Text = Device.DeviceID.ToUpper(CultureInfo.InvariantCulture);
-            //TB_Type.Text = string.Format("{0}", _Twin.Tags["device_type"]);
-            //TB_IMEI.Text = string.Format("{0}", _Twin.Tags["imei"]);
-
-            //foreach (KeyValuePair<string, object> item in twin.Properties.Desired)
-            //{
-            //    if (item.Key.Equals("location", StringComparison.InvariantCulture))
-            //    {
-            //        Position position = JsonConvert.DeserializeObject<Position>(item.Value.ToString());
-
-            //        var latitude = position.latitude.ToString(CultureInfo.InvariantCulture);
-            //        var longitude = position.longitude.ToString(CultureInfo.InvariantCulture);
-
-            //        TB_Position.Text = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", latitude.Substring(0, Math.Min(6, latitude.Length)), longitude.Substring(0, Math.Min(6, longitude.Length)));
-            //    }
-            //}
-
-            var latitude = Device.DevicePosition.Latitude.ToString(CultureInfo.InvariantCulture);
-            var longitude = Device.DevicePosition.Longitude.ToString(CultureInfo.InvariantCulture);
-
-            TB_Position.Text = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", latitude.Substring(0, Math.Min(6, latitude.Length)), longitude.Substring(0, Math.Min(6, longitude.Length)));
+            //BRD_DeviceType.Background = new SolidColorBrush(ColorHandler.FromHex(DefaultProjectColor));
         }
 
-        private void UserControl_Tapped(object sender, TappedRoutedEventArgs e)
+
+        private void BRD_Remove_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            IsSelected = !IsSelected;
-
-            if (IsSelected)
+            if (Remove != null)
             {
-                SetItemStyle(true);                
-
-                if (ItemSelected != null)
-                {
-                    ItemSelected?.Invoke(sender, null);
-                }
-            }
-            else
-            {
-                SetItemStyle(false);
-
-                if (ItemDeselected != null)
-                {
-                    ItemDeselected?.Invoke(sender, null);
-                }
+                Remove?.Invoke(this, null);
             }
         }
 
-        public void SetItemStyle(bool isEnabled)
+        private void BRD_Remove_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            if (isEnabled)
-            {
-                BRD_Main.Background = new SolidColorBrush(ColorHandler.FromHex(resourceLoader.GetString("BTN_Action_Pointer_Entered_BGColor")));
-                //IMG_Default.Visibility = Visibility.Collapsed;
-                //IMG_Selected.Visibility = Visibility.Visible;
+            TB_Remove.Foreground = new SolidColorBrush(ColorHandler.FromHex("#FFDC0505"));
+        }
 
-                IsSelected = true;
-            }
-            else
-            {
-                BRD_Main.Background = new SolidColorBrush(Colors.Transparent);
-                //IMG_Default.Visibility = Visibility.Visible;
-                //IMG_Selected.Visibility = Visibility.Collapsed;
-
-                IsSelected = false;
-            }   
+        private void BRD_Remove_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            TB_Remove.Foreground = new SolidColorBrush(ColorHandler.FromHex("#FF404040"));
         }
     }
 }

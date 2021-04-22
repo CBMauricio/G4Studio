@@ -1,7 +1,11 @@
 ﻿using G4Studio.Utils;
 using Hyperion.Platform.Tests.Core.ExedraLib.Models;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.Timers;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -13,62 +17,70 @@ namespace G4Studio.Views
 {
     public sealed partial class UC_Projects : UserControl
     {
-        private bool IsShowingInfo { get; set; }
         public List<Tenant> Projects { get; private set; }
         public Tenant SelectedProject { get; set; }
 
         public double ItemWidth { get; set; }
         public double ItemHeight { get; set; }
         public double DefaultMargin { get; set; }
+        public double DefaultMarginTop { get; set; }
+        public int NRows { get; set; }
         public int NColumns { get; set; }
 
         public event RoutedEventHandler ItemSelected;
+        public event RoutedEventHandler GoBack;
+
+        private static Timer Timer { get; set; }
 
         public UC_Projects()
         {
             InitializeComponent();
 
-            IsShowingInfo = false;
-            ItemWidth = 210;
-            ItemHeight = 111;
-            DefaultMargin = 13;
-            NColumns = 8;
+            Timer = new Timer(600);
+            Timer.Elapsed += Timer_ElapsedAsync;
+
+            ItemWidth = 262;
+            ItemHeight = 107;
+            DefaultMargin = 7;
+            DefaultMarginTop = 7;
+            NColumns = 7;
+            NRows = 7;
             Projects = new List<Tenant>();
-
-            SB_ShowInfo.Completed += SB_ShowInfo_Completed;
-            SB_HideInfo.Completed += SB_HideInfo_Completed;
         }
 
-        public void BindData(List<Tenant> projects)
+        public void BindData(TenantIList tenantsObj)
         {
-            Projects = projects;
+            if (tenantsObj == null) return;
 
-            BindProjects();
+            Projects = tenantsObj.Tenants;
+
+            if (Projects == null || Projects.Count < 1) return;
+
+            TB_NDevices_Total.Text = Projects.Count.ToString(CultureInfo.InvariantCulture);
+
+            BindProjects(Projects);
         }
 
-        public void Reset()
+        private void BindProjects(List<Tenant> projects)
         {
-            IsShowingInfo = false;
-        }
-
-        private void BindProjects()
-        {
+            TB_NDevices_Filtered.Text = projects.Count.ToString(CultureInfo.InvariantCulture);
             GRD_Projects_List.Children.Clear();
 
             int column = 1;
             int line = 1;
 
-            double defaultMargin = 5;
-
             double marginLeft;
-            double marginTop = defaultMargin;
+            double marginTop = DefaultMargin;
 
-            foreach (var project in Projects)
+            int projectMaxSize = ProjectMaxSize();
+
+            SP_Projects_Info_Top.Height = NRows * ItemHeight + (NRows - 2) * DefaultMarginTop - SP_Projects_Info_Top.Margin.Bottom - 100;
+            TB_FilterProjects.Width = (NColumns * ItemWidth) - ((NColumns - 2) * DefaultMargin) + 2;
+
+            foreach (var project in projects)
             {
                 if (project != null)
                 {
-                    //project.GetNTwins().Wait();
-
                     if (column <= NColumns)
                     {
                         marginLeft = (column - 1) * ItemWidth + column * DefaultMargin;
@@ -78,7 +90,7 @@ namespace G4Studio.Views
                     else
                     {
                         marginLeft = DefaultMargin;
-                        marginTop = line * ItemHeight + (line + 1) * DefaultMargin;
+                        marginTop = line * ItemHeight + (line + 1) * DefaultMarginTop;
 
                         column = 2;
                         line++;
@@ -86,72 +98,112 @@ namespace G4Studio.Views
 
                     UC_Projects_Item project_item = new UC_Projects_Item()
                     {
-                        Margin = new Thickness(marginLeft, marginTop, defaultMargin, 0),
+                        Margin = new Thickness(marginLeft, marginTop, DefaultMargin, 0),
                         ItemWidth = ItemWidth,
                         ItemHeight = ItemHeight,
                         VerticalAlignment = VerticalAlignment.Top,
                         HorizontalAlignment = HorizontalAlignment.Left,
-                        //BGColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor, project.FillOpacity * 100)),
                         BRDColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor)),
-                        BRDThickness = new Thickness(0, 0, 0, 5),
-                        BGColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor)),
-                        Text = project.Name,
-                        NProjects = project.NDevices.ToString(CultureInfo.InvariantCulture),
-                        Project = project
+                        BGColor = new SolidColorBrush(ColorHandler.FromHex(project.FillColor))
                     };
 
                     project_item.ItemTapped += Project_item_ItemTapped;
 
-                    project_item.BindData();
+                    project_item.BindData(project, projectMaxSize);
 
                     GRD_Projects_List.Children.Add(project_item);
+
                 }
-            }
-        }
-
-        private void Project_item_ItemTapped(object sender, RoutedEventArgs e)
-        {  
-            UC_Projects_Item selectedItem = sender as UC_Projects_Item;
-            SelectedProject = selectedItem.Project;
-            
-            //IsShowingInfo = true;
-
-            //TB_Title.Text = SelectedProject.name;
-            //TB_Hostname.Text = SelectedProject.hostnames[0];
-            //TB_NProjects.Text = SelectedProject.Count.ToString(CultureInfo.InvariantCulture);
-
-            //SP_ProjectInfo.Visibility = Visibility.Visible;
-            //BRD_Projects_List.Visibility = Visibility.Collapsed;
-            //SB_ShowProject_Info.Begin();
-
-            SB_HideInfo.Begin();
-
-            if (ItemSelected != null)
-            {
-                ItemSelected?.Invoke(sender, null);
             }
         }
 
         public void Show()
         {
-            SP_Main.Visibility = Visibility.Visible;
-            SB_ShowInfo.Begin();
+            SB_ShowInfo_R.Begin();
         }
 
         public void Hide()
         {
-            SB_HideInfo.Begin();
+            SB_HideInfo_R.Begin();
         }
 
-        private void SB_ShowInfo_Completed(object sender, object e)
+        private int ProjectMaxSize()
         {
-            IsShowingInfo = true;
+            int currentMax = 0;
+
+            foreach (var item in Projects)
+            {
+                currentMax = Math.Max(currentMax, item.NDevices);
+            }
+
+            return currentMax;
         }
 
-        private void SB_HideInfo_Completed(object sender, object e)
+        private void SetIMGBreadcrumbVisibility(bool pointerEntered)
         {
-            IsShowingInfo = false;
-            SP_Main.Visibility = Visibility.Collapsed;
+            IMG_Breadcrumb_1.Visibility = pointerEntered ? Visibility.Collapsed : Visibility.Visible;
+            IMG_Breadcrumb_2.Visibility = pointerEntered ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private async void Timer_ElapsedAsync(object sender, ElapsedEventArgs e)
+        {
+            Timer.Stop();
+
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                var text = TB_FilterProjects.Text.ToUpperInvariant();
+
+                BindProjects(Projects.FindAll(item => item.Name.ToUpperInvariant().IndexOf(text, StringComparison.InvariantCulture) >= 0
+                    || item.Timezone.ToUpperInvariant().IndexOf(text, StringComparison.InvariantCulture) >= 0
+                    || string.Join("", item.Hostnames).ToUpperInvariant().IndexOf(text, StringComparison.InvariantCulture) >= 0));
+            });
+        }
+        private void Project_item_ItemTapped(object sender, RoutedEventArgs e)
+        {
+            UC_Projects_Item selectedItem = sender as UC_Projects_Item;
+            SelectedProject = selectedItem.Project;
+
+            if (ItemSelected != null)
+            {
+                ItemSelected?.Invoke(sender, null);
+            }
+
+            Debug.WriteLine("Project_item_ItemTapped");
+        }
+
+        private async void BT_Delete_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.High, () =>
+            {
+                TB_FilterProjects.Text = string.Empty;
+            });
+        }
+
+        private void TB_FilterProjects_TextChanged(object sender, TextChangedEventArgs e)
+        {   
+            Timer.Start();
+
+            BT_Delete.Opacity = string.IsNullOrEmpty(TB_FilterProjects.Text) ? 0 : 100;
+        }
+
+        private void SP_Breadcrumb_l_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            SetIMGBreadcrumbVisibility(true);
+        }
+
+        private void SP_Breadcrumb_l_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            SetIMGBreadcrumbVisibility(false);
+        }
+
+        private void SP_Breadcrumb_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            Hide();
+
+            if (GoBack != null)
+            {
+                GoBack?.Invoke(sender, e);
+            }
         }
     }
 }

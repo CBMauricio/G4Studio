@@ -15,17 +15,12 @@ namespace G4Studio
             InitializeComponent();
 
             UCLandingPage.FinishedWork += UC_LandingPage_FinishedWork;
-
-
-            //VER UC_LANDINGPAGE DESCOMENTAR SB
-            //UCLandingPage.Visibility = Visibility.Collapsed;
         }
 
         private void UC_LandingPage_FinishedWork(object sender, RoutedEventArgs e)
         {
             UCLandingPage.Visibility = Visibility.Collapsed;
-
-            UCMapControl.StartAnimation(UCLandingPage.EnvironmentT);
+            UCMapControl.StartAnimation();
         }
     }
 }

@@ -17,7 +17,16 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <PackageCertificateThumbprint>10E1A3053D284AF52AF1302C0C677E11342320F2</PackageCertificateThumbprint>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <PackageCertificateKeyFile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -127,13 +136,20 @@
     <Compile Include="Models\DimFeedback.cs" />
     <Compile Include="Models\G3GatewayTableEntity.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\RunBookItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ColorHandler.cs" />
+    <Compile Include="Utils\D2CMessagesConfig.cs" />
     <Compile Include="Utils\GeoPositionConversor.cs" />
     <Compile Include="Utils\MathHandler.cs" />
     <Compile Include="Utils\NetworkHandler.cs" />
+    <Compile Include="Utils\TextHandler.cs" />
     <Compile Include="Utils\TimeZoneHandler.cs" />
     <Compile Include="Utils\TwinHandler.cs" />
+    <Compile Include="Utils\UIElementsHandler.cs" />
+    <Compile Include="Views\Animations\UC_BoxesAnimation.xaml.cs">
+      <DependentUpon>UC_BoxesAnimation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UIElements\UC_Action_BTN.xaml.cs">
       <DependentUpon>UC_Action_BTN.xaml</DependentUpon>
     </Compile>
@@ -143,14 +159,8 @@
     <Compile Include="Views\UIElements\UC_Devices_Item.xaml.cs">
       <DependentUpon>UC_Devices_Item.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UIElements\UIEImageItem.xaml.cs">
-      <DependentUpon>UIEImageItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UIElements\UIETextItem.xaml.cs">
-      <DependentUpon>UIETextItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserControls\UCActions.xaml.cs">
-      <DependentUpon>UCActions.xaml</DependentUpon>
+    <Compile Include="Views\UIElements\UC_Environment_Item.xaml.cs">
+      <DependentUpon>UC_Environment_Item.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UC_LandingPage.xaml.cs">
       <DependentUpon>UC_LandingPage.xaml</DependentUpon>
@@ -158,14 +168,26 @@
     <Compile Include="Views\UC_MapControl.xaml.cs">
       <DependentUpon>UC_MapControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Animations\UC_MapControlAnimation.xaml.cs">
-      <DependentUpon>UC_MapControlAnimation.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\UC_ProjectDetail.xaml.cs">
       <DependentUpon>UC_ProjectDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\UCSelectorEnvironment.xaml.cs">
-      <DependentUpon>UCSelectorEnvironment.xaml</DependentUpon>
+    <Compile Include="Views\UIElements\UC_RunBook_Item.xaml.cs">
+      <DependentUpon>UC_RunBook_Item.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UIElements\UIEImageItem.xaml.cs">
+      <DependentUpon>UIEImageItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UCActions.xaml.cs">
+      <DependentUpon>UCActions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_Devices_Actions.xaml.cs">
+      <DependentUpon>UC_Devices_Actions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_Environments.xaml.cs">
+      <DependentUpon>UC_Environments.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_Project.xaml.cs">
+      <DependentUpon>UC_Project.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\UC_Projects.xaml.cs">
       <DependentUpon>UC_Projects.xaml</DependentUpon>
@@ -176,14 +198,14 @@
     <Compile Include="Views\Animations\UC_DoWork.xaml.cs">
       <DependentUpon>UC_DoWork.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\UCControlPanel.xaml.cs">
-      <DependentUpon>UCControlPanel.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\UserControls\UC_ListOfActions.xaml.cs">
       <DependentUpon>UC_ListOfActions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UIElements\UC_ListViewItem.xaml.cs">
       <DependentUpon>UC_ListViewItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\UC_RunBooks.xaml.cs">
+      <DependentUpon>UC_RunBooks.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -199,11 +221,7 @@
     <Content Include="Assets\Artwork\Icon_Deselect_All_256px.png" />
     <Content Include="Assets\Artwork\Icon_Deselect_All_38px.png" />
     <Content Include="Assets\Artwork\Icon_Deselect_All_48px.png" />
-    <Content Include="Assets\Artwork\Icon_Devices_B_256px.png" />
-    <Content Include="Assets\Artwork\Icon_Devices_B_48px.png" />
     <Content Include="Assets\Artwork\Icon_Devices_B_V2_256px.png" />
-    <Content Include="Assets\Artwork\Icon_Devices_W_256px.png" />
-    <Content Include="Assets\Artwork\Icon_Devices_W_48px.png" />
     <Content Include="Assets\Artwork\Icon_Devices_W_V2_256px.png" />
     <Content Include="Assets\Artwork\icon_luminaire.png" />
     <Content Include="Assets\Artwork\Icon_Lumminaire_White.png" />
@@ -222,7 +240,6 @@
     <Content Include="Assets\Artwork\Icon_Lum_New_Black_v2_48px.png" />
     <Content Include="Assets\Artwork\Icon_Lum_Red_38px.png" />
     <Content Include="Assets\Artwork\Icon_Lum_Red_48px.png" />
-    <Content Include="Assets\Artwork\Icon_Lum_Refresh_Black_38px.png" />
     <Content Include="Assets\Artwork\Icon_Lum_Refresh_Black_v2_38px.png" />
     <Content Include="Assets\Artwork\Icon_Lum_Refresh_Black_v2_48px.png" />
     <Content Include="Assets\Artwork\Icon_Lum_UPD_Black_38px.png" />
@@ -292,20 +309,29 @@
     <Content Include="Assets\Artwork\Icon_Unselect_All_v4_48px.png" />
     <Content Include="Assets\Artwork\Icon_Unselect_All_v5_120px.png" />
     <Content Include="Assets\Artwork\Icon_Unselect_All_v5_48px.png" />
+    <Content Include="Assets\Devices\Icon_Lum_BAS_Black_2048.png" />
+    <Content Include="Assets\Devices\Icon_Lum_New_Black_v2_48x.png" />
+    <Content Include="Assets\Devices\Icon_Lum_UPD_Black_2048px.png" />
+    <Content Include="Assets\Icons\icon_arrow_left_B_v2.png" />
     <Content Include="Assets\Icons\icon_arrow_left_B%402x.png" />
     <Content Include="Assets\Icons\icon_arrow_left_B.png" />
     <Content Include="Assets\Icons\icon_arrow_left_B_F%402x.png" />
     <Content Include="Assets\Icons\icon_arrow_left_B_F.png" />
+    <Content Include="Assets\Icons\icon_arrow_left_W_v2.png" />
     <Content Include="Assets\Icons\icon_arrow_right_B%402x.png" />
     <Content Include="Assets\Icons\icon_arrow_right_B.png" />
     <Content Include="Assets\Icons\icon_arrow_right_B_F%402x.png" />
     <Content Include="Assets\Icons\icon_arrow_right_B_F.png" />
+    <Content Include="Assets\Icons\icon_arrow_right_B_v2.png" />
+    <Content Include="Assets\Icons\icon_arrow_right_W_v2.png" />
     <Content Include="Assets\Icons\Icon_Devices_B.png" />
     <Content Include="Assets\Icons\Icon_Devices_W.png" />
+    <Content Include="Assets\Icons\icon_Location_B.png" />
     <Content Include="Assets\Icons\Icon_Menu_B.png" />
     <Content Include="Assets\Icons\Icon_Menu_W.png" />
     <Content Include="Assets\Icons\Icon_Projects_B.png" />
     <Content Include="Assets\Icons\Icon_Projects_W.png" />
+    <Content Include="Assets\Icons\icon_webpage_B.png" />
     <Content Include="Assets\IMG\LandingPageWide_V5.png" />
     <Content Include="Assets\Artwork\logo_b_v3_256.png" />
     <Content Include="Assets\Artwork\logo_simple_B_V2.png" />
@@ -340,6 +366,38 @@
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\logo.png" />
     <Content Include="Assets\logo_simple_B.png" />
+    <Content Include="Assets\Map\Icon_Add_B_v2_48px.png" />
+    <Content Include="Assets\Map\Icon_Add_W_v2_48px.png" />
+    <Content Include="Assets\Map\Icon_Alarm_B_48px.png" />
+    <Content Include="Assets\Map\Icon_Alarm_B_v3_48px.png" />
+    <Content Include="Assets\Map\Icon_Alarm_W_48px.png" />
+    <Content Include="Assets\Map\Icon_Alarm_W_v3_48px.png" />
+    <Content Include="Assets\Map\Icon_Arrow_Down_W.png" />
+    <Content Include="Assets\Map\Icon_Arrow_Left_DG_48px.png" />
+    <Content Include="Assets\Map\Icon_Arrow_Right_DG_48px.png" />
+    <Content Include="Assets\Map\Icon_Arrow_Right_W.png" />
+    <Content Include="Assets\Map\Icon_BLK_B_31px.png" />
+    <Content Include="Assets\Map\Icon_BLK_B_v2_31px.png" />
+    <Content Include="Assets\Map\Icon_List_B_128px.png" />
+    <Content Include="Assets\Map\Icon_List_B_v2_128px.png" />
+    <Content Include="Assets\Map\Icon_Lum_BAS_Black_v3_31px.png" />
+    <Content Include="Assets\Map\Icon_Lum_BAS_Black_v4_31px.png" />
+    <Content Include="Assets\Map\Icon_Lum_BAS_Red_v2_31px.png" />
+    <Content Include="Assets\Map\Icon_Lum_BAS_Red_v3_31px.png" />
+    <Content Include="Assets\Map\Icon_Position_Reset.png" />
+    <Content Include="Assets\Map\Icon_Register_B_48px.png" />
+    <Content Include="Assets\Map\Icon_Register_W_48px.png" />
+    <Content Include="Assets\Map\Icon_Runbooks_W_48px.png" />
+    <Content Include="Assets\Map\Icon_Telemetry_B_48px.png" />
+    <Content Include="Assets\Map\Icon_Telemetry_W_48px.png" />
+    <Content Include="Assets\Media\Icon_Media_FF_B_48_v2.png" />
+    <Content Include="Assets\Media\Icon_Media_FF_W_48_v2.png" />
+    <Content Include="Assets\Media\Icon_Media_Pause_B_48px.png" />
+    <Content Include="Assets\Media\Icon_Media_Pause_W_48px.png" />
+    <Content Include="Assets\Media\Icon_Media_Play_B_48px.png" />
+    <Content Include="Assets\Media\Icon_Media_Play_W_48px.png" />
+    <Content Include="Assets\Media\Icon_Media_Stop_B_48px.png" />
+    <Content Include="Assets\Media\Icon_Media_Stop_W_48px.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
@@ -397,6 +455,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Animations\UC_BoxesAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\UIElements\UC_Action_BTN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -409,17 +471,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UIElements\UIEImageItem.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Views\UIElements\UC_Environment_Item.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UIElements\UIETextItem.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserControls\UCActions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UC_LandingPage.xaml">
       <SubType>Designer</SubType>
@@ -429,15 +483,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Animations\UC_MapControlAnimation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\UC_ProjectDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\UCSelectorEnvironment.xaml">
+    <Page Include="Views\UIElements\UC_RunBook_Item.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UIElements\UIEImageItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UCActions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\UC_Devices_Actions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\UC_Environments.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\UC_Project.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -453,10 +523,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\UCControlPanel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\UserControls\UC_ListOfActions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -465,10 +531,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\UC_RunBooks.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Identity">
-      <Version>1.2.3</Version>
+      <Version>1.3.0</Version>
     </PackageReference>
     <PackageReference Include="Azure.Security.KeyVault.Secrets">
       <Version>4.1.0</Version>
@@ -477,33 +547,33 @@
       <Version>1.1.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Azure.Devices">
-      <Version>1.28.0</Version>
+      <Version>1.31.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Azure.KeyVault">
       <Version>3.0.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Azure.Services.AppAuthentication">
-      <Version>1.6.0</Version>
+      <Version>1.6.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
-      <Version>3.3.1</Version>
+      <Version>3.3.2</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.10</Version>
+      <Version>6.2.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
-      <Version>6.1.1</Version>
+      <Version>7.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.4.3</Version>
+      <Version>2.5.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager">
       <Version>3.2.3</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>12.0.3</Version>
+      <Version>13.0.1</Version>
     </PackageReference>
     <PackageReference Include="RestSharp">
       <Version>106.11.7</Version>
@@ -512,17 +582,20 @@
       <Version>9.3.3</Version>
     </PackageReference>
     <PackageReference Include="XAML.MapControl">
-      <Version>5.4.0</Version>
+      <Version>5.6.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Resources\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Hyperion.Platform.Tests.Core.ExedraLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\platform-test-suite\tests\Hyperion.Platform.Tests.Core\bin\Debug\netstandard2.0\Hyperion.Platform.Tests.Core.ExedraLib.dll</HintPath>
-    </Reference>
+    <None Include="G4Studio_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hyperion.Platform.Tests.Core\Hyperion.Platform.Tests.Core.ExedraLib.csproj">
+      <Project>{61705659-a087-4677-8757-c80d15c8329f}</Project>
+      <Name>Hyperion.Platform.Tests.Core.ExedraLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

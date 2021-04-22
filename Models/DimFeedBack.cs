@@ -26,30 +26,10 @@ namespace G4Studio.Models
             ACCPowerFactor = acPowerFactor;
         }
 
-        //public static List<DimFeedback> GetDimFeedbacks_OLD(DateTime initDate, int nMessagesPerDay, double workingHours, double carryConsumption)
-        //{   
-        //    List<DimFeedback> dimFeedbacks = new List<DimFeedback>();
-
-        //    nMessagesPerDay = Math.Max(2, nMessagesPerDay);
-
-        //    double incMinutes = workingHours * 60 / (nMessagesPerDay - 1);
-
-        //    for (int i = 0; i < nMessagesPerDay; i++)
-        //    {
-        //        DateTime date = initDate.AddMinutes(incMinutes * i);
-                
-        //        double energyConsumptionPerDay = GetDimLevelIncByWeekDay((int)date.DayOfWeek);
-        //        double energyConsumptionPerMinute = (energyConsumptionPerDay / (workingHours * 60));
-
-        //        int dimLevel = GetDimLevelByHour(date.Hour);
-
-        //        double totalEnergyConsumption = Math.Round(carryConsumption + (energyConsumptionPerMinute * incMinutes * i), 2);
-
-        //        dimFeedbacks.Add(new DimFeedback() { Date = date, DimLevel = dimLevel, EnergyConsumption = totalEnergyConsumption });
-        //    }
-
-        //    return dimFeedbacks;
-        //}
+        public static DimFeedback GetDimFeedback(DateTime initDate)
+        {
+            return new DimFeedback() { Date = initDate, DimLevel = 100, EnergyConsumption = 0, ACPower = 85.8, ACCurrent = 0.379, ACCPowerFactor = 1 };
+        }
 
         public static List<DimFeedback> GetDimFeedbacks(DateTime initDate, double latitude, double longitude, bool usesTimeZoneHandler)
         {

@@ -5,28 +5,34 @@
     xmlns:local="using:G4Studio.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" VerticalAlignment="Top" Tapped="UserControl_Tapped" Background="Red" HorizontalAlignment="Left">
+    mc:Ignorable="d" VerticalAlignment="Top" Background="Red" HorizontalAlignment="Left">
 
-    <Border x:Name="BRD_Main" VerticalAlignment="Top" Margin="0,0,0,0" BorderBrush="#19000000" BorderThickness="0,0,0,0" FocusVisualPrimaryBrush="White" Background="White" HorizontalAlignment="Left" CornerRadius="4,4,4,4" Width="Auto" Height="Auto" Opacity="1">
+    <Border x:Name="BRD_Main" VerticalAlignment="Top" Margin="0,0,0,0" BorderBrush="#35000000" BorderThickness="1,1,1,1" FocusVisualPrimaryBrush="White" Background="White" HorizontalAlignment="Left" CornerRadius="4,4,4,4" Width="Auto" Height="Auto" Opacity="1">
 
-        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="7,7,7,7" HorizontalAlignment="Left">
-            <TextBlock x:Name="TB_Name" Text="0013A20041292942" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="14" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="#FF343434" FontStretch="Normal"/>
-            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                <StackPanel x:Name="SP_Images" Orientation="Horizontal" VerticalAlignment="Center" Visibility="Collapsed">
-                    <Image x:Name="IMG_Default" Source="/Assets/Artwork/Icon_Lum_Black_v2_48px.png" Height="17" Margin="0,0,0,0"/>
-                    <Image x:Name="IMG_Selected" Source="/Assets/Artwork/Icon_Lum_Black_Filled_v2_48px.png" Height="17" Margin="0,0,0,0" Visibility="Collapsed"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Border Background="#FF363636" Margin="0,0,0,0" VerticalAlignment="Center" CornerRadius="1,1,1,1">
-                        <TextBlock x:Name="TB_Type" Text="G3" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="11" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="White" FontStretch="Normal" Margin="3,2,3,2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                    <TextBlock x:Name="TB_IMEI" Text="357044061475577" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="16" FontWeight="Light" FocusVisualPrimaryBrush="#FFA2A2A2" Foreground="#FF4D4D4D" FontStretch="Normal" Margin="5,2,0,0" VerticalAlignment="Center" Visibility="Collapsed"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <Image Source="/Assets/Artwork/icon_cursor.png" Width="11" FocusVisualPrimaryBrush="#CC000000" Margin="0,-2,0,0"/>
-                    <TextBlock x:Name="TB_Position" Text="38.753, -8.367" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="12" FontWeight="Light" FocusVisualPrimaryBrush="#FF191919" Foreground="#FF4D4D4D" FontStretch="Normal" VerticalAlignment="Center" Margin="3,0,0,0"/>
+        <Grid HorizontalAlignment="Stretch" Margin="7,7,7,7" VerticalAlignment="Stretch">
+
+            <StackPanel Orientation="Vertical" Margin="0,0,0,0" HorizontalAlignment="Left" MinWidth="182">
+                <TextBlock x:Name="TB_Name" Text="0013A20041292942" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="13" FontWeight="Light" FocusVisualPrimaryBrush="White" Foreground="#FF333333" FontStretch="Normal" Margin="0,2,0,0"/>
+                <StackPanel Orientation="Horizontal" Margin="0,7,0,0">
+                    <StackPanel x:Name="SP_Images" Orientation="Horizontal" VerticalAlignment="Center" Visibility="Collapsed">
+                        <Image x:Name="IMG_Default" Source="/Assets/Artwork/Icon_Lum_Black_v2_48px.png" Height="17" Margin="0,0,0,0"/>
+                        <Image x:Name="IMG_Selected" Source="/Assets/Artwork/Icon_Lum_Black_Filled_v2_48px.png" Height="17" Margin="0,0,0,0" Visibility="Collapsed"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Border x:Name="BRD_DeviceType" Background="#FF363636" Margin="0,0,0,0" VerticalAlignment="Center" CornerRadius="1,1,1,1">
+                            <TextBlock x:Name="TB_Type" Text="G3" TextWrapping="Wrap" FontFamily="Roboto Black" FontSize="11" FontWeight="Normal" FocusVisualPrimaryBrush="White" Foreground="White" FontStretch="Normal" Margin="3,2,3,2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="TB_IMEI" Text="357044061475577" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="16" FontWeight="Light" FocusVisualPrimaryBrush="#FFA2A2A2" Foreground="#FF4D4D4D" FontStretch="Normal" Margin="5,2,0,0" VerticalAlignment="Center" Visibility="Collapsed"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5,1,0,0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <Image Source="/Assets/Artwork/icon_cursor.png" Width="11" FocusVisualPrimaryBrush="#CC000000" Margin="0,-2,0,0" Height="11" Canvas.ZIndex="1"/>
+                        <TextBlock x:Name="TB_Position" Text="38.753231, -8.367212" TextWrapping="Wrap" FontFamily="Roboto Thin" FontSize="11" FontWeight="Normal" FocusVisualPrimaryBrush="#FF191919" Foreground="#7F333333" FontStretch="Normal" VerticalAlignment="Center" Margin="3,0,0,0" FontStyle="Normal"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
+            <Border x:Name="BRD_Remove" BorderThickness="1" BorderBrush="White" Margin="0,0,5,0" VerticalAlignment="Center" CornerRadius="10,10,10,10" Height="19" Tapped="BRD_Remove_Tapped" Background="White" PointerEntered="BRD_Remove_PointerEntered" PointerExited="BRD_Remove_PointerExited" HorizontalAlignment="Right">
+                <TextBlock x:Name="TB_Remove" Text="X" TextWrapping="Wrap" FontFamily="Arial Nova" FontSize="12" FontWeight="Light" FocusVisualPrimaryBrush="White" Foreground="#FF404040" FontStretch="Normal" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
     </Border>
 </UserControl>

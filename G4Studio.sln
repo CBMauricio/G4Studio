@@ -5,6 +5,13 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G4Studio", "G4Studio.csproj", "{AC386108-24AC-4360-A488-02C864BA8386}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CB41D679-974C-4DF7-8411-80B85F9573E7}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hyperion.Platform.Tests.Core.ExedraLib", "..\Hyperion.Platform.Tests.Core\Hyperion.Platform.Tests.Core.ExedraLib.csproj", "{61705659-A087-4677-8757-C80D15C8329F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +52,26 @@ Global
 		{AC386108-24AC-4360-A488-02C864BA8386}.Release|x86.ActiveCfg = Release|x86
 		{AC386108-24AC-4360-A488-02C864BA8386}.Release|x86.Build.0 = Release|x86
 		{AC386108-24AC-4360-A488-02C864BA8386}.Release|x86.Deploy.0 = Release|x86
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|x64.Build.0 = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Debug|x86.Build.0 = Debug|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|ARM.Build.0 = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|ARM64.Build.0 = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|x64.ActiveCfg = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|x64.Build.0 = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|x86.ActiveCfg = Release|Any CPU
+		{61705659-A087-4677-8757-C80D15C8329F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

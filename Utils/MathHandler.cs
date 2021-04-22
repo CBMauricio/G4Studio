@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace G4Studio.Utils
 {
@@ -12,6 +8,12 @@ namespace G4Studio.Utils
         {
             Random random = new Random();
             return random.NextDouble() * (maximum - minimum) + minimum;
+        }
+
+        public static double GetRandomNumber(int minimum, int maximum)
+        {
+            Random random = new Random();
+            return Math.Round(random.NextDouble() * (maximum - minimum) + minimum, 0);
         }
     }
 }

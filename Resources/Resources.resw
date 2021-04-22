@@ -177,8 +177,35 @@
   <data name="CONFS_Azure_Atlas_RESTRequest" xml:space="preserve">
     <value>?api-version=1.0&amp;query={0}&amp;subscription-key={1}&amp;timeStamp={2}</value>
   </data>
+  <data name="CONFS_C2D_ALR_Desc" xml:space="preserve">
+    <value>D2C Alarms</value>
+  </data>
+  <data name="CONFS_C2D_BALR_Desc" xml:space="preserve">
+    <value>Bulk D2C Alarms</value>
+  </data>
+  <data name="CONFS_C2D_BREG_Desc" xml:space="preserve">
+    <value>Bulk Registration</value>
+  </data>
+  <data name="CONFS_C2D_BTEL_Desc" xml:space="preserve">
+    <value>Bulk D2C Telemetry</value>
+  </data>
+  <data name="CONFS_C2D_REG_Desc" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="CONFS_C2D_TEL_Desc" xml:space="preserve">
+    <value>D2C Telemetry</value>
+  </data>
   <data name="CONFS_ENVIRONMENT" xml:space="preserve">
     <value>_DEV</value>
+  </data>
+  <data name="CONFS_ENV_DEV_Desc" xml:space="preserve">
+    <value>Development</value>
+  </data>
+  <data name="CONFS_ENV_PRD_Desc" xml:space="preserve">
+    <value>Production</value>
+  </data>
+  <data name="CONFS_ENV_TST_Desc" xml:space="preserve">
+    <value>Test &amp; Quality</value>
   </data>
   <data name="DEFAULTS_IMG_Tiles" xml:space="preserve">
     <value>ms-appx:///Assets/Icons/Icon_Menu_B.png</value>
@@ -186,14 +213,50 @@
   <data name="DEFAULTS_IMG_Tiles_Alt" xml:space="preserve">
     <value>ms-appx:///Assets/Icons/Icon_Menu_W.png</value>
   </data>
+  <data name="Map_Actions_ALR_IMG_B" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Alarm_B_v3_48px.png</value>
+  </data>
+  <data name="Map_Actions_ALR_IMG_W" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Alarm_W_v3_48px.png</value>
+  </data>
+  <data name="Map_Actions_BLK_IMG_B" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_BLK_B_v2_31px.png</value>
+  </data>
+  <data name="Map_Actions_BLK_IMG_W" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_BLK_W_v2_31px.png</value>
+  </data>
+  <data name="Map_Actions_REG_IMG_B" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Register_B_48px.png</value>
+  </data>
+  <data name="Map_Actions_REG_IMG_W" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Register_W_48px.png</value>
+  </data>
+  <data name="Map_Actions_RUN_IMG_B" xml:space="preserve">
+    <value>ms-appx:///Assets/Media/Icon_Media_FF_B_48_v2.png</value>
+  </data>
+  <data name="Map_Actions_RUN_IMG_W" xml:space="preserve">
+    <value>ms-appx:///Assets/Media/Icon_Media_FF_W_48_v2.png</value>
+  </data>
+  <data name="Map_Actions_TEL_IMG_B" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Telemetry_B_48px.png</value>
+  </data>
+  <data name="Map_Actions_TEL_IMG_W" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Telemetry_W_48px.png</value>
+  </data>
   <data name="Map_Pushpin_Black" xml:space="preserve">
     <value>ms-appx:///Assets/Artwork/Icon_Pin_Black_v2_38px.png</value>
+  </data>
+  <data name="Map_Pushpin_Default" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Lum_BAS_Black_v4_31px.png</value>
   </data>
   <data name="Map_Pushpin_Grey" xml:space="preserve">
     <value>ms-appx:///Assets/Artwork/Icon_Pin_Grey_38px.png</value>
   </data>
+  <data name="Map_Pushpin_New" xml:space="preserve">
+    <value>ms-appx:///Assets/Map/Icon_Lum_BAS_Red_v3_31px.png</value>
+  </data>
   <data name="Map_Pushpin_Red" xml:space="preserve">
-    <value>ms-appx:///Assets/Artwork/Icon_Pin_Red_38px.png</value>
+    <value>ms-appx:///Assets/Map/Icon_Lum_BAS_Red_v2_31px.png</value>
   </data>
   <data name="Map_Pushpin_Selected" xml:space="preserve">
     <value>ms-appx:///Assets/Artwork/Icon_Pin_Black_v3_38px.png</value>
@@ -203,101 +266,220 @@
   </data>
   <data name="Map_Style" xml:space="preserve">
     <value>{
-    "version": "1.0",
-    "settings": {
-        "atmosphereVisible": false, 
-        "landColor": "#FFF2F3F0", 
-        "logosVisible": false, 
-        "officialColorVisible": false, 
-        "rasterRegionsVisible": false, 
-        "shadedReliefVisible": false, 
-        "spaceColor": "#FFFFFFFF", 
-        "useDefaultImageColors": false
+  "version": "1.0",
+  "settings": {
+    "atmosphereVisible": false, 
+    "landColor": "#FFF2F3F0", 
+    "logosVisible": false, 
+    "officialColorVisible": false, 
+    "rasterRegionsVisible": false, 
+    "shadedReliefVisible": false, 
+    "spaceColor": "#FFFFFFFF", 
+    "useDefaultImageColors": false
+  },
+  "elements": {
+    "mapElement": {
+      "fillColor": "#FFF4F4F4", 
+      "fontFamily": "Segoe UI"
     },
-    "elements": {
-        "area": {
-            "fillColor": "#FFE6E9E5", 
-            "fontFamily": "Segoe UI", 
-            "labelColor": "#FF5E5E5E", 
-            "labelVisible": true, 
-            "visible": true
-        },
-        "point": {
-            "labelColor": "#FF5E5E5E"
-        },
-        "political": {
-            "labelVisible": false, 
-            "visible": false
-        },
-        "structure": {
-            "visible": true
-        },
-        "building": {
-            "fillColor": "#FFEAEAE5", 
-            "visible": false
-        },
-        "road": {
-            "fontFamily": "Segoe UI", 
-            "labelColor": "#FF575757", 
-            "labelOutlineColor": "#FFFFFFFF", 
-            "labelVisible": true, 
-            "visible": true
-        },
-        "arterialRoad": {
-            "fillColor": "#FFFFFFFF", 
-            "strokeColor": "#FFDDDEDD", 
-            "visible": true
-        },
-        "controlledAccessHighway": {
-            "fillColor": "#FFFFFFFF", 
-            "strokeColor": "#FFDDDEDD", 
-            "visible": true
-        },
-        "highSpeedRamp": {
-            "visible": true
-        },
-        "highway": {
-            "fillColor": "#FFFFFFFF", 
-            "strokeColor": "#FFDDDEDD", 
-            "visible": true
-        },
-        "majorRoad": {
-            "fillColor": "#FFFFFFFF", 
-            "strokeColor": "#FFC6C6C6", 
-            "visible": true
-        },
-        "street": {
-            "fillColor": "#FFFFFFFF", 
-            "strokeColor": "#FFDDDEDD", 
-            "visible": true
-        },
-        "ramp": {
-            "fillColor": "#FFFFFFFF", 
-            "strokeColor": "#FFDDDEDD", 
-            "visible": true
-        },
-        "unpavedStreet": {
-            "fillColor": "#FFE6E9E5", 
-            "strokeColor": "#FFDDDEDD", 
-            "visible": true
-        },
-        "tollRoad": {
-            "visible": true
-        },
-        "trail": {
-            "visible": true
-        },
-        "waterRoute": {
-            "labelVisible": false, 
-            "visible": false
-        },
-        "water": {
-            "fillColor": "#FFC2C8CA"
-        },
-        "river": {
-            "fillColor": "#FFC6C8CA"
-        }
+    "area": {
+      "fillColor": "#FFE6E9E5", 
+      "fontFamily": "Segoe UI", 
+      "labelColor": "#FF5E5E5E", 
+      "labelVisible": true, 
+      "visible": true
+    },
+    "point": {
+      "labelColor": "#FF5E5E5E"
+    },
+    "political": {
+      "borderVisible": true, 
+      "labelVisible": false, 
+      "visible": true
+    },
+    "structure": {
+      "labelVisible": false, 
+      "visible": true
+    },
+    "building": {
+      "fillColor": "#FFEAEAE5", 
+      "visible": true
+    },
+    "road": {
+      "fontFamily": "Segoe UI", 
+      "labelColor": "#FF575757", 
+      "labelOutlineColor": "#FFFFFFFF", 
+      "labelVisible": true, 
+      "visible": true
+    },
+    "arterialRoad": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "controlledAccessHighway": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "highSpeedRamp": {
+      "visible": true
+    },
+    "highway": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "majorRoad": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFC6C6C6", 
+      "visible": true
+    },
+    "street": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "ramp": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "unpavedStreet": {
+      "fillColor": "#FFE6E9E5", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "tollRoad": {
+      "visible": true
+    },
+    "trail": {
+      "visible": true
+    },
+    "waterRoute": {
+      "labelVisible": false, 
+      "visible": false
+    },
+    "water": {
+      "fillColor": "#FFC2C8CA", 
+      "fontFamily": "Segoe UI", 
+      "labelColor": "#84000000", 
+      "labelVisible": false, 
+      "visible": true
+    },
+    "river": {
+      "fillColor": "#FFC6C8CA"
     }
+  }
+}</value>
+  </data>
+  <data name="Map_Style_v1" xml:space="preserve">
+    <value>{
+  "version": "1.0",
+  "settings": {
+    "atmosphereVisible": false, 
+    "landColor": "#FFF2F3F0", 
+    "logosVisible": false, 
+    "officialColorVisible": false, 
+    "rasterRegionsVisible": false, 
+    "shadedReliefVisible": false, 
+    "spaceColor": "#FFFFFFFF", 
+    "useDefaultImageColors": false
+  },
+  "elements": {
+    "mapElement": {
+      "fillColor": "#FFF4F4F4", 
+      "fontFamily": "Segoe UI"
+    },
+    "area": {
+      "fillColor": "#FFE6E9E5", 
+      "fontFamily": "Segoe UI", 
+      "labelColor": "#FF5E5E5E", 
+      "labelVisible": true, 
+      "visible": true
+    },
+    "point": {
+      "labelColor": "#FF5E5E5E"
+    },
+    "political": {
+      "borderVisible": true, 
+      "labelVisible": false, 
+      "visible": true
+    },
+    "structure": {
+      "labelVisible": false, 
+      "visible": true
+    },
+    "building": {
+      "fillColor": "#FFEAEAE5", 
+      "visible": true
+    },
+    "road": {
+      "fontFamily": "Segoe UI", 
+      "labelColor": "#FF575757", 
+      "labelOutlineColor": "#FFFFFFFF", 
+      "labelVisible": true, 
+      "visible": true
+    },
+    "arterialRoad": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "controlledAccessHighway": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "highSpeedRamp": {
+      "visible": true
+    },
+    "highway": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "majorRoad": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFC6C6C6", 
+      "visible": true
+    },
+    "street": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "ramp": {
+      "fillColor": "#FFFFFFFF", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "unpavedStreet": {
+      "fillColor": "#FFE6E9E5", 
+      "strokeColor": "#FFDDDEDD", 
+      "visible": true
+    },
+    "tollRoad": {
+      "visible": true
+    },
+    "trail": {
+      "visible": true
+    },
+    "waterRoute": {
+      "labelVisible": false, 
+      "visible": false
+    },
+    "water": {
+      "fillColor": "#FFC2C8CA", 
+      "fontFamily": "Segoe UI", 
+      "labelColor": "#84000000", 
+      "labelVisible": false, 
+      "visible": true
+    },
+    "river": {
+      "fillColor": "#FFC6C8CA"
+    }
+  }
 }</value>
   </data>
   <data name="SANITIZE" xml:space="preserve">
